@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Container,
   Typography,
@@ -10,8 +10,7 @@ import {
   FormControlLabel,
   Radio,
   RadioGroup,
-  Alert,
-  Grid
+  Alert
 } from '@mui/material';
 import { motion } from 'framer-motion';
 
@@ -25,7 +24,7 @@ interface SpeechForm {
 }
 
 const Toastmasters = () => {
-  const [formData, setFormData] = useState<SpeechForm>({
+  const [formData, setFormData] = React.useState<SpeechForm>({
     name: '',
     email: '',
     type: '',
@@ -34,9 +33,9 @@ const Toastmasters = () => {
     equipment: ''
   });
 
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = React.useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -51,162 +50,135 @@ const Toastmasters = () => {
   };
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="md">
       <Box sx={{ py: 8 }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <Typography variant="h3" component="h1" gutterBottom align="center" sx={{ mb: 6 }}>
+          <Typography 
+            variant="h3" 
+            component="h1" 
+            gutterBottom 
+            align="center" 
+            sx={{ 
+              mb: 2,
+              color: '#9E7676'
+            }}
+          >
             Toastmasters
           </Typography>
 
-          <Grid container spacing={4}>
-            {/* Information */}
-            <Grid item xs={12} md={6}>
-              <Paper elevation={3} sx={{ p: 4, height: '100%', bgcolor: 'rgba(158, 118, 118, 0.05)' }}>
-                <Typography variant="h5" gutterBottom color="primary">
-                  Information om tal och uppträdanden
-                </Typography>
-                <Typography variant="body1" paragraph>
-                  Vi ser fram emot alla fina tal och uppträdanden under kvällen! För att göra det så
-                  smidigt som möjligt för alla ber vi er att anmäla ert tal eller uppträdande i förväg.
-                </Typography>
-                <Typography variant="body1" paragraph>
-                  <strong>Kontakta våra toastmasters:</strong><br />
-                  [Namn Efternamn]<br />
-                  Tel: [Telefonnummer]<br />
-                  E-post: [E-postadress]
-                </Typography>
-                <Typography variant="body1" paragraph>
-                  <strong>Tips för tal:</strong>
-                </Typography>
-                <ul>
-                  <li>
-                    <Typography variant="body1">
-                      Håll talet kort och koncist (ca 3-5 minuter)
+          <Box sx={{ mb: 6, textAlign: 'center' }}>
+            <Typography variant="h5" gutterBottom sx={{ color: '#594545' }}>
+              Maja & Erik
+            </Typography>
+            <Typography variant="body1" sx={{ mb: 3, color: '#594545' }}>
+              Vi är glada att presentera Maja och Erik som våra toastmasters för kvällen! 
+            </Typography>
+            <Typography variant="body1" sx={{ mb: 4, color: '#594545' }}>
+              Om du vill hålla tal, sjunga en sång eller bidra med någon annan form av underhållning under middagen, 
+              vänligen fyll i formuläret nedan. Maja och Erik kommer att kontakta dig för att planera kvällens program.
+            </Typography>
+          </Box>
+
+          {submitted ? (
+            <Alert severity="success" sx={{ mt: 4 }}>
+              Tack för din anmälan! Maja eller Erik kommer att kontakta dig inom kort.
+            </Alert>
+          ) : (
+            <Paper elevation={2} sx={{ p: 4, background: 'linear-gradient(145deg, #ffffff 0%, #f8f8f8 100%)' }}>
+              <form onSubmit={handleSubmit}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                  <TextField
+                    required
+                    label="Namn"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    fullWidth
+                  />
+
+                  <TextField
+                    required
+                    label="E-post"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    fullWidth
+                  />
+
+                  <FormControl required>
+                    <Typography variant="subtitle1" gutterBottom>
+                      Typ av framträdande
                     </Typography>
-                  </li>
-                  <li>
-                    <Typography variant="body1">
-                      Blanda gärna humor med allvar
-                    </Typography>
-                  </li>
-                  <li>
-                    <Typography variant="body1">
-                      Undvik interna skämt som få förstår
-                    </Typography>
-                  </li>
-                </ul>
-              </Paper>
-            </Grid>
+                    <RadioGroup
+                      name="type"
+                      value={formData.type}
+                      onChange={handleChange}
+                    >
+                      <FormControlLabel
+                        value="tal"
+                        control={<Radio />}
+                        label="Tal"
+                      />
+                      <FormControlLabel
+                        value="sang"
+                        control={<Radio />}
+                        label="Sång"
+                      />
+                      <FormControlLabel
+                        value="annat"
+                        control={<Radio />}
+                        label="Annat framträdande"
+                      />
+                    </RadioGroup>
+                  </FormControl>
 
-            {/* Formulär */}
-            <Grid item xs={12} md={6}>
-              <Paper elevation={3} sx={{ p: 4, bgcolor: 'rgba(158, 118, 118, 0.05)' }}>
-                {submitted ? (
-                  <Alert severity="success" sx={{ mt: 2 }}>
-                    Tack för din anmälan! Toastmastern kommer att kontakta dig.
-                  </Alert>
-                ) : (
-                  <>
-                    <Typography variant="h5" gutterBottom color="primary">
-                      Anmäl tal eller uppträdande
-                    </Typography>
-                    <form onSubmit={handleSubmit}>
-                      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-                        <TextField
-                          required
-                          label="Namn"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          fullWidth
-                        />
+                  <TextField
+                    required
+                    label="Uppskattad längd (minuter)"
+                    name="duration"
+                    value={formData.duration}
+                    onChange={handleChange}
+                    fullWidth
+                  />
 
-                        <TextField
-                          required
-                          label="E-post"
-                          name="email"
-                          type="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          fullWidth
-                        />
+                  <TextField
+                    label="Kort beskrivning av ditt framträdande"
+                    name="description"
+                    value={formData.description}
+                    onChange={handleChange}
+                    fullWidth
+                    multiline
+                    rows={3}
+                  />
 
-                        <FormControl required>
-                          <Typography variant="subtitle1" gutterBottom>
-                            Typ av framträdande
-                          </Typography>
-                          <RadioGroup
-                            name="type"
-                            value={formData.type}
-                            onChange={handleChange}
-                          >
-                            <FormControlLabel
-                              value="tal"
-                              control={<Radio />}
-                              label="Tal"
-                            />
-                            <FormControlLabel
-                              value="sang"
-                              control={<Radio />}
-                              label="Sång"
-                            />
-                            <FormControlLabel
-                              value="uppradande"
-                              control={<Radio />}
-                              label="Annat uppträdande"
-                            />
-                          </RadioGroup>
-                        </FormControl>
+                  <TextField
+                    label="Behov av utrustning (mikrofon, projektor etc.)"
+                    name="equipment"
+                    value={formData.equipment}
+                    onChange={handleChange}
+                    fullWidth
+                    multiline
+                    rows={2}
+                  />
 
-                        <TextField
-                          required
-                          label="Uppskattad längd (minuter)"
-                          name="duration"
-                          value={formData.duration}
-                          onChange={handleChange}
-                          fullWidth
-                        />
-
-                        <TextField
-                          label="Kort beskrivning"
-                          name="description"
-                          value={formData.description}
-                          onChange={handleChange}
-                          multiline
-                          rows={3}
-                          fullWidth
-                        />
-
-                        <TextField
-                          label="Behov av utrustning"
-                          name="equipment"
-                          value={formData.equipment}
-                          onChange={handleChange}
-                          multiline
-                          rows={2}
-                          fullWidth
-                          helperText="T.ex. projektor, mikrofon, etc."
-                        />
-
-                        <Button
-                          type="submit"
-                          variant="contained"
-                          color="primary"
-                          size="large"
-                        >
-                          Skicka anmälan
-                        </Button>
-                      </Box>
-                    </form>
-                  </>
-                )}
-              </Paper>
-            </Grid>
-          </Grid>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    sx={{ mt: 2 }}
+                  >
+                    Skicka anmälan
+                  </Button>
+                </Box>
+              </form>
+            </Paper>
+          )}
         </motion.div>
       </Box>
     </Container>
