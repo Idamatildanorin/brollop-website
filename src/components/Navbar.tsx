@@ -1,77 +1,145 @@
-import React from 'react';
-import { AppBar, Toolbar, Button, Box, Menu, MenuItem } from '@mui/material';
+import { useState } from 'react';
+import { 
+  AppBar, 
+  Toolbar, 
+  Button, 
+  Box, 
+  IconButton, 
+  Drawer, 
+  List, 
+  ListItem, 
+  ListItemText,
+  useMediaQuery,
+  useTheme
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 
+const navItems = [
+  { text: 'Hem', path: '/' },
+  { text: 'Vår Historia', path: '/var-historia' },
+  { text: 'Praktisk Info', path: '/praktisk-info' },
+  { text: 'Schema', path: '/schema' },
+  { text: 'Toastmasters', path: '/toastmasters' },
+  { text: 'Aktiviteter', path: '/aktiviteter' },
+  { text: 'Galleri', path: '/gallery' },
+  { text: 'OSA', path: '/rsvp' }
+];
+
 const Navbar = () => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const drawer = (
+    <List>
+      {navItems.map((item) => (
+        <ListItem 
+          key={item.path} 
+          component={Link} 
+          to={item.path}
+          onClick={handleDrawerToggle}
+          sx={{ 
+            color: '#594545',
+            '&:hover': {
+              backgroundColor: 'rgba(158, 118, 118, 0.1)'
+            }
+          }}
+        >
+          <ListItemText 
+            primary={item.text}
+            primaryTypographyProps={{
+              sx: { 
+                fontSize: '1.1rem',
+                fontFamily: '"Playfair Display", serif'
+              }
+            }}
+          />
+        </ListItem>
+      ))}
+    </List>
+  );
+
   return (
-    <AppBar position="static" color="transparent" elevation={0}>
+    <AppBar position="sticky" color="inherit" elevation={0} sx={{ bgcolor: '#fff' }}>
       <Toolbar>
-        <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', gap: 3 }}>
-          <Button
-            component={Link}
-            to="/"
-            color="inherit"
-            sx={{ fontSize: '1.1rem', textTransform: 'none' }}
-          >
-            Hem
-          </Button>
-          <Button
-            component={Link}
-            to="/var-historia"
-            color="inherit"
-            sx={{ fontSize: '1.1rem', textTransform: 'none' }}
-          >
-            Vår Historia
-          </Button>
-          <Button
-            component={Link}
-            to="/praktisk-info"
-            color="inherit"
-            sx={{ fontSize: '1.1rem', textTransform: 'none' }}
-          >
-            Praktisk Info
-          </Button>
-          <Button
-            component={Link}
-            to="/schema"
-            color="inherit"
-            sx={{ fontSize: '1.1rem', textTransform: 'none' }}
-          >
-            Schema
-          </Button>
-          <Button
-            component={Link}
-            to="/toastmasters"
-            color="inherit"
-            sx={{ fontSize: '1.1rem', textTransform: 'none' }}
-          >
-            Toastmasters
-          </Button>
-          <Button
-            component={Link}
-            to="/aktiviteter"
-            color="inherit"
-            sx={{ fontSize: '1.1rem', textTransform: 'none' }}
-          >
-            Aktiviteter
-          </Button>
-          <Button
-            component={Link}
-            to="/gallery"
-            color="inherit"
-            sx={{ fontSize: '1.1rem', textTransform: 'none' }}
-          >
-            Galleri
-          </Button>
-          <Button
-            component={Link}
-            to="/rsvp"
-            color="inherit"
-            sx={{ fontSize: '1.1rem', textTransform: 'none' }}
-          >
-            OSA
-          </Button>
-        </Box>
+        {isMobile ? (
+          <>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ color: '#9E7676' }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
+              <Button
+                component={Link}
+                to="/"
+                color="inherit"
+                sx={{ 
+                  fontSize: '1.2rem', 
+                  textTransform: 'none',
+                  color: '#9E7676',
+                  fontFamily: '"Playfair Display", serif'
+                }}
+              >
+                Pelle & Matilda
+              </Button>
+            </Box>
+          </>
+        ) : (
+          <Box sx={{ 
+            flexGrow: 1, 
+            display: 'flex', 
+            justifyContent: 'center', 
+            gap: 3,
+            '& .MuiButton-root': {
+              color: '#594545',
+              fontSize: '1.1rem',
+              textTransform: 'none',
+              fontFamily: '"Playfair Display", serif',
+              '&:hover': {
+                backgroundColor: 'rgba(158, 118, 118, 0.1)'
+              }
+            }
+          }}>
+            {navItems.map((item) => (
+              <Button
+                key={item.path}
+                component={Link}
+                to={item.path}
+              >
+                {item.text}
+              </Button>
+            ))}
+          </Box>
+        )}
+
+        <Drawer
+          variant="temporary"
+          anchor="left"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true // Better open performance on mobile.
+          }}
+          sx={{
+            '& .MuiDrawer-paper': { 
+              boxSizing: 'border-box', 
+              width: 240,
+              bgcolor: '#fff'
+            },
+          }}
+        >
+          {drawer}
+        </Drawer>
       </Toolbar>
     </AppBar>
   );
