@@ -4,12 +4,14 @@
   "version": "0.0.1",
   "type": "module",
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^6.4.7",
     "@mui/material": "^5.15.6",
     "framer-motion": "^11.0.3",
     "react": "^18.2.0",
+    "react-confetti": "^6.4.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.3",
     "typescript": "^5.3.3"
