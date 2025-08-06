@@ -64,20 +64,20 @@ const Toastmasters = () => {
             align="center" 
             sx={{ 
               mb: 2,
-              color: '#9E7676'
+              color: '#1976d2'
             }}
           >
             Toastmasters
           </Typography>
 
           <Box sx={{ mb: 6, textAlign: 'center' }}>
-            <Typography variant="h5" gutterBottom sx={{ color: '#594545' }}>
+            <Typography variant="h5" gutterBottom sx={{ color: '#0d47a1' }}>
               Maja & Erik
             </Typography>
-            <Typography variant="body1" sx={{ mb: 3, color: '#594545' }}>
+            <Typography variant="body1" sx={{ mb: 3, color: '#0d47a1' }}>
               Vi är glada att presentera Maja och Erik som våra toastmasters för kvällen! 
             </Typography>
-            <Typography variant="body1" sx={{ mb: 4, color: '#594545' }}>
+            <Typography variant="body1" sx={{ mb: 4, color: '#0d47a1' }}>
               Om du vill hålla tal, sjunga en sång eller bidra med någon annan form av underhållning under middagen, 
               vänligen fyll i formuläret nedan. Maja och Erik kommer att kontakta dig för att planera kvällens program.
             </Typography>

@@ -17,13 +17,9 @@ import { Link } from 'react-router-dom';
 
 const navItems = [
   { text: 'Hem', path: '/' },
-  { text: 'Vår Historia', path: '/var-historia' },
-  { text: 'Praktisk Info', path: '/praktisk-info' },
-  { text: 'Schema', path: '/schema' },
-  { text: 'Toastmasters', path: '/toastmasters' },
-  { text: 'Aktiviteter', path: '/aktiviteter' },
-  { text: 'Galleri', path: '/gallery' },
-  { text: 'OSA', path: '/rsvp' }
+  { text: 'OSA', path: '/rsvp' },
+  { text: 'Plats & Info', path: '/praktisk-info' },
+  { text: 'Foton', path: '/gallery' }
 ];
 
 const Navbar = () => {

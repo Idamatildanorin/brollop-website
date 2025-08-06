@@ -71,7 +71,7 @@ const Schedule = () => {
             align="center" 
             sx={{ 
               mb: 6,
-              color: '#9E7676'
+              color: '#1976d2'
             }}
           >
             Schema för bröllopsdagen
@@ -86,8 +86,8 @@ const Schedule = () => {
                 top: 0,
                 bottom: 0,
                 width: 3,
-                background: 'linear-gradient(180deg, #9E7676 0%, #9E7676 30%, rgba(158, 118, 118, 0.7) 70%, rgba(158, 118, 118, 0.4) 100%)',
-                boxShadow: '0 0 8px rgba(158, 118, 118, 0.2)'
+                background: 'linear-gradient(180deg, #1976d2 0%, #1976d2 30%, rgba(25, 118, 210, 0.7) 70%, rgba(25, 118, 210, 0.4) 100%)',
+                boxShadow: '0 0 8px rgba(25, 118, 210, 0.2)'
               }}
             />
 
@@ -118,7 +118,7 @@ const Schedule = () => {
                     <Typography
                       variant="h6"
                       sx={{ 
-                        color: '#9E7676',
+                        color: '#0d47a1',
                         fontSize: '1.1rem'
                       }}
                     >
@@ -136,9 +136,9 @@ const Schedule = () => {
                       height: 20,
                       borderRadius: '50%',
                       bgcolor: '#fff',
-                      border: '3px solid #9E7676',
+                      border: '3px solid #1976d2',
                       transform: 'translateY(-50%)',
-                      boxShadow: '0 0 0 4px rgba(158, 118, 118, 0.15), 0 2px 4px rgba(0,0,0,0.1)',
+                      boxShadow: '0 0 0 4px rgba(25, 118, 210, 0.15), 0 2px 4px rgba(0,0,0,0.1)',
                       zIndex: 1
                     }}
                   />
@@ -159,7 +159,7 @@ const Schedule = () => {
                       variant="h6" 
                       gutterBottom
                       sx={{ 
-                        color: '#594545',
+                        color: '#0d47a1',
                         fontSize: '1.1rem',
                         fontWeight: 500
                       }}
@@ -169,7 +169,7 @@ const Schedule = () => {
                     <Typography 
                       variant="body1"
                       sx={{ 
-                        color: '#594545',
+                        color: '#0d47a1',
                         opacity: 0.8
                       }}
                     >

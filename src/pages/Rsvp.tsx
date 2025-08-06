@@ -14,7 +14,8 @@ import {
   CircularProgress,
   Collapse,
   Dialog,
-  IconButton
+  IconButton,
+  Divider
 } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import emailjs from '@emailjs/browser';
@@ -170,7 +171,7 @@ const BubblePopper = ({ onClose, playerName }: { onClose: () => void; playerName
           <CloseIcon />
         </IconButton>
         
-        <Typography variant="h4" sx={{ mb: 2, color: '#9E7676' }}>
+        <Typography variant="h4" sx={{ mb: 2, color: '#4caf50' }}>
           Bubbel-tävlingen! 🍾
         </Typography>
 
@@ -178,7 +179,7 @@ const BubblePopper = ({ onClose, playerName }: { onClose: () => void; playerName
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
             {hasPlayed ? (
               <>
-                <Typography variant="h6" sx={{ color: '#594545', mb: 2 }}>
+                <Typography variant="h6" sx={{ color: '#2e7d32', mb: 2 }}>
                   Du poppade {score} bubblor!
                 </Typography>
                 {isLeader && (
@@ -187,10 +188,10 @@ const BubblePopper = ({ onClose, playerName }: { onClose: () => void; playerName
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ duration: 0.5, repeat: 3 }}
                   >
-                    <Typography variant="h5" sx={{ color: '#9E7676', fontWeight: 'bold', mb: 1 }}>
+                    <Typography variant="h5" sx={{ color: '#4caf50', fontWeight: 'bold', mb: 1 }}>
                       🎉 DU LEDER TÄVLINGEN! 🍾
                     </Typography>
-                    <Typography variant="body1" sx={{ color: '#594545', mb: 2 }}>
+                    <Typography variant="body1" sx={{ color: '#2e7d32', mb: 2 }}>
                       En bubbelflaska väntar på dig på bröllopet om du vinner!
                     </Typography>
                   </motion.div>
@@ -198,7 +199,7 @@ const BubblePopper = ({ onClose, playerName }: { onClose: () => void; playerName
               </>
             ) : (
               <>
-                <Typography variant="h6" sx={{ color: '#594545', mb: 2 }}>
+                <Typography variant="h6" sx={{ color: '#2e7d32', mb: 2 }}>
                   Välkommen till bubbel-tävlingen! Du har EN chans att vinna en bubbelflaska!
                 </Typography>
                 <Button
@@ -213,7 +214,7 @@ const BubblePopper = ({ onClose, playerName }: { onClose: () => void; playerName
             )}
 
             <Box sx={{ mt: 3, width: '100%', maxWidth: 400 }}>
-              <Typography variant="h6" sx={{ color: '#9E7676', mb: 2 }}>
+              <Typography variant="h6" sx={{ color: '#4caf50', mb: 2 }}>
                 Topplista 🏆
               </Typography>
               {topScores.slice(0, 5).map((player, index) => (
@@ -224,15 +225,15 @@ const BubblePopper = ({ onClose, playerName }: { onClose: () => void; playerName
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     p: 1,
-                    backgroundColor: player.name === playerName ? 'rgba(158, 118, 118, 0.1)' : 'transparent',
+                    backgroundColor: player.name === playerName ? 'rgba(76, 175, 80, 0.1)' : 'transparent',
                     borderRadius: 1,
                     mb: 1
                   }}
                 >
-                  <Typography sx={{ color: '#594545' }}>
+                  <Typography sx={{ color: '#2e7d32' }}>
                     {index + 1}. {player.name}
                   </Typography>
-                  <Typography sx={{ color: '#594545', fontWeight: 'bold' }}>
+                  <Typography sx={{ color: '#2e7d32', fontWeight: 'bold' }}>
                     {player.score} bubblor
                   </Typography>
                 </Box>
@@ -241,7 +242,7 @@ const BubblePopper = ({ onClose, playerName }: { onClose: () => void; playerName
           </Box>
         ) : (
           <Box sx={{ mb: 2 }}>
-            <Typography variant="h6" sx={{ color: '#594545' }}>
+            <Typography variant="h6" sx={{ color: '#2e7d32' }}>
               Poäng: {score} | Tid kvar: {timeLeft}s
             </Typography>
           </Box>
@@ -291,23 +292,33 @@ const BubblePopper = ({ onClose, playerName }: { onClose: () => void; playerName
   );
 };
 
-interface GuestForm {
+interface CombinedForm {
   name: string;
   email: string;
   attending: string;
   dietaryRestrictions: string;
   message: string;
   danceSong: string;
+  wantsToSpeak: string;
+  speechType: string;
+  speechDuration: string;
+  speechDescription: string;
+  speechEquipment: string;
 }
 
 const Rsvp = () => {
-  const [formData, setFormData] = useState<GuestForm>({
+  const [formData, setFormData] = useState<CombinedForm>({
     name: '',
     email: '',
     attending: '',
     dietaryRestrictions: '',
     message: '',
-    danceSong: ''
+    danceSong: '',
+    wantsToSpeak: '',
+    speechType: '',
+    speechDuration: '',
+    speechDescription: '',
+    speechEquipment: ''
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -339,7 +350,7 @@ const Rsvp = () => {
     }
   }, [showConfetti]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -363,7 +374,12 @@ const Rsvp = () => {
           attending: formData.attending === 'yes' ? 'Ja, kommer' : 'Nej, kan inte komma',
           dietary_restrictions: formData.dietaryRestrictions || 'Inga',
           message: formData.message || 'Inget meddelande',
-          dance_song: formData.danceSong || 'Ingen låt vald'
+          dance_song: formData.danceSong || 'Ingen låt vald',
+          wants_to_speak: formData.wantsToSpeak === 'yes' ? 'Ja' : 'Nej',
+          speech_type: formData.speechType || 'Inget',
+          speech_duration: formData.speechDuration || 'Inget',
+          speech_description: formData.speechDescription || 'Inget',
+          speech_equipment: formData.speechEquipment || 'Inget'
         },
         'TrPdgkkOUYIHHEi6A'
       );
@@ -371,7 +387,6 @@ const Rsvp = () => {
       if (result.text === 'OK') {
         if (formData.attending === 'yes') {
           setShowConfetti(true);
-          // Visa spelet efter en längre stund (4 sekunder)
           setTimeout(() => setShowBubbleGame(true), 4000);
         }
         setSubmitted(true);
@@ -411,16 +426,22 @@ const Rsvp = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <Typography variant="h3" component="h1" gutterBottom align="center" sx={{ 
-            color: '#9E7676',
-            fontFamily: 'inherit',
-            letterSpacing: 'initial'
-          }}>
+          <Typography 
+            variant="h3" 
+            component="h1" 
+            gutterBottom 
+            align="center" 
+            sx={{ 
+              color: '#4caf50',
+              fontFamily: 'inherit',
+              letterSpacing: 'initial'
+            }}
+          >
             OSA
           </Typography>
           <Typography variant="h6" align="center" gutterBottom sx={{ 
             mb: 4, 
-            color: '#594545',
+            color: '#2e7d32',
             fontStyle: 'normal'
           }}>
             Vänligen svara senast den 5 maj 2026
@@ -482,7 +503,7 @@ const Rsvp = () => {
                   />
 
                   <FormControl required>
-                    <Typography variant="subtitle1" gutterBottom sx={{ color: '#594545' }}>
+                    <Typography variant="subtitle1" gutterBottom sx={{ color: '#2e7d32' }}>
                       Kommer du på bröllopet?
                     </Typography>
                     <RadioGroup
@@ -548,6 +569,117 @@ const Rsvp = () => {
                     rows={4}
                     disabled={loading}
                   />
+
+                  {/* Toastmasters sektion */}
+                  <Divider sx={{ my: 3 }} />
+                  
+                  <Box sx={{ mb: 2 }}>
+                    <Typography variant="h5" gutterBottom sx={{ color: '#1976d2' }}>
+                      Toastmasters
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: '#666', mb: 2 }}>
+                      Maja & Erik är våra toastmasters för kvällen. Vill du hålla tal, sjunga en sång eller bidra med annan underhållning?
+                    </Typography>
+                  </Box>
+
+                  <FormControl>
+                    <Typography variant="subtitle1" gutterBottom sx={{ color: '#1976d2' }}>
+                      Vill du bidra med något framträdande under middagen?
+                    </Typography>
+                    <RadioGroup
+                      name="wantsToSpeak"
+                      value={formData.wantsToSpeak}
+                      onChange={handleChange}
+                    >
+                      <FormControlLabel
+                        value="yes"
+                        control={<Radio />}
+                        label="Ja, jag vill bidra med något"
+                        disabled={loading}
+                      />
+                      <FormControlLabel
+                        value="no"
+                        control={<Radio />}
+                        label="Nej, tack"
+                        disabled={loading}
+                      />
+                    </RadioGroup>
+                  </FormControl>
+
+                  <AnimatePresence>
+                    {formData.wantsToSpeak === 'yes' && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                          <FormControl required>
+                            <Typography variant="subtitle1" gutterBottom sx={{ color: '#1976d2' }}>
+                              Typ av framträdande
+                            </Typography>
+                            <RadioGroup
+                              name="speechType"
+                              value={formData.speechType}
+                              onChange={handleChange}
+                            >
+                              <FormControlLabel
+                                value="tal"
+                                control={<Radio />}
+                                label="Tal"
+                                disabled={loading}
+                              />
+                              <FormControlLabel
+                                value="sang"
+                                control={<Radio />}
+                                label="Sång"
+                                disabled={loading}
+                              />
+                              <FormControlLabel
+                                value="annat"
+                                control={<Radio />}
+                                label="Annat framträdande"
+                                disabled={loading}
+                              />
+                            </RadioGroup>
+                          </FormControl>
+
+                          <TextField
+                            required
+                            label="Uppskattad längd (minuter)"
+                            name="speechDuration"
+                            value={formData.speechDuration}
+                            onChange={handleChange}
+                            fullWidth
+                            disabled={loading}
+                          />
+
+                          <TextField
+                            label="Kort beskrivning av ditt framträdande"
+                            name="speechDescription"
+                            value={formData.speechDescription}
+                            onChange={handleChange}
+                            fullWidth
+                            multiline
+                            rows={3}
+                            disabled={loading}
+                          />
+
+                          <TextField
+                            label="Behov av utrustning (mikrofon, projektor etc.)"
+                            name="speechEquipment"
+                            value={formData.speechEquipment}
+                            onChange={handleChange}
+                            fullWidth
+                            multiline
+                            rows={2}
+                            disabled={loading}
+                          />
+                        </Box>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
 
                   <Button
                     type="submit"

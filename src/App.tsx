@@ -10,14 +10,15 @@ import Toastmasters from './pages/Toastmasters';
 import Activities from './pages/Activities';
 import Gallery from './pages/Gallery';
 import Rsvp from './pages/Rsvp';
+import QRCodePage from './pages/QRCode';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#9E7676', // En varm brun-rosa nyans
+      main: '#1976d2', // En vacker blå nyans
     },
     secondary: {
-      main: '#594545', // En mörkare komplementfärg
+      main: '#0d47a1', // En mörkare blå komplementfärg
     },
   },
   typography: {
@@ -41,6 +42,7 @@ function App() {
               <Route path="/aktiviteter" element={<Activities />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/rsvp" element={<Rsvp />} />
+              <Route path="/qr" element={<QRCodePage />} />
             </Routes>
           </main>
         </div>
