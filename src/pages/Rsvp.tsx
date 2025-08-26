@@ -18,6 +18,8 @@ import {
   Divider
 } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import emailjs from '@emailjs/browser';
 import Confetti from 'react-confetti';
 import CloseIcon from '@mui/icons-material/Close';
@@ -421,6 +423,32 @@ const Rsvp = () => {
       )}
 
       <Box sx={{ py: 8 }}>
+        {/* Tillbakaknapp */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Box sx={{ mb: 4 }}>
+            <Button
+              component={Link}
+              to="/"
+              variant="outlined"
+              startIcon={<ArrowBackIcon />}
+              sx={{
+                color: '#1976d2',
+                borderColor: '#1976d2',
+                '&:hover': {
+                  borderColor: '#0d47a1',
+                  backgroundColor: 'rgba(25, 118, 210, 0.04)'
+                }
+              }}
+            >
+              Tillbaka till hemsidan
+            </Button>
+          </Box>
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -444,7 +472,7 @@ const Rsvp = () => {
             color: '#2e7d32',
             fontStyle: 'normal'
           }}>
-            Vänligen svara senast den 5 maj 2026
+            Vänligen svara senast den 5 juni 2026
           </Typography>
 
           {submitted ? (
