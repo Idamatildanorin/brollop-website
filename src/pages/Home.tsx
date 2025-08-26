@@ -31,187 +31,224 @@ const Home = () => {
   }, []);
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="md">
       <Box sx={{ 
-        py: 8,
+        py: 6,
         background: 'linear-gradient(135deg, #fefefe 0%, #f8f6f0 100%)',
-        minHeight: '100vh'
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center'
       }}>
-        {/* Huvudrubrik */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
+        {/* Diskret ram runt allt innehåll */}
+        <Box
+          sx={{
+            background: '#fff',
+            borderRadius: '20px',
+            p: { xs: 4, md: 6 },
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)',
+            border: '1px solid rgba(231, 76, 60, 0.1)',
+            position: 'relative',
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              height: '3px',
+              background: 'linear-gradient(90deg, #e74c3c, #c0392b)',
+              borderRadius: '20px 20px 0 0'
+            }
+          }}
         >
-          <Typography 
-            variant="h1" 
-            component="h1" 
-            gutterBottom 
-            align="center"
-            sx={{ 
-              fontFamily: '"Playfair Display", serif',
-              fontWeight: 300,
-              mb: 6,
-              background: 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              fontSize: { xs: '2.5rem', md: '3.5rem' }
-            }}
+          {/* Huvudrubrik - mer kompakt */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Pelle & Matilda
-          </Typography>
-        </motion.div>
+            <Typography 
+              variant="h2" 
+              component="h1" 
+              align="center"
+              sx={{ 
+                fontFamily: '"Cormorant Garamond", serif',
+                fontWeight: 400,
+                mb: 4,
+                color: '#2c3e50',
+                fontSize: { xs: '2.2rem', md: '2.8rem' },
+                letterSpacing: '0.05em'
+              }}
+            >
+              Pelle & Matilda
+            </Typography>
+          </motion.div>
 
-        {/* Nedräkning */}
-        <Box sx={{ mb: 8 }}>
-          <Typography 
-            variant="h3" 
-            component="h2" 
-            gutterBottom 
-            align="center"
-            sx={{ 
-              fontFamily: '"Playfair Display", serif',
-              fontWeight: 300,
-              mb: 4,
-              color: '#333',
-              position: 'relative',
-              '&::before': {
-                content: '""',
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: '60px',
-                height: '2px',
-                background: 'linear-gradient(90deg, transparent, #e74c3c, transparent)',
-                zIndex: -1
-              }
-            }}
-          >
-            Tillsammans räknar vi ner
-          </Typography>
-
-          <Box sx={{ display: 'flex', gap: 4, flexWrap: 'wrap', justifyContent: 'center', mb: 6 }}>
-            {Object.entries(timeLeft).map(([unit, value], index) => (
-              <motion.div
-                key={unit}
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-              >
-                <Box
-                  sx={{
-                    p: 3,
-                    background: 'linear-gradient(135deg, rgba(158, 118, 118, 0.1) 0%, rgba(192, 57, 43, 0.1) 100%)',
-                    borderRadius: 2,
-                    minWidth: 120
-                  }}
-                >
-                  <Typography variant="h3">{value}</Typography>
-                  <Typography variant="subtitle1" sx={{ textTransform: 'capitalize' }}>
-                    {unit}
-                  </Typography>
-                </Box>
-              </motion.div>
-            ))}
-          </Box>
-        </Box>
-
-        {/* OSA-knapp */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
-        >
-          <Box sx={{ textAlign: 'center', mb: 6 }}>
+          {/* Nedräkning - mer kompakt */}
+          <Box sx={{ mb: 6 }}>
             <Typography 
               variant="h5" 
+              component="h2" 
+              align="center"
               sx={{ 
-                mb: 3,
-                fontFamily: '"Playfair Display", serif',
-                fontWeight: 300,
-                color: '#555'
+                fontFamily: '"Cormorant Garamond", serif',
+                fontWeight: 400,
+                mb: 4,
+                color: '#34495e',
+                fontSize: '1.1rem',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase'
               }}
             >
-              Vi hoppas att du kan komma och fira med oss!
+              Tillsammans räknar vi ner
             </Typography>
-            <Button 
-              component={Link}
-              to="/rsvp"
-              variant="contained"
-              size="large"
-              sx={{ 
-                px: 6,
-                py: 2.5,
-                fontSize: '1.2rem',
-                background: 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)',
-                borderRadius: 3,
-                boxShadow: '0 8px 25px rgba(231, 76, 60, 0.3)',
-                '&:hover': {
-                  background: 'linear-gradient(135deg, #d63031 0%, #a93226 100%)',
-                  boxShadow: '0 12px 35px rgba(231, 76, 60, 0.4)',
-                  transform: 'translateY(-2px)'
-                },
-                transition: 'all 0.3s ease'
-              }}
-            >
-              OSA här
-            </Button>
-            
-            <Typography 
-              variant="body1" 
-              sx={{ 
-                mt: 4,
-                fontFamily: '"Playfair Display", serif',
-                fontWeight: 300,
-                color: '#666',
-                fontStyle: 'italic',
-                fontSize: '0.95rem',
-                maxWidth: '500px',
-                mx: 'auto',
-                lineHeight: 1.5
-              }}
-            >
-              Vi älskar barn, men denna kväll vill vi fira tillsammans med våra vuxna vänner och familj.
-            </Typography>
-          </Box>
-        </motion.div>
 
-        {/* Mer info kommer snart */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.6 }}
-        >
-          <Box 
-            sx={{ 
-              p: 4, 
-              background: 'linear-gradient(135deg, rgba(158, 118, 118, 0.05) 0%, rgba(192, 57, 43, 0.05) 100%)',
-              borderRadius: 3,
-              textAlign: 'center',
-              position: 'relative',
-              '&::before': {
-                content: '""',
-                position: 'absolute',
-                top: 0,
-                left: '50%',
-                transform: 'translateX(-50%)',
-                width: '80px',
-                height: '4px',
-                background: 'linear-gradient(90deg, transparent, #e74c3c, transparent)',
-                borderRadius: '2px'
-              }
-            }}
-          >
-            <Typography variant="h5" gutterBottom sx={{ mt: 2 }}>
-              Mer Information Kommer Snart
-            </Typography>
-            <Typography variant="body1" sx={{ opacity: 0.7 }}>
-              Schema, aktiviteter och mer information kommer att läggas till närmare bröllopet
-            </Typography>
+            <Box sx={{ 
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(4, 1fr)',
+              gap: 2,
+              maxWidth: '500px',
+              mx: 'auto'
+            }}>
+              {Object.entries(timeLeft).map(([unit, value], index) => (
+                <motion.div
+                  key={unit}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
+                >
+                  <Box
+                    sx={{
+                      p: 2,
+                      textAlign: 'center',
+                      borderBottom: '2px solid #e74c3c'
+                    }}
+                  >
+                    <Typography 
+                      variant="h4" 
+                      sx={{ 
+                        color: '#e74c3c',
+                        fontWeight: 300,
+                        mb: 1,
+                        fontFamily: '"Cormorant Garamond", serif',
+                        fontSize: '1.8rem'
+                      }}
+                    >
+                      {value}
+                    </Typography>
+                    <Typography 
+                      variant="caption" 
+                      sx={{ 
+                        color: '#7f8c8d',
+                        fontWeight: 400,
+                        fontFamily: '"Cormorant Garamond", serif',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.1em',
+                        fontSize: '0.7rem'
+                      }}
+                    >
+                      {unit === 'days' ? 'dagar' : unit === 'hours' ? 'timmar' : unit === 'minutes' ? 'minuter' : 'sekunder'}
+                    </Typography>
+                  </Box>
+                </motion.div>
+              ))}
+            </Box>
           </Box>
-        </motion.div>
+
+          {/* OSA-knapp - mer elegant */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1 }}
+          >
+            <Box sx={{ textAlign: 'center', mb: 6 }}>
+              <Typography 
+                variant="body1" 
+                sx={{ 
+                  mb: 3,
+                  fontFamily: '"Cormorant Garamond", serif',
+                  fontWeight: 400,
+                  color: '#34495e',
+                  fontSize: '1rem',
+                  fontStyle: 'italic'
+                }}
+              >
+                Vi hoppas att du kan komma och fira med oss!
+              </Typography>
+              <Button 
+                component={Link}
+                to="/rsvp"
+                variant="outlined"
+                size="medium"
+                sx={{ 
+                  px: 4,
+                  py: 1.5,
+                  fontSize: '0.9rem',
+                  color: '#e74c3c',
+                  borderColor: '#e74c3c',
+                  borderRadius: 0,
+                  fontFamily: '"Cormorant Garamond", serif',
+                  fontWeight: 400,
+                  textTransform: 'none',
+                  letterSpacing: '0.05em',
+                  '&:hover': {
+                    backgroundColor: '#e74c3c',
+                    color: '#fff',
+                    borderColor: '#e74c3c'
+                  },
+                  transition: 'all 0.3s ease'
+                }}
+              >
+                OSA här
+              </Button>
+              
+              <Typography 
+                variant="caption" 
+                sx={{ 
+                  display: 'block',
+                  mt: 3,
+                  fontFamily: '"Cormorant Garamond", serif',
+                  fontWeight: 300,
+                  color: '#95a5a6',
+                  fontStyle: 'italic',
+                  fontSize: '0.75rem',
+                  maxWidth: '400px',
+                  mx: 'auto',
+                  lineHeight: 1.4
+                }}
+              >
+                Vi älskar barn, men denna kväll vill vi fira tillsammans med våra vuxna vänner och familj.
+              </Typography>
+            </Box>
+          </motion.div>
+
+          {/* Mer info kommer snart - mer subtil */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.3 }}
+          >
+            <Box 
+              sx={{ 
+                p: 3, 
+                textAlign: 'center',
+                maxWidth: '400px',
+                mx: 'auto',
+                borderTop: '1px solid #ecf0f1'
+              }}
+            >
+              <Typography variant="body2" sx={{ 
+                color: '#95a5a6', 
+                fontFamily: '"Cormorant Garamond", serif',
+                fontWeight: 300,
+                fontSize: '0.85rem',
+                fontStyle: 'italic'
+              }}>
+                Mer information kommer snart
+              </Typography>
+            </Box>
+          </motion.div>
+        </Box>
       </Box>
     </Container>
   );

@@ -422,328 +422,462 @@ const Rsvp = () => {
         />
       )}
 
-      <Box sx={{ py: 8 }}>
-        {/* Tillbakaknapp */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
+      <Box sx={{ 
+        py: 6,
+        background: 'linear-gradient(135deg, #fefefe 0%, #f8f6f0 100%)',
+        minHeight: '100vh'
+      }}>
+        {/* Diskret ram runt allt innehåll */}
+        <Box
+          sx={{
+            background: '#fff',
+            borderRadius: '20px',
+            p: { xs: 4, md: 6 },
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)',
+            border: '1px solid rgba(231, 76, 60, 0.1)',
+            position: 'relative',
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              height: '3px',
+              background: 'linear-gradient(90deg, #e74c3c, #c0392b)',
+              borderRadius: '20px 20px 0 0'
+            }
+          }}
         >
-          <Box sx={{ mb: 4 }}>
-            <Button
-              component={Link}
-              to="/"
-              variant="outlined"
-              startIcon={<ArrowBackIcon />}
-              sx={{
-                color: '#1976d2',
-                borderColor: '#1976d2',
-                '&:hover': {
-                  borderColor: '#0d47a1',
-                  backgroundColor: 'rgba(25, 118, 210, 0.04)'
-                }
-              }}
-            >
-              Tillbaka till hemsidan
-            </Button>
-          </Box>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Typography 
-            variant="h3" 
-            component="h1" 
-            gutterBottom 
-            align="center" 
-            sx={{ 
-              color: '#4caf50',
-              fontFamily: 'inherit',
-              letterSpacing: 'initial'
-            }}
+          {/* Tillbakaknapp */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            OSA
-          </Typography>
-          <Typography variant="h6" align="center" gutterBottom sx={{ 
-            mb: 4, 
-            color: '#2e7d32',
-            fontStyle: 'normal'
-          }}>
-            Vänligen svara senast den 5 juni 2026
-          </Typography>
+            <Box sx={{ mb: 4 }}>
+              <Button
+                component={Link}
+                to="/"
+                variant="outlined"
+                startIcon={<ArrowBackIcon />}
+                sx={{
+                  color: '#e74c3c',
+                  borderColor: '#e74c3c',
+                  borderRadius: 0,
+                  fontFamily: '"Cormorant Garamond", serif',
+                  fontWeight: 400,
+                  '&:hover': {
+                    borderColor: '#c0392b',
+                    backgroundColor: 'rgba(231, 76, 60, 0.04)'
+                  }
+                }}
+              >
+                Tillbaka till hemsidan
+              </Button>
+            </Box>
+          </motion.div>
 
-          {submitted ? (
-            <Alert 
-              severity="success" 
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Typography 
+              variant="h3" 
+              component="h1" 
+              gutterBottom 
+              align="center" 
               sx={{ 
-                mt: 4,
-                '& .MuiAlert-message': {
-                  fontSize: '1.1rem',
-                  textAlign: 'center',
-                  width: '100%'
-                }
+                color: '#e74c3c',
+                fontFamily: '"Cormorant Garamond", serif',
+                fontWeight: 400,
+                mb: 2,
+                letterSpacing: '0.05em'
               }}
             >
-              {formData.attending === 'yes' 
-                ? "Hurra! Vi ser fram emot att fira tillsammans med dig! 🎉" 
-                : "Tack för ditt svar! Vi kommer att sakna dig! ❤️"}
-            </Alert>
-          ) : (
-            <Paper 
-              elevation={2} 
-              sx={{ 
-                p: 4, 
-                background: 'linear-gradient(145deg, #ffffff 0%, #f8f8f8 100%)',
-                borderRadius: '12px',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.05)'
-              }}
-            >
-              {error && (
-                <Alert severity="error" sx={{ mb: 3 }}>
-                  {error}
-                </Alert>
-              )}
-              
-              <form onSubmit={handleSubmit}>
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-                  <TextField
-                    required
-                    label="Namn"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    fullWidth
-                    disabled={loading}
-                  />
+              OSA
+            </Typography>
+            <Typography variant="h6" align="center" gutterBottom sx={{ 
+              mb: 4, 
+              color: '#34495e',
+              fontFamily: '"Cormorant Garamond", serif',
+              fontWeight: 300,
+              fontStyle: 'italic'
+            }}>
+              Vänligen svara senast den 5 juni 2026
+            </Typography>
 
-                  <TextField
-                    required
-                    label="E-post"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    fullWidth
-                    disabled={loading}
-                  />
-
-                  <FormControl required>
-                    <Typography variant="subtitle1" gutterBottom sx={{ color: '#2e7d32' }}>
-                      Kommer du på bröllopet?
-                    </Typography>
-                    <RadioGroup
-                      name="attending"
-                      value={formData.attending}
+            {submitted ? (
+              <Alert 
+                severity="success" 
+                sx={{ 
+                  mt: 4,
+                  '& .MuiAlert-message': {
+                    fontSize: '1.1rem',
+                    textAlign: 'center',
+                    width: '100%'
+                  }
+                }}
+              >
+                {formData.attending === 'yes' 
+                  ? "Hurra! Vi ser fram emot att fira tillsammans med dig! 🎉" 
+                  : "Tack för ditt svar! Vi kommer att sakna dig! ❤️"}
+              </Alert>
+            ) : (
+              <Box sx={{ 
+                background: 'transparent',
+                borderRadius: '12px'
+              }}>
+                {error && (
+                  <Alert severity="error" sx={{ mb: 3 }}>
+                    {error}
+                  </Alert>
+                )}
+                
+                <form onSubmit={handleSubmit}>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                    <TextField
+                      required
+                      label="Namn"
+                      name="name"
+                      value={formData.name}
                       onChange={handleChange}
-                    >
-                      <FormControlLabel
-                        value="yes"
-                        control={<Radio />}
-                        label="Ja, jag kommer"
-                        disabled={loading}
-                      />
-                      <FormControlLabel
-                        value="no"
-                        control={<Radio />}
-                        label="Nej, jag kan tyvärr inte komma"
-                        disabled={loading}
-                      />
-                    </RadioGroup>
-                  </FormControl>
+                      fullWidth
+                      disabled={loading}
+                      sx={{
+                        '& .MuiOutlinedInput-root': {
+                          borderRadius: 0,
+                          fontFamily: '"Cormorant Garamond", serif'
+                        }
+                      }}
+                    />
 
-                  <AnimatePresence>
-                    {formData.attending === 'yes' && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
+                    <TextField
+                      required
+                      label="E-post"
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      fullWidth
+                      disabled={loading}
+                      sx={{
+                        '& .MuiOutlinedInput-root': {
+                          borderRadius: 0,
+                          fontFamily: '"Cormorant Garamond", serif'
+                        }
+                      }}
+                    />
+
+                    <FormControl required>
+                      <Typography variant="subtitle1" gutterBottom sx={{ 
+                        color: '#34495e',
+                        fontFamily: '"Cormorant Garamond", serif',
+                        fontWeight: 400
+                      }}>
+                        Kommer du på bröllopet?
+                      </Typography>
+                      <RadioGroup
+                        name="attending"
+                        value={formData.attending}
+                        onChange={handleChange}
                       >
-                        <TextField
-                          label="Min bästa danslåt"
-                          name="danceSong"
-                          value={formData.danceSong}
-                          onChange={handleChange}
-                          fullWidth
-                          placeholder="Låt och artist som får dig att dansa"
-                          helperText="Hjälp oss skapa den bästa spellistan!"
+                        <FormControlLabel
+                          value="yes"
+                          control={<Radio />}
+                          label="Ja, jag kommer"
                           disabled={loading}
-                        />
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-
-                  <TextField
-                    label="Allergier eller specialkost"
-                    name="dietaryRestrictions"
-                    value={formData.dietaryRestrictions}
-                    onChange={handleChange}
-                    fullWidth
-                    multiline
-                    rows={2}
-                    disabled={loading}
-                  />
-
-                  <TextField
-                    label="Meddelande till brudparet"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    fullWidth
-                    multiline
-                    rows={4}
-                    disabled={loading}
-                  />
-
-                  {/* Toastmasters sektion */}
-                  <Divider sx={{ my: 3 }} />
-                  
-                  <Box sx={{ mb: 2 }}>
-                    <Typography variant="h5" gutterBottom sx={{ color: '#1976d2' }}>
-                      Toastmasters
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: '#666', mb: 2 }}>
-                      Maja & Erik är våra toastmasters för kvällen. Vill du hålla tal, sjunga en sång eller bidra med annan underhållning?
-                    </Typography>
-                  </Box>
-
-                  <FormControl>
-                    <Typography variant="subtitle1" gutterBottom sx={{ color: '#1976d2' }}>
-                      Vill du bidra med något framträdande under middagen?
-                    </Typography>
-                    <RadioGroup
-                      name="wantsToSpeak"
-                      value={formData.wantsToSpeak}
-                      onChange={handleChange}
-                    >
-                      <FormControlLabel
-                        value="yes"
-                        control={<Radio />}
-                        label="Ja, jag vill bidra med något"
-                        disabled={loading}
-                      />
-                      <FormControlLabel
-                        value="no"
-                        control={<Radio />}
-                        label="Nej, tack"
-                        disabled={loading}
-                      />
-                    </RadioGroup>
-                  </FormControl>
-
-                  <AnimatePresence>
-                    {formData.wantsToSpeak === 'yes' && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-                          <FormControl required>
-                            <Typography variant="subtitle1" gutterBottom sx={{ color: '#1976d2' }}>
-                              Typ av framträdande
-                            </Typography>
-                            <RadioGroup
-                              name="speechType"
-                              value={formData.speechType}
-                              onChange={handleChange}
-                            >
-                              <FormControlLabel
-                                value="tal"
-                                control={<Radio />}
-                                label="Tal"
-                                disabled={loading}
-                              />
-                              <FormControlLabel
-                                value="sang"
-                                control={<Radio />}
-                                label="Sång"
-                                disabled={loading}
-                              />
-                              <FormControlLabel
-                                value="annat"
-                                control={<Radio />}
-                                label="Annat framträdande"
-                                disabled={loading}
-                              />
-                            </RadioGroup>
-                          </FormControl>
-
-                          <TextField
-                            required
-                            label="Uppskattad längd (minuter)"
-                            name="speechDuration"
-                            value={formData.speechDuration}
-                            onChange={handleChange}
-                            fullWidth
-                            disabled={loading}
-                          />
-
-                          <TextField
-                            label="Kort beskrivning av ditt framträdande"
-                            name="speechDescription"
-                            value={formData.speechDescription}
-                            onChange={handleChange}
-                            fullWidth
-                            multiline
-                            rows={3}
-                            disabled={loading}
-                          />
-
-                          <TextField
-                            label="Behov av utrustning (mikrofon, projektor etc.)"
-                            name="speechEquipment"
-                            value={formData.speechEquipment}
-                            onChange={handleChange}
-                            fullWidth
-                            multiline
-                            rows={2}
-                            disabled={loading}
-                          />
-                        </Box>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    size="large"
-                    disabled={loading}
-                    sx={{ 
-                      mt: 2,
-                      position: 'relative',
-                      minHeight: 48
-                    }}
-                  >
-                    {loading ? (
-                      <>
-                        <CircularProgress
-                          size={24}
                           sx={{
-                            position: 'absolute',
-                            top: '50%',
-                            left: '50%',
-                            marginTop: '-12px',
-                            marginLeft: '-12px',
+                            fontFamily: '"Cormorant Garamond", serif',
+                            fontWeight: 400
                           }}
                         />
-                        Skickar...
-                      </>
-                    ) : (
-                      'Skicka svar'
-                    )}
-                  </Button>
-                </Box>
-              </form>
-            </Paper>
-          )}
-        </motion.div>
+                        <FormControlLabel
+                          value="no"
+                          control={<Radio />}
+                          label="Nej, jag kan tyvärr inte komma"
+                          disabled={loading}
+                          sx={{
+                            fontFamily: '"Cormorant Garamond", serif',
+                            fontWeight: 400
+                          }}
+                        />
+                      </RadioGroup>
+                    </FormControl>
+
+                    <AnimatePresence>
+                      {formData.attending === 'yes' && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <TextField
+                            label="Min bästa danslåt"
+                            name="danceSong"
+                            value={formData.danceSong}
+                            onChange={handleChange}
+                            fullWidth
+                            placeholder="Låt och artist som får dig att dansa"
+                            helperText="Hjälp oss skapa den bästa spellistan!"
+                            disabled={loading}
+                            sx={{
+                              '& .MuiOutlinedInput-root': {
+                                borderRadius: 0,
+                                fontFamily: '"Cormorant Garamond", serif'
+                              }
+                            }}
+                          />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    <TextField
+                      label="Allergier eller specialkost"
+                      name="dietaryRestrictions"
+                      value={formData.dietaryRestrictions}
+                      onChange={handleChange}
+                      fullWidth
+                      multiline
+                      rows={2}
+                      disabled={loading}
+                      sx={{
+                        '& .MuiOutlinedInput-root': {
+                          borderRadius: 0,
+                          fontFamily: '"Cormorant Garamond", serif'
+                        }
+                      }}
+                    />
+
+                    <TextField
+                      label="Meddelande till brudparet"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      fullWidth
+                      multiline
+                      rows={4}
+                      disabled={loading}
+                      sx={{
+                        '& .MuiOutlinedInput-root': {
+                          borderRadius: 0,
+                          fontFamily: '"Cormorant Garamond", serif'
+                        }
+                      }}
+                    />
+
+                    {/* Toastmasters sektion */}
+                    <Divider sx={{ my: 3, borderColor: '#ecf0f1' }} />
+                    
+                    <Box sx={{ mb: 2 }}>
+                      <Typography variant="h5" gutterBottom sx={{ 
+                        color: '#e74c3c',
+                        fontFamily: '"Cormorant Garamond", serif',
+                        fontWeight: 400
+                      }}>
+                        Toastmasters
+                      </Typography>
+                      <Typography variant="body2" sx={{ 
+                        color: '#7f8c8d',
+                        mb: 2,
+                        fontFamily: '"Cormorant Garamond", serif',
+                        fontWeight: 300
+                      }}>
+                        Maja & Erik är våra toastmasters för kvällen. Vill du hålla tal, sjunga en sång eller bidra med annan underhållning?
+                      </Typography>
+                    </Box>
+
+                    <FormControl>
+                      <Typography variant="subtitle1" gutterBottom sx={{ 
+                        color: '#34495e',
+                        fontFamily: '"Cormorant Garamond", serif',
+                        fontWeight: 400
+                      }}>
+                        Vill du bidra med något framträdande under middagen?
+                      </Typography>
+                      <RadioGroup
+                        name="wantsToSpeak"
+                        value={formData.wantsToSpeak}
+                        onChange={handleChange}
+                      >
+                        <FormControlLabel
+                          value="yes"
+                          control={<Radio />}
+                          label="Ja, jag vill bidra med något"
+                          disabled={loading}
+                          sx={{
+                            fontFamily: '"Cormorant Garamond", serif',
+                            fontWeight: 400
+                          }}
+                        />
+                        <FormControlLabel
+                          value="no"
+                          control={<Radio />}
+                          label="Nej, tack"
+                          disabled={loading}
+                          sx={{
+                            fontFamily: '"Cormorant Garamond", serif',
+                            fontWeight: 400
+                          }}
+                        />
+                      </RadioGroup>
+                    </FormControl>
+
+                    <AnimatePresence>
+                      {formData.wantsToSpeak === 'yes' && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                            <FormControl required>
+                              <Typography variant="subtitle1" gutterBottom sx={{ 
+                                color: '#34495e',
+                                fontFamily: '"Cormorant Garamond", serif',
+                                fontWeight: 400
+                              }}>
+                                Typ av framträdande
+                              </Typography>
+                              <RadioGroup
+                                name="speechType"
+                                value={formData.speechType}
+                                onChange={handleChange}
+                              >
+                                <FormControlLabel
+                                  value="tal"
+                                  control={<Radio />}
+                                  label="Tal"
+                                  disabled={loading}
+                                  sx={{
+                                    fontFamily: '"Cormorant Garamond", serif',
+                                    fontWeight: 400
+                                  }}
+                                />
+                                <FormControlLabel
+                                  value="sang"
+                                  control={<Radio />}
+                                  label="Sång"
+                                  disabled={loading}
+                                  sx={{
+                                    fontFamily: '"Cormorant Garamond", serif',
+                                    fontWeight: 400
+                                  }}
+                                />
+                                <FormControlLabel
+                                  value="annat"
+                                  control={<Radio />}
+                                  label="Annat framträdande"
+                                  disabled={loading}
+                                  sx={{
+                                    fontFamily: '"Cormorant Garamond", serif',
+                                    fontWeight: 400
+                                  }}
+                                />
+                              </RadioGroup>
+                            </FormControl>
+
+                            <TextField
+                              required
+                              label="Uppskattad längd (minuter)"
+                              name="speechDuration"
+                              value={formData.speechDuration}
+                              onChange={handleChange}
+                              fullWidth
+                              disabled={loading}
+                              sx={{
+                                '& .MuiOutlinedInput-root': {
+                                  borderRadius: 0,
+                                  fontFamily: '"Cormorant Garamond", serif'
+                                }
+                              }}
+                            />
+
+                            <TextField
+                              label="Kort beskrivning av ditt framträdande"
+                              name="speechDescription"
+                              value={formData.speechDescription}
+                              onChange={handleChange}
+                              fullWidth
+                              multiline
+                              rows={3}
+                              disabled={loading}
+                              sx={{
+                                '& .MuiOutlinedInput-root': {
+                                  borderRadius: 0,
+                                  fontFamily: '"Cormorant Garamond", serif'
+                                }
+                              }}
+                            />
+
+                            <TextField
+                              label="Behov av utrustning (mikrofon, projektor etc.)"
+                              name="speechEquipment"
+                              value={formData.speechEquipment}
+                              onChange={handleChange}
+                              fullWidth
+                              multiline
+                              rows={2}
+                              disabled={loading}
+                              sx={{
+                                '& .MuiOutlinedInput-root': {
+                                  borderRadius: 0,
+                                  fontFamily: '"Cormorant Garamond", serif'
+                                }
+                              }}
+                            />
+                          </Box>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      size="large"
+                      disabled={loading}
+                      sx={{ 
+                        mt: 2,
+                        position: 'relative',
+                        minHeight: 48,
+                        backgroundColor: '#e74c3c',
+                        borderRadius: 0,
+                        fontFamily: '"Cormorant Garamond", serif',
+                        fontWeight: 400,
+                        textTransform: 'none',
+                        letterSpacing: '0.05em',
+                        '&:hover': {
+                          backgroundColor: '#c0392b'
+                        }
+                      }}
+                    >
+                      {loading ? (
+                        <>
+                          <CircularProgress
+                            size={24}
+                            sx={{
+                              position: 'absolute',
+                              top: '50%',
+                              left: '50%',
+                              marginTop: '-12px',
+                              marginLeft: '-12px',
+                            }}
+                          />
+                          Skickar...
+                        </>
+                      ) : (
+                        'Skicka svar'
+                      )}
+                    </Button>
+                  </Box>
+                </form>
+              </Box>
+            )}
+          </motion.div>
+        </Box>
       </Box>
     </Container>
   );
