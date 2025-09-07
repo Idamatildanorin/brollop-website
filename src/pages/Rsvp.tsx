@@ -175,7 +175,7 @@ const Rsvp = () => {
                   }
                 }}
               >
-                Tillbaka till hemsidan
+                Tillbaka
               </Button>
             </Box>
           </motion.div>
