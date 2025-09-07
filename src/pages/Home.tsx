@@ -5,10 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
   const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0
+    days: 0
   });
 
   // Ange bröllopsdatumet här (format: YYYY, MM-1, DD, HH, MM)
@@ -20,10 +17,7 @@ const Home = () => {
       const distance = weddingDate.getTime() - now;
 
       setTimeLeft({
-        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-        seconds: Math.floor((distance % (1000 * 60)) / 1000)
+        days: Math.floor(distance / (1000 * 60 * 60 * 24))
       });
     }, 1000);
 
@@ -104,54 +98,53 @@ const Home = () => {
             </Typography>
 
             <Box sx={{ 
-              display: 'grid', 
-              gridTemplateColumns: 'repeat(4, 1fr)',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
               gap: 2,
-              maxWidth: '500px',
+              maxWidth: '300px',
               mx: 'auto'
             }}>
-              {Object.entries(timeLeft).map(([unit, value], index) => (
-                <motion.div
-                  key={unit}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+              >
+                <Box
+                  sx={{
+                    p: 3,
+                    textAlign: 'center',
+                    borderBottom: '2px solid #e74c3c',
+                    minWidth: '120px'
+                  }}
                 >
-                  <Box
-                    sx={{
-                      p: 2,
-                      textAlign: 'center',
-                      borderBottom: '2px solid #e74c3c'
+                  <Typography 
+                    variant="h3" 
+                    sx={{ 
+                      color: '#e74c3c',
+                      fontWeight: 300,
+                      mb: 1,
+                      fontFamily: '"Cormorant Garamond", serif',
+                      fontSize: { xs: '2.5rem', md: '3rem' }
                     }}
                   >
-                    <Typography 
-                      variant="h4" 
-                      sx={{ 
-                        color: '#e74c3c',
-                        fontWeight: 300,
-                        mb: 1,
-                        fontFamily: '"Cormorant Garamond", serif',
-                        fontSize: '1.8rem'
-                      }}
-                    >
-                      {value}
-                    </Typography>
-                    <Typography 
-                      variant="caption" 
-                      sx={{ 
-                        color: '#7f8c8d',
-                        fontWeight: 400,
-                        fontFamily: '"Cormorant Garamond", serif',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.1em',
-                        fontSize: '0.7rem'
-                      }}
-                    >
-                      {unit === 'days' ? 'dagar' : unit === 'hours' ? 'timmar' : unit === 'minutes' ? 'minuter' : 'sekunder'}
-                    </Typography>
-                  </Box>
-                </motion.div>
-              ))}
+                    {timeLeft.days}
+                  </Typography>
+                  <Typography 
+                    variant="caption" 
+                    sx={{ 
+                      color: '#7f8c8d',
+                      fontWeight: 400,
+                      fontFamily: '"Cormorant Garamond", serif',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.1em',
+                      fontSize: '0.8rem'
+                    }}
+                  >
+                    dagar
+                  </Typography>
+                </Box>
+              </motion.div>
             </Box>
           </Box>
 
