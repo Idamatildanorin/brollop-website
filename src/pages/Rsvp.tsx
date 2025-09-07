@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Container,
   Box,
@@ -11,323 +11,39 @@ import {
   Typography,
   Paper,
   Alert,
-  CircularProgress,
-  Collapse,
-  Dialog,
-  IconButton,
-  Divider
+  CircularProgress
 } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import emailjs from '@emailjs/browser';
 import Confetti from 'react-confetti';
-import CloseIcon from '@mui/icons-material/Close';
 
 // Initialize EmailJS
 emailjs.init("TrPdgkkOUYIHHEi6A");
 
-// Roliga meddelanden för bubblorna
-const BUBBLE_MESSAGES = [
-  "Dags att dansa! 💃",
-  "Kärlek är i luften! ❤️",
-  "Skål för brudparet! 🥂",
-  "Fest och glädje! 🎉",
-  "Kärlek & dans! 💕",
-  "Champagne! 🍾",
-  "Tårta kommer! 🎂",
-  "Dags att fira! 🎊",
-  "Kärlek vinner! 💑",
-  "Dans hela natten! 🌙"
-];
-
-interface Bubble {
-  id: number;
-  x: number;
-  y: number;
-  size: number;
-  speed: number;
-  message: string;
-}
-
-interface PlayerScore {
-  name: string;
-  score: number;
-}
-
-const BubblePopper = ({ onClose, playerName }: { onClose: () => void; playerName: string }) => {
-  const [bubbles, setBubbles] = useState<Bubble[]>([]);
-  const [score, setScore] = useState(0);
-  const [gameStarted, setGameStarted] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(30);
-  const [hasPlayed, setHasPlayed] = useState(() => {
-    const playedPlayers = localStorage.getItem('bubbleGamePlayers');
-    if (!playedPlayers) return false;
-    return JSON.parse(playedPlayers).includes(playerName);
-  });
-  const [topScores, setTopScores] = useState<PlayerScore[]>(() => {
-    const saved = localStorage.getItem('bubbleGameScores');
-    return saved ? JSON.parse(saved) : [];
-  });
-  const [isLeader, setIsLeader] = useState(false);
-
-  // Skapa nya bubblor
-  const createBubble = useCallback(() => {
-    const newBubble: Bubble = {
-      id: Math.random(),
-      x: Math.random() * (window.innerWidth - 100),
-      y: window.innerHeight,
-      size: Math.random() * (60 - 30) + 30,
-      speed: Math.random() * (4 - 2) + 2,
-      message: BUBBLE_MESSAGES[Math.floor(Math.random() * BUBBLE_MESSAGES.length)]
-    };
-    setBubbles(prev => [...prev, newBubble]);
-  }, []);
-
-  // Starta spelet
-  const startGame = () => {
-    if (hasPlayed) return;
-    setGameStarted(true);
-    setScore(0);
-    setTimeLeft(30);
-  };
-
-  // Spara poäng och uppdatera topplistan
-  const saveScore = (finalScore: number) => {
-    const newScore: PlayerScore = { name: playerName, score: finalScore };
-    const updatedScores = [...topScores, newScore].sort((a, b) => b.score - a.score);
-    setTopScores(updatedScores);
-    localStorage.setItem('bubbleGameScores', JSON.stringify(updatedScores));
-    
-    // Markera spelaren som har spelat
-    const playedPlayers = localStorage.getItem('bubbleGamePlayers');
-    const players = playedPlayers ? JSON.parse(playedPlayers) : [];
-    players.push(playerName);
-    localStorage.setItem('bubbleGamePlayers', JSON.stringify(players));
-    setHasPlayed(true);
-
-    // Kolla om spelaren leder
-    setIsLeader(updatedScores[0].name === playerName);
-  };
-
-  // Uppdatera bubblor
-  useEffect(() => {
-    if (!gameStarted) return;
-
-    const bubbleInterval = setInterval(createBubble, 800);
-    const gameInterval = setInterval(() => {
-      setBubbles(prev => 
-        prev.map(bubble => ({
-          ...bubble,
-          y: bubble.y - bubble.speed
-        })).filter(bubble => bubble.y > -100)
-      );
-    }, 16);
-
-    const timer = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev <= 1) {
-          clearInterval(bubbleInterval);
-          clearInterval(gameInterval);
-          clearInterval(timer);
-          setGameStarted(false);
-          saveScore(score);
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => {
-      clearInterval(bubbleInterval);
-      clearInterval(gameInterval);
-      clearInterval(timer);
-    };
-  }, [gameStarted, createBubble, score, playerName]);
-
-  // Poppa en bubbla
-  const popBubble = (id: number) => {
-    setBubbles(prev => prev.filter(bubble => bubble.id !== id));
-    setScore(prev => prev + 1);
-  };
-
-  return (
-    <Dialog
-      open={true}
-      maxWidth="md"
-      fullWidth
-      onClose={onClose}
-      PaperProps={{
-        sx: {
-          background: 'linear-gradient(145deg, #ffffff 0%, #f8f8f8 100%)',
-          height: '80vh',
-          position: 'relative',
-          overflow: 'hidden'
-        }
-      }}
-    >
-      <Box sx={{ p: 2, textAlign: 'center', position: 'relative' }}>
-        <IconButton
-          onClick={onClose}
-          sx={{ position: 'absolute', right: 8, top: 8 }}
-        >
-          <CloseIcon />
-        </IconButton>
-        
-        <Typography variant="h4" sx={{ mb: 2, color: '#4caf50' }}>
-          Bubbel-tävlingen! 🍾
-        </Typography>
-
-        {!gameStarted ? (
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-            {hasPlayed ? (
-              <>
-                <Typography variant="h6" sx={{ color: '#2e7d32', mb: 2 }}>
-                  Du poppade {score} bubblor!
-                </Typography>
-                {isLeader && (
-                  <motion.div
-                    initial={{ scale: 1 }}
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 0.5, repeat: 3 }}
-                  >
-                    <Typography variant="h5" sx={{ color: '#4caf50', fontWeight: 'bold', mb: 1 }}>
-                      🎉 DU LEDER TÄVLINGEN! 🍾
-                    </Typography>
-                    <Typography variant="body1" sx={{ color: '#2e7d32', mb: 2 }}>
-                      En bubbelflaska väntar på dig på bröllopet om du vinner!
-                    </Typography>
-                  </motion.div>
-                )}
-              </>
-            ) : (
-              <>
-                <Typography variant="h6" sx={{ color: '#2e7d32', mb: 2 }}>
-                  Välkommen till bubbel-tävlingen! Du har EN chans att vinna en bubbelflaska!
-                </Typography>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={startGame}
-                  sx={{ mt: 2 }}
-                >
-                  Starta spelet!
-                </Button>
-              </>
-            )}
-
-            <Box sx={{ mt: 3, width: '100%', maxWidth: 400 }}>
-              <Typography variant="h6" sx={{ color: '#4caf50', mb: 2 }}>
-                Topplista 🏆
-              </Typography>
-              {topScores.slice(0, 5).map((player, index) => (
-                <Box
-                  key={index}
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    p: 1,
-                    backgroundColor: player.name === playerName ? 'rgba(76, 175, 80, 0.1)' : 'transparent',
-                    borderRadius: 1,
-                    mb: 1
-                  }}
-                >
-                  <Typography sx={{ color: '#2e7d32' }}>
-                    {index + 1}. {player.name}
-                  </Typography>
-                  <Typography sx={{ color: '#2e7d32', fontWeight: 'bold' }}>
-                    {player.score} bubblor
-                  </Typography>
-                </Box>
-              ))}
-            </Box>
-          </Box>
-        ) : (
-          <Box sx={{ mb: 2 }}>
-            <Typography variant="h6" sx={{ color: '#2e7d32' }}>
-              Poäng: {score} | Tid kvar: {timeLeft}s
-            </Typography>
-          </Box>
-        )}
-
-        <Box
-          sx={{
-            position: 'relative',
-            width: '100%',
-            height: '60vh',
-            overflow: 'hidden',
-            background: 'linear-gradient(180deg, #f0f8ff 0%, #e6f0ff 100%)'
-          }}
-        >
-          {bubbles.map(bubble => (
-            <motion.div
-              key={bubble.id}
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              style={{
-                position: 'absolute',
-                left: bubble.x,
-                top: bubble.y,
-                width: bubble.size,
-                height: bubble.size,
-                borderRadius: '50%',
-                background: 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(255,255,255,0.4))',
-                border: '1px solid rgba(255,255,255,0.6)',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: bubble.size * 0.2,
-                textAlign: 'center',
-                padding: '5px',
-                boxShadow: '0 0 10px rgba(255,255,255,0.5)',
-                userSelect: 'none'
-              }}
-              onClick={() => popBubble(bubble.id)}
-            >
-              {bubble.message}
-            </motion.div>
-          ))}
-        </Box>
-      </Box>
-    </Dialog>
-  );
-};
 
 interface CombinedForm {
   name: string;
-  email: string;
   attending: string;
   dietaryRestrictions: string;
-  message: string;
   danceSong: string;
-  wantsToSpeak: string;
-  speechType: string;
-  speechDuration: string;
-  speechDescription: string;
-  speechEquipment: string;
+  message: string;
 }
 
 const Rsvp = () => {
   const [formData, setFormData] = useState<CombinedForm>({
     name: '',
-    email: '',
     attending: '',
     dietaryRestrictions: '',
-    message: '',
     danceSong: '',
-    wantsToSpeak: '',
-    speechType: '',
-    speechDuration: '',
-    speechDescription: '',
-    speechEquipment: ''
+    message: ''
   });
 
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showConfetti, setShowConfetti] = useState(false);
-  const [showBubbleGame, setShowBubbleGame] = useState(false);
   const [windowDimensions, setWindowDimensions] = useState({
     width: window.innerWidth,
     height: window.innerHeight
@@ -372,16 +88,10 @@ const Rsvp = () => {
         {
           to_name: 'Pelle & Matilda',
           from_name: formData.name,
-          from_email: formData.email,
           attending: formData.attending === 'yes' ? 'Ja, kommer' : 'Nej, kan inte komma',
           dietary_restrictions: formData.dietaryRestrictions || 'Inga',
-          message: formData.message || 'Inget meddelande',
           dance_song: formData.danceSong || 'Ingen låt vald',
-          wants_to_speak: formData.wantsToSpeak === 'yes' ? 'Ja' : 'Nej',
-          speech_type: formData.speechType || 'Inget',
-          speech_duration: formData.speechDuration || 'Inget',
-          speech_description: formData.speechDescription || 'Inget',
-          speech_equipment: formData.speechEquipment || 'Inget'
+          message: formData.message || 'Inget meddelande'
         },
         'TrPdgkkOUYIHHEi6A'
       );
@@ -389,7 +99,6 @@ const Rsvp = () => {
       if (result.text === 'OK') {
         if (formData.attending === 'yes') {
           setShowConfetti(true);
-          setTimeout(() => setShowBubbleGame(true), 4000);
         }
         setSubmitted(true);
       } else {
@@ -415,12 +124,6 @@ const Rsvp = () => {
         />
       )}
       
-      {showBubbleGame && (
-        <BubblePopper 
-          onClose={() => setShowBubbleGame(false)} 
-          playerName={formData.name}
-        />
-      )}
 
       <Box sx={{ 
         py: 6,
@@ -552,23 +255,6 @@ const Rsvp = () => {
                       }}
                     />
 
-                    <TextField
-                      required
-                      label="E-post"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      fullWidth
-                      disabled={loading}
-                      sx={{
-                        '& .MuiOutlinedInput-root': {
-                          borderRadius: 0,
-                          fontFamily: '"Cormorant Garamond", serif'
-                        }
-                      }}
-                    />
-
                     <FormControl required>
                       <Typography variant="subtitle1" gutterBottom sx={{ 
                         color: '#34495e',
@@ -605,6 +291,8 @@ const Rsvp = () => {
                       </RadioGroup>
                     </FormControl>
 
+
+
                     <AnimatePresence>
                       {formData.attending === 'yes' && (
                         <motion.div
@@ -613,179 +301,15 @@ const Rsvp = () => {
                           exit={{ opacity: 0, height: 0 }}
                           transition={{ duration: 0.3 }}
                         >
-                          <TextField
-                            label="Min bästa danslåt"
-                            name="danceSong"
-                            value={formData.danceSong}
-                            onChange={handleChange}
-                            fullWidth
-                            placeholder="Låt och artist som får dig att dansa"
-                            helperText="Hjälp oss skapa den bästa spellistan!"
-                            disabled={loading}
-                            sx={{
-                              '& .MuiOutlinedInput-root': {
-                                borderRadius: 0,
-                                fontFamily: '"Cormorant Garamond", serif'
-                              }
-                            }}
-                          />
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-
-                    <TextField
-                      label="Allergier eller specialkost"
-                      name="dietaryRestrictions"
-                      value={formData.dietaryRestrictions}
-                      onChange={handleChange}
-                      fullWidth
-                      multiline
-                      rows={2}
-                      disabled={loading}
-                      sx={{
-                        '& .MuiOutlinedInput-root': {
-                          borderRadius: 0,
-                          fontFamily: '"Cormorant Garamond", serif'
-                        }
-                      }}
-                    />
-
-                    <TextField
-                      label="Meddelande till brudparet"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      fullWidth
-                      multiline
-                      rows={4}
-                      disabled={loading}
-                      sx={{
-                        '& .MuiOutlinedInput-root': {
-                          borderRadius: 0,
-                          fontFamily: '"Cormorant Garamond", serif'
-                        }
-                      }}
-                    />
-
-                    {/* Toastmasters sektion */}
-                    <Divider sx={{ my: 3, borderColor: '#ecf0f1' }} />
-                    
-                    <Box sx={{ mb: 2 }}>
-                      <Typography variant="h5" gutterBottom sx={{ 
-                        color: '#e74c3c',
-                        fontFamily: '"Cormorant Garamond", serif',
-                        fontWeight: 400
-                      }}>
-                        Toastmasters
-                      </Typography>
-                      <Typography variant="body2" sx={{ 
-                        color: '#7f8c8d',
-                        mb: 2,
-                        fontFamily: '"Cormorant Garamond", serif',
-                        fontWeight: 300
-                      }}>
-                        Maja & Erik är våra toastmasters för kvällen. Vill du hålla tal, sjunga en sång eller bidra med annan underhållning?
-                      </Typography>
-                    </Box>
-
-                    <FormControl>
-                      <Typography variant="subtitle1" gutterBottom sx={{ 
-                        color: '#34495e',
-                        fontFamily: '"Cormorant Garamond", serif',
-                        fontWeight: 400
-                      }}>
-                        Vill du bidra med något framträdande under middagen?
-                      </Typography>
-                      <RadioGroup
-                        name="wantsToSpeak"
-                        value={formData.wantsToSpeak}
-                        onChange={handleChange}
-                      >
-                        <FormControlLabel
-                          value="yes"
-                          control={<Radio />}
-                          label="Ja, jag vill bidra med något"
-                          disabled={loading}
-                          sx={{
-                            fontFamily: '"Cormorant Garamond", serif',
-                            fontWeight: 400
-                          }}
-                        />
-                        <FormControlLabel
-                          value="no"
-                          control={<Radio />}
-                          label="Nej, tack"
-                          disabled={loading}
-                          sx={{
-                            fontFamily: '"Cormorant Garamond", serif',
-                            fontWeight: 400
-                          }}
-                        />
-                      </RadioGroup>
-                    </FormControl>
-
-                    <AnimatePresence>
-                      {formData.wantsToSpeak === 'yes' && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.3 }}
-                        >
                           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-                            <FormControl required>
-                              <Typography variant="subtitle1" gutterBottom sx={{ 
-                                color: '#34495e',
-                                fontFamily: '"Cormorant Garamond", serif',
-                                fontWeight: 400
-                              }}>
-                                Typ av framträdande
-                              </Typography>
-                              <RadioGroup
-                                name="speechType"
-                                value={formData.speechType}
-                                onChange={handleChange}
-                              >
-                                <FormControlLabel
-                                  value="tal"
-                                  control={<Radio />}
-                                  label="Tal"
-                                  disabled={loading}
-                                  sx={{
-                                    fontFamily: '"Cormorant Garamond", serif',
-                                    fontWeight: 400
-                                  }}
-                                />
-                                <FormControlLabel
-                                  value="sang"
-                                  control={<Radio />}
-                                  label="Sång"
-                                  disabled={loading}
-                                  sx={{
-                                    fontFamily: '"Cormorant Garamond", serif',
-                                    fontWeight: 400
-                                  }}
-                                />
-                                <FormControlLabel
-                                  value="annat"
-                                  control={<Radio />}
-                                  label="Annat framträdande"
-                                  disabled={loading}
-                                  sx={{
-                                    fontFamily: '"Cormorant Garamond", serif',
-                                    fontWeight: 400
-                                  }}
-                                />
-                              </RadioGroup>
-                            </FormControl>
-
                             <TextField
-                              required
-                              label="Uppskattad längd (minuter)"
-                              name="speechDuration"
-                              value={formData.speechDuration}
+                              label="Min bästa danslåt"
+                              name="danceSong"
+                              value={formData.danceSong}
                               onChange={handleChange}
                               fullWidth
+                              placeholder="Låt och artist som får dig att dansa"
+                              helperText="Hjälp oss skapa den bästa spellistan!"
                               disabled={loading}
                               sx={{
                                 '& .MuiOutlinedInput-root': {
@@ -796,26 +320,9 @@ const Rsvp = () => {
                             />
 
                             <TextField
-                              label="Kort beskrivning av ditt framträdande"
-                              name="speechDescription"
-                              value={formData.speechDescription}
-                              onChange={handleChange}
-                              fullWidth
-                              multiline
-                              rows={3}
-                              disabled={loading}
-                              sx={{
-                                '& .MuiOutlinedInput-root': {
-                                  borderRadius: 0,
-                                  fontFamily: '"Cormorant Garamond", serif'
-                                }
-                              }}
-                            />
-
-                            <TextField
-                              label="Behov av utrustning (mikrofon, projektor etc.)"
-                              name="speechEquipment"
-                              value={formData.speechEquipment}
+                              label="Allergier eller specialkost"
+                              name="dietaryRestrictions"
+                              value={formData.dietaryRestrictions}
                               onChange={handleChange}
                               fullWidth
                               multiline
@@ -828,10 +335,30 @@ const Rsvp = () => {
                                 }
                               }}
                             />
+
+                            <TextField
+                              label="Hälsning till brudparet"
+                              name="message"
+                              value={formData.message}
+                              onChange={handleChange}
+                              fullWidth
+                              multiline
+                              rows={4}
+                              placeholder="Skriv en personlig hälsning till Pelle & Matilda..."
+                              helperText="Vi ser fram emot att läsa era fina meddelanden!"
+                              disabled={loading}
+                              sx={{
+                                '& .MuiOutlinedInput-root': {
+                                  borderRadius: 0,
+                                  fontFamily: '"Cormorant Garamond", serif'
+                                }
+                              }}
+                            />
                           </Box>
                         </motion.div>
                       )}
                     </AnimatePresence>
+
 
                     <Button
                       type="submit"
