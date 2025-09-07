@@ -6,7 +6,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const Accommodation = () => {
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" sx={{ px: { xs: 2, sm: 3 } }}>
       <Box sx={{
         py: 6,
         background: 'linear-gradient(135deg, #fefefe 0%, #f8f6f0 100%)',
@@ -17,7 +17,7 @@ const Accommodation = () => {
           sx={{
             background: '#fff',
             borderRadius: '20px',
-            p: { xs: 4, md: 6 },
+            p: { xs: 3, sm: 4, md: 6 },
             boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)',
             border: '1px solid rgba(231, 76, 60, 0.1)',
             position: 'relative',
@@ -77,7 +77,7 @@ const Accommodation = () => {
                 fontWeight: 400,
                 mb: 4,
                 color: '#2c3e50',
-                fontSize: { xs: '2.2rem', md: '2.8rem' },
+                fontSize: { xs: '1.8rem', sm: '2.2rem', md: '2.8rem' },
                 letterSpacing: '0.05em'
               }}
             >
@@ -125,10 +125,11 @@ const Accommodation = () => {
 
               <Box sx={{ 
                 backgroundColor: 'rgba(231, 76, 60, 0.05)', 
-                p: 3, 
+                p: { xs: 2, md: 3 }, 
                 borderRadius: 2, 
                 mb: 3,
-                border: '1px solid rgba(231, 76, 60, 0.1)'
+                border: '1px solid rgba(231, 76, 60, 0.1)',
+                overflow: 'hidden'
               }}>
                 <Typography
                   variant="h6"
@@ -137,7 +138,7 @@ const Accommodation = () => {
                     fontWeight: 400,
                     mb: 2,
                     color: '#e74c3c',
-                    fontSize: '1.1rem'
+                    fontSize: { xs: '1rem', md: '1.1rem' }
                   }}
                 >
                   Bokningsinstruktioner:
@@ -150,7 +151,8 @@ const Accommodation = () => {
                     mb: 2,
                     color: '#34495e',
                     lineHeight: 1.6,
-                    fontSize: '1rem'
+                    fontSize: { xs: '0.9rem', md: '1rem' },
+                    wordBreak: 'break-all'
                   }}
                 >
                   <strong>Bokningskod:</strong> MATILDAPELLE
@@ -163,7 +165,8 @@ const Accommodation = () => {
                     mb: 1,
                     color: '#34495e',
                     lineHeight: 1.6,
-                    fontSize: '1rem'
+                    fontSize: { xs: '0.9rem', md: '1rem' },
+                    wordBreak: 'break-word'
                   }}
                 >
                   1. Gå till www.gibsonshotell.se/boka
@@ -176,7 +179,7 @@ const Accommodation = () => {
                     mb: 1,
                     color: '#34495e',
                     lineHeight: 1.6,
-                    fontSize: '1rem'
+                    fontSize: { xs: '0.9rem', md: '1rem' }
                   }}
                 >
                   2. Skriv in er bokningskod, tryck tillämpa
@@ -189,7 +192,7 @@ const Accommodation = () => {
                     mb: 1,
                     color: '#34495e',
                     lineHeight: 1.6,
-                    fontSize: '1rem'
+                    fontSize: { xs: '0.9rem', md: '1rem' }
                   }}
                 >
                   3. Välj datum, antal gäster, sök
@@ -201,7 +204,7 @@ const Accommodation = () => {
                     fontWeight: 300,
                     color: '#34495e',
                     lineHeight: 1.6,
-                    fontSize: '1rem'
+                    fontSize: { xs: '0.9rem', md: '1rem' }
                   }}
                 >
                   Därefter är det bara att välja rum och klicka sig vidare i en logisk ordning.
