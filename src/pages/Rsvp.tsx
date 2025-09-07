@@ -354,6 +354,55 @@ const Rsvp = () => {
                                 }
                               }}
                             />
+
+                            {/* Toastmasters sektion */}
+                            <Box sx={{ 
+                              mt: 4, 
+                              p: 3, 
+                              backgroundColor: 'rgba(231, 76, 60, 0.05)', 
+                              borderRadius: 2,
+                              border: '1px solid rgba(231, 76, 60, 0.1)'
+                            }}>
+                              <Typography
+                                variant="h6"
+                                sx={{
+                                  fontFamily: '"Cormorant Garamond", serif',
+                                  fontWeight: 400,
+                                  mb: 2,
+                                  color: '#e74c3c',
+                                  fontSize: { xs: '1rem', md: '1.1rem' }
+                                }}
+                              >
+                                Vill du hålla tal eller bidra med underhållning?
+                              </Typography>
+                              
+                              <Typography
+                                variant="body1"
+                                sx={{
+                                  fontFamily: '"Cormorant Garamond", serif',
+                                  fontWeight: 300,
+                                  mb: 2,
+                                  color: '#34495e',
+                                  lineHeight: 1.6,
+                                  fontSize: { xs: '0.9rem', md: '1rem' }
+                                }}
+                              >
+                                Kontakta våra toastmasters Maja & Erik direkt:
+                              </Typography>
+                              
+                              <Typography
+                                variant="body1"
+                                sx={{
+                                  fontFamily: '"Cormorant Garamond", serif',
+                                  fontWeight: 400,
+                                  color: '#e74c3c',
+                                  fontSize: { xs: '0.9rem', md: '1rem' },
+                                  wordBreak: 'break-all'
+                                }}
+                              >
+                                [TOASTMASTER EMAIL]
+                              </Typography>
+                            </Box>
                           </Box>
                         </motion.div>
                       )}
