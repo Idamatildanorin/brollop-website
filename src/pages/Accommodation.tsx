@@ -169,7 +169,7 @@ const Accommodation = () => {
                     wordBreak: 'break-word'
                   }}
                 >
-                  1. Gå till www.gibsonshotell.se/boka
+                  1. Gå till <a href="https://www.gibsonshotell.se/boka" target="_blank" rel="noopener noreferrer" style={{ color: '#e74c3c', textDecoration: 'none' }}>www.gibsonshotell.se/boka</a>
                 </Typography>
                 <Typography
                   variant="body1"
@@ -269,7 +269,7 @@ const Accommodation = () => {
                   fontSize: '1rem'
                 }}
               >
-                För er som åker från Göteborg finns det en tågstation nära både 
+                För er som åker från Göteborg finns tågstationen Jonsereds C nära både 
                 hotellet och bröllopslokalen, så tåg är också ett bekvämt alternativ.
               </Typography>
             </Box>

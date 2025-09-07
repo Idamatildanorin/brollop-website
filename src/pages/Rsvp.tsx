@@ -201,13 +201,27 @@ const Rsvp = () => {
               OSA
             </Typography>
             <Typography variant="h6" align="center" gutterBottom sx={{ 
-              mb: 4, 
+              mb: 2, 
               color: '#34495e',
               fontFamily: '"Cormorant Garamond", serif',
               fontWeight: 300,
               fontStyle: 'italic'
             }}>
               Vänligen svara senast den 5 juni 2026
+            </Typography>
+
+            <Typography variant="body2" align="center" sx={{ 
+              mb: 4, 
+              color: '#95a5a6',
+              fontFamily: '"Cormorant Garamond", serif',
+              fontWeight: 300,
+              fontStyle: 'italic',
+              fontSize: '0.85rem',
+              maxWidth: '400px',
+              mx: 'auto',
+              lineHeight: 1.4
+            }}>
+              Vi älskar barn, men denna kväll vill vi fira tillsammans med våra vuxna vänner och familj.
             </Typography>
 
             {submitted ? (
