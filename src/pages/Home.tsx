@@ -68,7 +68,7 @@ const Home = () => {
               sx={{ 
                 fontFamily: '"Cormorant Garamond", serif',
                 fontWeight: 400,
-                mb: 4,
+                mb: 2,
                 color: '#2c3e50',
                 fontSize: { xs: '2.2rem', md: '2.8rem' },
                 letterSpacing: '0.05em'
@@ -76,6 +76,38 @@ const Home = () => {
             >
               Pelle & Matilda
             </Typography>
+            
+            <Box sx={{ 
+              display: 'flex', 
+              flexDirection: 'column',
+              justifyContent: 'center', 
+              alignItems: 'center',
+              mb: 4
+            }}>
+              <Typography 
+                variant="body1" 
+                sx={{ 
+                  fontFamily: '"Cormorant Garamond", serif',
+                  fontWeight: 300,
+                  color: '#e74c3c',
+                  fontSize: { xs: '1rem', md: '1.1rem' },
+                  letterSpacing: '0.05em',
+                  fontStyle: 'italic',
+                  mb: 1
+                }}
+              >
+                5 september 2026
+              </Typography>
+              <Typography 
+                sx={{ 
+                  fontSize: '1.2rem',
+                  color: '#e74c3c',
+                  opacity: 0.7
+                }}
+              >
+                ♥
+              </Typography>
+            </Box>
           </motion.div>
 
           {/* Nedräkning - mer kompakt */}

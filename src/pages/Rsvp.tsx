@@ -183,11 +183,11 @@ const Rsvp = () => {
 
             <Typography variant="body2" align="center" sx={{ 
               mb: 4, 
-              color: '#95a5a6',
+              color: '#2c3e50',
               fontFamily: '"Cormorant Garamond", serif',
-              fontWeight: 300,
+              fontWeight: 400,
               fontStyle: 'italic',
-              fontSize: '0.85rem',
+              fontSize: '0.95rem',
               maxWidth: '400px',
               mx: 'auto',
               lineHeight: 1.4
