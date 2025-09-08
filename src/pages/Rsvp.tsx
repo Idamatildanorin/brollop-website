@@ -215,7 +215,7 @@ const Rsvp = () => {
                   mx: 'auto',
                   lineHeight: 1.4
                 }}>
-                  Vi älskar barn, men denna kväll vill vi fira tillsammans med våra vuxna vänner och familj.
+                  Vi älskar barn, men denna kväll vill vi fira tillsammans med våra vuxna vänner och familj. Ammande får självklart komma.
                 </Typography>
               <Box sx={{ 
                 background: 'transparent',
