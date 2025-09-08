@@ -281,46 +281,91 @@ const Accommodation = () => {
                     sx={{
                       fontFamily: '"Cormorant Garamond", serif',
                       fontWeight: 400,
-                      mb: 2,
+                      mb: 3,
                       color: '#e74c3c',
                       fontSize: '1.1rem'
                     }}
                   >
                     Karta över området
                   </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      fontFamily: '"Cormorant Garamond", serif',
-                      fontWeight: 300,
-                      mb: 3,
-                      color: '#34495e',
-                      fontSize: '1rem'
-                    }}
-                  >
-                    Gibson Hotell ligger i Jonsered, nära Göteborg
-                  </Typography>
-                  <a 
-                    href="https://www.google.com/maps/search/Gibsons+Hotell+Jonsered" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    style={{
-                      display: 'inline-block',
-                      padding: '12px 24px',
-                      backgroundColor: '#e74c3c',
-                      color: 'white',
-                      textDecoration: 'none',
-                      borderRadius: '4px',
-                      fontFamily: '"Cormorant Garamond", serif',
-                      fontSize: '1rem',
-                      fontWeight: 400,
-                      transition: 'background-color 0.3s ease'
-                    }}
-                    onMouseOver={(e) => e.target.style.backgroundColor = '#c0392b'}
-                    onMouseOut={(e) => e.target.style.backgroundColor = '#e74c3c'}
-                  >
-                    Öppna i Google Maps
-                  </a>
+                  
+                  {/* Platser med pins */}
+                  <Box sx={{ mb: 3 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 1 }}>
+                      <Box sx={{ 
+                        width: 12, 
+                        height: 12, 
+                        backgroundColor: '#e74c3c', 
+                        borderRadius: '50%', 
+                        mr: 1 
+                      }} />
+                      <Typography variant="body2" sx={{ 
+                        fontFamily: '"Cormorant Garamond", serif',
+                        fontWeight: 400,
+                        color: '#34495e'
+                      }}>
+                        Gibson Hotell
+                      </Typography>
+                    </Box>
+                    
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 1 }}>
+                      <Box sx={{ 
+                        width: 12, 
+                        height: 12, 
+                        backgroundColor: '#c0392b', 
+                        borderRadius: '50%', 
+                        mr: 1 
+                      }} />
+                      <Typography variant="body2" sx={{ 
+                        fontFamily: '"Cormorant Garamond", serif',
+                        fontWeight: 400,
+                        color: '#34495e'
+                      }}>
+                        Festlokalen (Fabriksstråket 36)
+                      </Typography>
+                    </Box>
+                    
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
+                      <Box sx={{ 
+                        width: 12, 
+                        height: 12, 
+                        backgroundColor: '#34495e', 
+                        borderRadius: '50%', 
+                        mr: 1 
+                      }} />
+                      <Typography variant="body2" sx={{ 
+                        fontFamily: '"Cormorant Garamond", serif',
+                        fontWeight: 400,
+                        color: '#34495e'
+                      }}>
+                        Jonsered station
+                      </Typography>
+                    </Box>
+                  </Box>
+
+                  <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
+                    <a 
+                      href="https://www.google.com/maps/dir/Gibsons+Hotell+Jonsered/Fabriksstråket+36+Jonsered/Jonsered+station" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      style={{
+                        display: 'inline-block',
+                        padding: '12px 24px',
+                        backgroundColor: '#e74c3c',
+                        color: 'white',
+                        textDecoration: 'none',
+                        borderRadius: '4px',
+                        fontFamily: '"Cormorant Garamond", serif',
+                        fontSize: '1rem',
+                        fontWeight: 400,
+                        transition: 'background-color 0.3s ease'
+                      }}
+                      onMouseOver={(e) => e.target.style.backgroundColor = '#c0392b'}
+                      onMouseOut={(e) => e.target.style.backgroundColor = '#e74c3c'}
+                    >
+                      Se alla platser på karta
+                    </a>
+                  </Box>
                 </Box>
               </Box>
               
