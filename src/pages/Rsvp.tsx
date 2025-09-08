@@ -15,7 +15,6 @@ import {
 } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import emailjs from '@emailjs/browser';
 import Confetti from 'react-confetti';
 
@@ -151,34 +150,6 @@ const Rsvp = () => {
             }
           }}
         >
-          {/* Tillbakaknapp */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Box sx={{ mb: 4 }}>
-              <Button
-                component={Link}
-                to="/"
-                variant="outlined"
-                startIcon={<ArrowBackIcon />}
-                sx={{
-                  color: '#e74c3c',
-                  borderColor: '#e74c3c',
-                  borderRadius: 0,
-                  fontFamily: '"Cormorant Garamond", serif',
-                  fontWeight: 400,
-                  '&:hover': {
-                    borderColor: '#c0392b',
-                    backgroundColor: 'rgba(231, 76, 60, 0.04)'
-                  }
-                }}
-              >
-                Tillbaka
-              </Button>
-            </Box>
-          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}

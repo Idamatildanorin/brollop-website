@@ -2,7 +2,6 @@ import React from 'react';
 import { Box, Typography, Container, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const Accommodation = () => {
   return (
@@ -33,34 +32,6 @@ const Accommodation = () => {
             }
           }}
         >
-          {/* Tillbakaknapp */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Box sx={{ mb: 4 }}>
-              <Button
-                component={Link}
-                to="/"
-                variant="outlined"
-                startIcon={<ArrowBackIcon />}
-                sx={{
-                  color: '#e74c3c',
-                  borderColor: '#e74c3c',
-                  borderRadius: 0,
-                  fontFamily: '"Cormorant Garamond", serif',
-                  fontWeight: 400,
-                  '&:hover': {
-                    borderColor: '#c0392b',
-                    backgroundColor: 'rgba(231, 76, 60, 0.04)'
-                  }
-                }}
-              >
-                Tillbaka
-              </Button>
-            </Box>
-          </motion.div>
 
           {/* Huvudrubrik */}
           <motion.div
