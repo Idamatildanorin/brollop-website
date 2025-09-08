@@ -156,45 +156,6 @@ const Rsvp = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Typography 
-              variant="h3" 
-              component="h1" 
-              gutterBottom 
-              align="center" 
-              sx={{ 
-                color: '#e74c3c',
-                fontFamily: '"Cormorant Garamond", serif',
-                fontWeight: 400,
-                mb: 2,
-                letterSpacing: '0.05em'
-              }}
-            >
-              OSA
-            </Typography>
-            <Typography variant="h6" align="center" gutterBottom sx={{ 
-              mb: 2, 
-              color: '#34495e',
-              fontFamily: '"Cormorant Garamond", serif',
-              fontWeight: 300,
-              fontStyle: 'italic'
-            }}>
-              Vänligen svara senast den 5 juni 2026
-            </Typography>
-
-            <Typography variant="body2" align="center" sx={{ 
-              mb: 4, 
-              color: '#2c3e50',
-              fontFamily: '"Cormorant Garamond", serif',
-              fontWeight: 400,
-              fontStyle: 'italic',
-              fontSize: '0.95rem',
-              maxWidth: '400px',
-              mx: 'auto',
-              lineHeight: 1.4
-            }}>
-              Vi älskar barn, men denna kväll vill vi fira tillsammans med våra vuxna vänner och familj.
-            </Typography>
-
             {submitted ? (
               <Alert 
                 severity="success" 
@@ -212,6 +173,46 @@ const Rsvp = () => {
                   : "Tack för ditt svar! Vi kommer att sakna dig! ❤️"}
               </Alert>
             ) : (
+              <>
+                <Typography 
+                  variant="h3" 
+                  component="h1" 
+                  gutterBottom 
+                  align="center" 
+                  sx={{ 
+                    color: '#e74c3c',
+                    fontFamily: '"Cormorant Garamond", serif',
+                    fontWeight: 400,
+                    mb: 2,
+                    letterSpacing: '0.05em'
+                  }}
+                >
+                  OSA
+                </Typography>
+                
+                <Typography variant="h6" align="center" gutterBottom sx={{ 
+                  mb: 2, 
+                  color: '#34495e',
+                  fontFamily: '"Cormorant Garamond", serif',
+                  fontWeight: 300,
+                  fontStyle: 'italic'
+                }}>
+                  Vänligen svara senast den 5 juni 2026
+                </Typography>
+
+                <Typography variant="body2" align="center" sx={{ 
+                  mb: 4, 
+                  color: '#2c3e50',
+                  fontFamily: '"Cormorant Garamond", serif',
+                  fontWeight: 400,
+                  fontStyle: 'italic',
+                  fontSize: '0.95rem',
+                  maxWidth: '400px',
+                  mx: 'auto',
+                  lineHeight: 1.4
+                }}>
+                  Vi älskar barn, men denna kväll vill vi fira tillsammans med våra vuxna vänner och familj.
+                </Typography>
               <Box sx={{ 
                 background: 'transparent',
                 borderRadius: '12px'
@@ -494,6 +495,7 @@ const Rsvp = () => {
                   </Box>
                 </form>
               </Box>
+              </>
             )}
           </motion.div>
         </Box>
