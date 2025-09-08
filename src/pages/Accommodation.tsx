@@ -242,8 +242,8 @@ const Accommodation = () => {
                   fontSize: '1rem'
                 }}
               >
-                För er som åker från Göteborg finns Jonsered station nära både 
-                hotellet och festlokalen, så tåg är också ett bekvämt alternativ.
+                Det går kollektivtrafik mellan Göteborg och Jonsered, 
+                så det är också ett bekvämt alternativ för er som åker kollektivt.
               </Typography>
             </Box>
 
@@ -325,27 +325,11 @@ const Accommodation = () => {
                       </Typography>
                     </Box>
                     
-                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
-                      <Box sx={{ 
-                        width: 12, 
-                        height: 12, 
-                        backgroundColor: '#34495e', 
-                        borderRadius: '50%', 
-                        mr: 1 
-                      }} />
-                      <Typography variant="body2" sx={{ 
-                        fontFamily: '"Cormorant Garamond", serif',
-                        fontWeight: 400,
-                        color: '#34495e'
-                      }}>
-                        Jonsered station
-                      </Typography>
-                    </Box>
                   </Box>
 
                   <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
                     <a 
-                      href="https://www.google.com/maps/dir/Gibsons+Hotell+Jonsered/Fabriksstråket+36+Jonsered/Jonsered+station" 
+                      href="https://www.google.com/maps/dir/Gibsons+Hotell+Jonsered/Fabriksstråket+36+Jonsered" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       style={{
@@ -363,7 +347,7 @@ const Accommodation = () => {
                       onMouseOver={(e) => e.target.style.backgroundColor = '#c0392b'}
                       onMouseOut={(e) => e.target.style.backgroundColor = '#e74c3c'}
                     >
-                      Se alla platser på karta
+                      Se avstånd mellan platser
                     </a>
                   </Box>
                 </Box>
@@ -381,7 +365,7 @@ const Accommodation = () => {
                   textAlign: 'center'
                 }}
               >
-                Gibson Hotell och Jonsered station
+                Gibson Hotell och festlokalen
               </Typography>
             </Box>
 
