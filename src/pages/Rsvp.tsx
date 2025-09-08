@@ -62,7 +62,7 @@ const Rsvp = () => {
 
   useEffect(() => {
     if (showConfetti) {
-      const timer = setTimeout(() => setShowConfetti(false), 5000);
+      const timer = setTimeout(() => setShowConfetti(false), 8000);
       return () => clearTimeout(timer);
     }
   }, [showConfetti]);
@@ -87,6 +87,7 @@ const Rsvp = () => {
         {
           to_name: 'Pelle & Matilda',
           from_name: formData.name,
+          guest_name: formData.name,
           attending: formData.attending === 'yes' ? 'Ja, kommer' : 'Nej, kan inte komma',
           dietary_restrictions: formData.dietaryRestrictions || 'Inga',
           dance_song: formData.danceSong || 'Ingen låt vald',
@@ -118,8 +119,11 @@ const Rsvp = () => {
           width={windowDimensions.width}
           height={windowDimensions.height}
           recycle={false}
-          numberOfPieces={200}
-          gravity={0.3}
+          numberOfPieces={300}
+          gravity={0.2}
+          colors={['#e74c3c', '#c0392b', '#f39c12', '#e67e22', '#d35400']}
+          initialVelocityY={-10}
+          initialVelocityX={5}
         />
       )}
       
@@ -257,7 +261,7 @@ const Rsvp = () => {
                         <FormControlLabel
                           value="yes"
                           control={<Radio />}
-                          label="Ja, jag kommer"
+                          label="JA, såklart jag vill komma!"
                           disabled={loading}
                           sx={{
                             fontFamily: '"Cormorant Garamond", serif',

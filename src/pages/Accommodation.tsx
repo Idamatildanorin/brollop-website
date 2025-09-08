@@ -181,6 +181,20 @@ const Accommodation = () => {
                 >
                   Därefter är det bara att välja rum och klicka sig vidare i en logisk ordning.
                 </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontFamily: '"Cormorant Garamond", serif',
+                    fontWeight: 400,
+                    color: '#e74c3c',
+                    lineHeight: 1.6,
+                    fontSize: { xs: '0.9rem', md: '1rem' },
+                    mt: 2,
+                    fontStyle: 'italic'
+                  }}
+                >
+                  Rummen är blockerade för oss till 31/12-25. För att vara garanterad ett rum, bokas innan detta datum.
+                </Typography>
               </Box>
 
 
