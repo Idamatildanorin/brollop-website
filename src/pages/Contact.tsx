@@ -34,25 +34,31 @@ const Contact = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <Typography 
-              variant="h3" 
-              component="h1" 
-              gutterBottom 
-              align="center" 
-              sx={{ 
-                color: '#e74c3c',
+            <Typography
+              variant="h2"
+              component="h1"
+              align="center"
+              sx={{
                 fontFamily: '"Cormorant Garamond", serif',
                 fontWeight: 400,
-                mb: 2,
+                mb: 4,
+                color: '#2c3e50',
+                fontSize: { xs: '1.8rem', sm: '2.2rem', md: '2.8rem' },
                 letterSpacing: '0.05em'
               }}
             >
               Kontakt
             </Typography>
 
-            <Box sx={{ mb: 6, textAlign: 'center' }}>
+            {/* Innehåll */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <Box sx={{ mb: 6, textAlign: 'center' }}>
               <Typography variant="h5" gutterBottom sx={{ 
                 color: '#e74c3c', 
                 mb: 2,
@@ -181,14 +187,15 @@ const Contact = () => {
             </Grid>
           </Grid>
 
-            <Box sx={{ mt: 8, textAlign: 'center' }}>
-              <Typography variant="h6" gutterBottom>
-                Allmänna frågor
-              </Typography>
-              <Typography variant="body1">
-                För andra frågor om bröllopet, kontakta brudparet direkt.
-              </Typography>
-            </Box>
+              <Box sx={{ mt: 8, textAlign: 'center' }}>
+                <Typography variant="h6" gutterBottom>
+                  Allmänna frågor
+                </Typography>
+                <Typography variant="body1">
+                  För andra frågor om bröllopet, kontakta brudparet direkt.
+                </Typography>
+              </Box>
+            </motion.div>
           </motion.div>
         </Box>
       </Box>
