@@ -179,6 +179,41 @@ const Toastmasters = () => {
               </form>
             </Paper>
           )}
+
+          <Box sx={{ mt: 6, textAlign: 'center' }}>
+            <Typography variant="h6" gutterBottom sx={{ color: '#0d47a1' }}>
+              Kontakta våra toastmasters
+            </Typography>
+            <Typography variant="body1" sx={{ mb: 3, color: '#0d47a1' }}>
+              Du kan också kontakta Maja eller Erik direkt:
+            </Typography>
+            
+            <Box sx={{ display: 'flex', justifyContent: 'center', gap: 4, flexWrap: 'wrap' }}>
+              <Box sx={{ textAlign: 'center' }}>
+                <Typography variant="h6" sx={{ color: '#1976d2', mb: 1 }}>
+                  Erik Karlsson
+                </Typography>
+                <Typography variant="body1" sx={{ mb: 0.5 }}>
+                  erik.axel.carlsson@gmail.com
+                </Typography>
+                <Typography variant="body1">
+                  070-587 58 85
+                </Typography>
+              </Box>
+              
+              <Box sx={{ textAlign: 'center' }}>
+                <Typography variant="h6" sx={{ color: '#1976d2', mb: 1 }}>
+                  Maja Häggström
+                </Typography>
+                <Typography variant="body1" sx={{ mb: 0.5 }}>
+                  majahagg@gmail.com
+                </Typography>
+                <Typography variant="body1">
+                  072-531 04 84
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
         </motion.div>
       </Box>
     </Container>

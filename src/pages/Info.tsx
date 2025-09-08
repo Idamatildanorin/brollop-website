@@ -16,6 +16,8 @@ const Info = () => {
     {
       title: 'Fest',
       details: [
+
+          
         'Tid: Efter vigseln',
         'Plats: [Namn på festlokalen]',
         'Adress: [Festlokalens adress]',
@@ -94,10 +96,7 @@ const Info = () => {
               Kontakta oss
             </Typography>
             <Typography variant="body1">
-              Vid frågor, kontakta våra toastmasters:
-            </Typography>
-            <Typography variant="body1">
-              [Namn] - [Telefonnummer] - [E-post]
+              Vid frågor om tal och framträdanden, se Toastmasters-sidan.
             </Typography>
           </Box>
         </motion.div>

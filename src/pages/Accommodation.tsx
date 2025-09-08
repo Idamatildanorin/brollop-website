@@ -274,6 +274,99 @@ const Accommodation = () => {
               </Typography>
             </Box>
 
+            {/* Karta över området */}
+            <Box sx={{ mb: 6 }}>
+              <Typography
+                variant="h5"
+                component="h2"
+                sx={{
+                  fontFamily: '"Cormorant Garamond", serif',
+                  fontWeight: 400,
+                  mb: 3,
+                  color: '#e74c3c',
+                  fontSize: '1.3rem'
+                }}
+              >
+                Karta över området
+              </Typography>
+              
+              <Box sx={{ 
+                width: '100%', 
+                height: '400px', 
+                borderRadius: 2,
+                overflow: 'hidden',
+                border: '1px solid rgba(231, 76, 60, 0.1)',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: 'rgba(231, 76, 60, 0.05)'
+              }}>
+                <Box sx={{ textAlign: 'center' }}>
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      fontFamily: '"Cormorant Garamond", serif',
+                      fontWeight: 400,
+                      mb: 2,
+                      color: '#e74c3c',
+                      fontSize: '1.1rem'
+                    }}
+                  >
+                    Karta över området
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      fontFamily: '"Cormorant Garamond", serif',
+                      fontWeight: 300,
+                      mb: 3,
+                      color: '#34495e',
+                      fontSize: '1rem'
+                    }}
+                  >
+                    Gibson Hotell ligger i Jonsered, nära Göteborg
+                  </Typography>
+                  <a 
+                    href="https://www.google.com/maps/search/Gibsons+Hotell+Jonsered" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'inline-block',
+                      padding: '12px 24px',
+                      backgroundColor: '#e74c3c',
+                      color: 'white',
+                      textDecoration: 'none',
+                      borderRadius: '4px',
+                      fontFamily: '"Cormorant Garamond", serif',
+                      fontSize: '1rem',
+                      fontWeight: 400,
+                      transition: 'background-color 0.3s ease'
+                    }}
+                    onMouseOver={(e) => e.target.style.backgroundColor = '#c0392b'}
+                    onMouseOut={(e) => e.target.style.backgroundColor = '#e74c3c'}
+                  >
+                    Öppna i Google Maps
+                  </a>
+                </Box>
+              </Box>
+              
+              <Typography
+                variant="body2"
+                sx={{
+                  mt: 2,
+                  color: '#95a5a6',
+                  fontFamily: '"Cormorant Garamond", serif',
+                  fontWeight: 300,
+                  fontSize: '0.85rem',
+                  fontStyle: 'italic',
+                  textAlign: 'center'
+                }}
+              >
+                Gibson Hotell och Jonsereds C tågstation
+              </Typography>
+            </Box>
+
             <Box sx={{ textAlign: 'center' }}>
               <Typography
                 variant="body2"

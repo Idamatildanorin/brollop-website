@@ -404,18 +404,76 @@ const Rsvp = () => {
                                 Kontakta våra toastmasters Maja & Erik direkt:
                               </Typography>
                               
-                              <Typography
-                                variant="body1"
-                                sx={{
-                                  fontFamily: '"Cormorant Garamond", serif',
-                                  fontWeight: 400,
-                                  color: '#e74c3c',
-                                  fontSize: { xs: '0.9rem', md: '1rem' },
-                                  wordBreak: 'break-all'
-                                }}
-                              >
-                                [TOASTMASTER EMAIL]
-                              </Typography>
+                              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                                <Typography
+                                  variant="body1"
+                                  sx={{
+                                    fontFamily: '"Cormorant Garamond", serif',
+                                    fontWeight: 400,
+                                    color: '#e74c3c',
+                                    fontSize: { xs: '0.9rem', md: '1rem' }
+                                  }}
+                                >
+                                  Erik Karlsson
+                                </Typography>
+                                <Typography
+                                  variant="body1"
+                                  sx={{
+                                    fontFamily: '"Cormorant Garamond", serif',
+                                    fontWeight: 300,
+                                    color: '#34495e',
+                                    fontSize: { xs: '0.85rem', md: '0.9rem' }
+                                  }}
+                                >
+                                  erik.axel.carlsson@gmail.com
+                                </Typography>
+                                <Typography
+                                  variant="body1"
+                                  sx={{
+                                    fontFamily: '"Cormorant Garamond", serif',
+                                    fontWeight: 300,
+                                    color: '#34495e',
+                                    fontSize: { xs: '0.85rem', md: '0.9rem' },
+                                    mb: 1
+                                  }}
+                                >
+                                  070-587 58 85
+                                </Typography>
+                                
+                                <Typography
+                                  variant="body1"
+                                  sx={{
+                                    fontFamily: '"Cormorant Garamond", serif',
+                                    fontWeight: 400,
+                                    color: '#e74c3c',
+                                    fontSize: { xs: '0.9rem', md: '1rem' }
+                                  }}
+                                >
+                                  Maja Häggström
+                                </Typography>
+                                <Typography
+                                  variant="body1"
+                                  sx={{
+                                    fontFamily: '"Cormorant Garamond", serif',
+                                    fontWeight: 300,
+                                    color: '#34495e',
+                                    fontSize: { xs: '0.85rem', md: '0.9rem' }
+                                  }}
+                                >
+                                  majahagg@gmail.com
+                                </Typography>
+                                <Typography
+                                  variant="body1"
+                                  sx={{
+                                    fontFamily: '"Cormorant Garamond", serif',
+                                    fontWeight: 300,
+                                    color: '#34495e',
+                                    fontSize: { xs: '0.85rem', md: '0.9rem' }
+                                  }}
+                                >
+                                  072-531 04 84
+                                </Typography>
+                              </Box>
                             </Box>
                           </Box>
                         </motion.div>

@@ -4,6 +4,7 @@ import { ThemeProvider, createTheme } from '@mui/material';
 import Home from './pages/Home';
 import Rsvp from './pages/Rsvp';
 import Accommodation from './pages/Accommodation';
+import Contact from './pages/Contact';
 import Navbar from './components/Navbar';
 
 const theme = createTheme({
@@ -32,6 +33,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/rsvp" element={<Rsvp />} />
               <Route path="/accommodation" element={<Accommodation />} />
+              <Route path="/contact" element={<Contact />} />
             </Routes>
           </main>
         </div>

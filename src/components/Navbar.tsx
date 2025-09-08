@@ -18,7 +18,8 @@ import { Link } from 'react-router-dom';
 const navItems = [
   { text: 'Hem', path: '/' },
   { text: 'OSA', path: '/rsvp' },
-  { text: 'Boende', path: '/accommodation' }
+  { text: 'Boende', path: '/accommodation' },
+  { text: 'Kontakt', path: '/contact' }
 ];
 
 const Navbar = () => {
