@@ -70,7 +70,7 @@ const Contact = () => {
                 fontWeight: 300,
                 lineHeight: 1.6
               }}>
-                Om du vill hålla tal, sjunga en sång eller bidra med någon annan form av underhållning under middagen, 
+                Om du vill hålla tal, sjunga en sång, dansa eller bidra med någon annan form av underhållning under middagen, 
                 kontakta våra toastmasters Erik och Maja direkt.
               </Typography>
             </Box>

@@ -91,7 +91,8 @@ const Accommodation = () => {
                 Vi kommer att bo på Gibson Hotell under helgen och skulle vara 
                 så glada om ni alla kunde bo där tillsammans med oss! 
                 Det blir så mycket roligare att kunna träffas i hotellobbyn 
-                och dela dessa speciella dagar tillsammans.
+                och dela dessa speciella dagar tillsammans. Hotellet ligger med 
+                krypavstånd till festlokalen, så ni kan enkelt gå mellan dem.
               </Typography>
 
               <Box sx={{ 
@@ -225,9 +226,10 @@ const Accommodation = () => {
                   fontSize: '1rem'
                 }}
               >
-                Det finns stor parkering vid både Gibson Hotell och bröllopslokalen, 
+                Det finns stor parkering vid både Gibson Hotell och festlokalen, 
                 så bil är ett enkelt alternativ för er som kör.
               </Typography>
+
 
               <Typography
                 variant="body1"
@@ -241,7 +243,7 @@ const Accommodation = () => {
                 }}
               >
                 För er som åker från Göteborg finns tågstationen Jonsereds C nära både 
-                hotellet och bröllopslokalen, så tåg är också ett bekvämt alternativ.
+                hotellet och festlokalen, så tåg är också ett bekvämt alternativ.
               </Typography>
             </Box>
 
