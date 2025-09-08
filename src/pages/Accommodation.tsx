@@ -242,7 +242,7 @@ const Accommodation = () => {
                   fontSize: '1rem'
                 }}
               >
-                För er som åker från Göteborg finns tågstationen Jonsereds C nära både 
+                För er som åker från Göteborg finns Jonsered station nära både 
                 hotellet och festlokalen, så tåg är också ett bekvämt alternativ.
               </Typography>
             </Box>
@@ -336,7 +336,7 @@ const Accommodation = () => {
                   textAlign: 'center'
                 }}
               >
-                Gibson Hotell och Jonsereds C tågstation
+                Gibson Hotell och Jonsered station
               </Typography>
             </Box>
 
