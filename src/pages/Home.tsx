@@ -126,7 +126,7 @@ const Home = () => {
                 textTransform: 'uppercase'
               }}
             >
-              Tillsammans räknar vi ner
+              Nedräkning
             </Typography>
 
             <Box sx={{ 
