@@ -367,36 +367,8 @@ const Accommodation = () => {
                 </Box>
               </Box>
               
-              <Typography
-                variant="body2"
-                sx={{
-                  mt: 2,
-                  color: '#95a5a6',
-                  fontFamily: '"Cormorant Garamond", serif',
-                  fontWeight: 300,
-                  fontSize: '0.85rem',
-                  fontStyle: 'italic',
-                  textAlign: 'center'
-                }}
-              >
-                Gibson Hotell och festlokalen
-              </Typography>
             </Box>
 
-            <Box sx={{ textAlign: 'center' }}>
-              <Typography
-                variant="body2"
-                sx={{
-                  color: '#95a5a6',
-                  fontFamily: '"Cormorant Garamond", serif',
-                  fontWeight: 300,
-                  fontSize: '0.85rem',
-                  fontStyle: 'italic'
-                }}
-              >
-                Mer detaljerad information kommer snart
-              </Typography>
-            </Box>
           </motion.div>
         </Box>
       </Box>
