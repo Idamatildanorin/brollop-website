@@ -181,7 +181,7 @@ const Home = () => {
           </Box>
 
 
-          {/* Mer info kommer snart - mer subtil */}
+          {/* Information kommer löpande */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -189,21 +189,44 @@ const Home = () => {
           >
             <Box 
               sx={{ 
-                p: 3, 
                 textAlign: 'center',
-                maxWidth: '400px',
+                maxWidth: '600px',
                 mx: 'auto',
-                borderTop: '1px solid #ecf0f1'
+                mt: 6,
+                pt: 4,
+                borderTop: '1px solid rgba(231, 76, 60, 0.1)'
               }}
             >
-              <Typography variant="body2" sx={{ 
-                color: '#95a5a6', 
+              <Typography variant="h6" sx={{ 
+                color: '#e74c3c', 
+                fontFamily: '"Cormorant Garamond", serif',
+                fontWeight: 400,
+                fontSize: '1.1rem',
+                mb: 2,
+                letterSpacing: '0.05em'
+              }}>
+                Tips! Håll koll på hemsidan
+              </Typography>
+              <Typography variant="body1" sx={{ 
+                color: '#34495e', 
                 fontFamily: '"Cormorant Garamond", serif',
                 fontWeight: 300,
-                fontSize: '0.85rem',
+                fontSize: '0.95rem',
+                lineHeight: 1.6,
+                maxWidth: '500px',
+                mx: 'auto',
+                mb: 2
+              }}>
+                Information kommer att uppdateras löpande ju närmare bröllopet det blir
+              </Typography>
+              <Typography variant="body2" sx={{ 
+                color: '#7f8c8d', 
+                fontFamily: '"Cormorant Garamond", serif',
+                fontWeight: 300,
+                fontSize: '0.9rem',
                 fontStyle: 'italic'
               }}>
-                Mer information kommer snart
+                Här kommer tidplanen, praktisk information och mer detaljer att läggas upp
               </Typography>
             </Box>
           </motion.div>
