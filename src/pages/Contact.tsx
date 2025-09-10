@@ -187,14 +187,84 @@ const Contact = () => {
             </Grid>
           </Grid>
 
-              <Box sx={{ mt: 8, textAlign: 'center' }}>
-                <Typography variant="h6" gutterBottom>
-                  Allmänna frågor
-                </Typography>
-                <Typography variant="body1">
-                  För andra frågor om bröllopet, kontakta brudparet direkt.
-                </Typography>
+
+          <Box sx={{ 
+            mt: 8, 
+            pt: 4, 
+            borderTop: '1px solid rgba(231, 76, 60, 0.2)',
+            textAlign: 'center'
+          }}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <Typography variant="body2" sx={{ 
+                color: '#95a5a6',
+                fontFamily: '"Cormorant Garamond", serif',
+                fontWeight: 300,
+                fontSize: '0.9rem',
+                mb: 3
+              }}>
+                För andra frågor om bröllopet, kontakta brudparet direkt
+              </Typography>
+              
+              <Box sx={{ 
+                display: 'flex', 
+                justifyContent: 'center', 
+                alignItems: 'center',
+                gap: 4,
+                flexWrap: 'wrap'
+              }}>
+                <Box sx={{ textAlign: 'center' }}>
+                  <Typography variant="body2" sx={{ 
+                    color: '#e74c3c',
+                    fontFamily: '"Cormorant Garamond", serif',
+                    fontWeight: 400,
+                    fontSize: '0.95rem',
+                    mb: 0.5
+                  }}>
+                    Matilda
+                  </Typography>
+                  <Typography variant="body2" sx={{ 
+                    color: '#7f8c8d',
+                    fontFamily: '"Cormorant Garamond", serif',
+                    fontWeight: 300,
+                    fontSize: '0.8rem'
+                  }}>
+                    070-278 69 80
+                  </Typography>
+                </Box>
+                
+                <Box sx={{ 
+                  width: '1px', 
+                  height: '30px', 
+                  backgroundColor: 'rgba(231, 76, 60, 0.3)',
+                  display: { xs: 'none', sm: 'block' }
+                }} />
+                
+                <Box sx={{ textAlign: 'center' }}>
+                  <Typography variant="body2" sx={{ 
+                    color: '#e74c3c',
+                    fontFamily: '"Cormorant Garamond", serif',
+                    fontWeight: 400,
+                    fontSize: '0.95rem',
+                    mb: 0.5
+                  }}>
+                    Pelle
+                  </Typography>
+                  <Typography variant="body2" sx={{ 
+                    color: '#7f8c8d',
+                    fontFamily: '"Cormorant Garamond", serif',
+                    fontWeight: 300,
+                    fontSize: '0.8rem'
+                  }}>
+                    073-840 09 14
+                  </Typography>
+                </Box>
               </Box>
+            </motion.div>
+          </Box>
             </motion.div>
           </motion.div>
         </Box>
