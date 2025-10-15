@@ -129,9 +129,8 @@ const Rsvp = () => {
       
 
       <Box sx={{ 
-        py: 6,
-        background: 'linear-gradient(135deg, #fefefe 0%, #f8f6f0 100%)',
-        minHeight: '100vh'
+        py: 1,
+        background: 'linear-gradient(135deg, #fefefe 0%, #f8f6f0 100%)'
       }}>
         {/* Diskret ram runt allt innehåll */}
         <Box

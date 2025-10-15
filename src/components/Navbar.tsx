@@ -18,6 +18,7 @@ import { Link } from 'react-router-dom';
 const navItems = [
   { text: 'Hem', path: '/' },
   { text: 'OSA', path: '/rsvp' },
+  { text: 'Bra att veta', path: '/info' },
   { text: 'Boende och transport', path: '/accommodation' },
   { text: 'Kontakt', path: '/contact' }
 ];
@@ -61,8 +62,8 @@ const Navbar = () => {
   );
 
   return (
-    <AppBar position="sticky" color="inherit" elevation={0} sx={{ bgcolor: '#fff' }}>
-      <Toolbar>
+    <AppBar position="sticky" color="inherit" elevation={0} sx={{ bgcolor: '#fff', boxShadow: 'none' }}>
+      <Toolbar sx={{ py: 0, pt: 0, pb: 0, minHeight: '48px !important', paddingTop: '0 !important' }}>
         {isMobile ? (
           <>
             <IconButton
