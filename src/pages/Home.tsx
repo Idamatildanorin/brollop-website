@@ -183,7 +183,7 @@ const Home = () => {
                 mx: 'auto',
                 mb: 3
               }}>
-                Här kommer ni att hitta allt ni behöver veta om vår stora dag. Vi uppdaterar sidan regelbundet med ny information, så kom gärna tillbaka och kolla in vad som är nytt!
+                Här hittar ni all information ni behöver. Vi uppdaterar sidan regelbundet med ny information, så kom gärna tillbaka och kolla vad som är nytt.
               </Typography>
               <Typography variant="body2" sx={{ 
                 color: '#7f8c8d', 
@@ -193,7 +193,7 @@ const Home = () => {
                 fontStyle: 'italic',
                 lineHeight: 1.6
               }}>
-                Tidplan, praktisk information, boende, aktiviteter och mycket mer kommer att läggas upp här framöver. Vi ser fram emot att dela denna speciella dag med er! ✨
+                Tidplan, praktisk information, boende, aktiviteter och mer kommer att läggas upp här framöver. Vi ser fram emot att dela denna dag med er! ✨
               </Typography>
             </Box>
           </motion.div>
