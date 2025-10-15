@@ -91,6 +91,7 @@ const Info = () => {
           </motion.div>
 
 
+
           {/* Presenter */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
