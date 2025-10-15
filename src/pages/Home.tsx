@@ -27,31 +27,41 @@ const Home = () => {
   return (
     <Container maxWidth="md">
       <Box sx={{ 
-        py: 6,
-        background: 'linear-gradient(135deg, #fefefe 0%, #f8f6f0 100%)',
+        py: 1,
+        background: '#ffffff',
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center'
       }}>
-        {/* Diskret ram runt allt innehåll */}
+        {/* Innehåll med elegant ram */}
         <Box
           sx={{
-            background: '#fff',
-            borderRadius: '20px',
-            p: { xs: 4, md: 6 },
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)',
-            border: '1px solid rgba(231, 76, 60, 0.1)',
+            background: '#ffffff',
+            borderRadius: '25px',
+            p: { xs: 1.5, md: 2 },
             position: 'relative',
+            boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)',
+            border: '2px solid rgba(231, 76, 60, 0.15)',
             '&::before': {
               content: '""',
               position: 'absolute',
               top: 0,
               left: 0,
               right: 0,
-              height: '3px',
-              background: 'linear-gradient(90deg, #e74c3c, #c0392b)',
-              borderRadius: '20px 20px 0 0'
+              height: '5px',
+              background: 'linear-gradient(90deg, #e74c3c, #c0392b, #e74c3c)',
+              borderRadius: '25px 25px 0 0'
+            },
+            '&::after': {
+              content: '""',
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: '5px',
+              background: 'linear-gradient(90deg, #e74c3c, #c0392b, #e74c3c)',
+              borderRadius: '0 0 25px 25px'
             }
           }}
         >
@@ -61,74 +71,30 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <Typography 
-              variant="h2" 
-              component="h1" 
-              align="center"
-              sx={{ 
-                fontFamily: '"Cormorant Garamond", serif',
-                fontWeight: 400,
-                mb: 2,
-                color: '#2c3e50',
-                fontSize: { xs: '2.2rem', md: '2.8rem' },
-                letterSpacing: '0.05em'
-              }}
-            >
-              Pelle & Matilda
-            </Typography>
-            
             <Box sx={{ 
-              display: 'flex', 
-              flexDirection: 'column',
-              justifyContent: 'center', 
+              display: 'flex',
+              justifyContent: 'center',
               alignItems: 'center',
-              mb: 4
+              mb: 0
             }}>
-              <Typography 
-                variant="body1" 
-                sx={{ 
-                  fontFamily: '"Cormorant Garamond", serif',
-                  fontWeight: 300,
-                  color: '#e74c3c',
-                  fontSize: { xs: '1rem', md: '1.1rem' },
-                  letterSpacing: '0.05em',
-                  fontStyle: 'italic',
-                  mb: 1
+              <img
+                src="/images/ChatGPT Image 14 okt. 2025 19_49_39.png"
+                alt="Pelle och Matilda"
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  maxWidth: '350px',
+                  display: 'block',
+                  filter: 'brightness(1.2) contrast(1.1)',
+                  backgroundColor: '#ffffff'
                 }}
-              >
-                5 september 2026
-              </Typography>
-              <Typography 
-                sx={{ 
-                  fontSize: '1.2rem',
-                  color: '#e74c3c',
-                  opacity: 0.7
-                }}
-              >
-                ♥
-              </Typography>
+              />
             </Box>
+            
           </motion.div>
 
           {/* Nedräkning - mer kompakt */}
-          <Box sx={{ mb: 6 }}>
-            <Typography 
-              variant="h5" 
-              component="h2" 
-              align="center"
-              sx={{ 
-                fontFamily: '"Cormorant Garamond", serif',
-                fontWeight: 400,
-                mb: 4,
-                color: '#34495e',
-                fontSize: '1.1rem',
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase'
-              }}
-            >
-              Nedräkning
-            </Typography>
-
+          <Box sx={{ mb: 1 }}>
             <Box sx={{ 
               display: 'flex',
               justifyContent: 'center',
@@ -173,7 +139,7 @@ const Home = () => {
                       fontSize: '0.8rem'
                     }}
                   >
-                    dagar
+                    dagar kvar
                   </Typography>
                 </Box>
               </motion.div>
@@ -192,8 +158,8 @@ const Home = () => {
                 textAlign: 'center',
                 maxWidth: '600px',
                 mx: 'auto',
-                mt: 6,
-                pt: 4,
+                mt: 1,
+                pt: 1,
                 borderTop: '1px solid rgba(231, 76, 60, 0.1)'
               }}
             >
@@ -201,32 +167,33 @@ const Home = () => {
                 color: '#e74c3c', 
                 fontFamily: '"Cormorant Garamond", serif',
                 fontWeight: 400,
-                fontSize: '1.1rem',
-                mb: 2,
+                fontSize: '1.2rem',
+                mb: 3,
                 letterSpacing: '0.05em'
               }}>
-                Tips! Håll koll på hemsidan
+                Välkommen till vår bröllopssida! 💕
               </Typography>
               <Typography variant="body1" sx={{ 
                 color: '#34495e', 
                 fontFamily: '"Cormorant Garamond", serif',
                 fontWeight: 300,
-                fontSize: '0.95rem',
-                lineHeight: 1.6,
-                maxWidth: '500px',
+                fontSize: '1rem',
+                lineHeight: 1.7,
+                maxWidth: '600px',
                 mx: 'auto',
-                mb: 2
+                mb: 3
               }}>
-                Information kommer att uppdateras löpande ju närmare bröllopet det blir
+                Här kommer ni att hitta allt ni behöver veta om vår stora dag. Vi uppdaterar sidan regelbundet med ny information, så kom gärna tillbaka och kolla in vad som är nytt!
               </Typography>
               <Typography variant="body2" sx={{ 
                 color: '#7f8c8d', 
                 fontFamily: '"Cormorant Garamond", serif',
                 fontWeight: 300,
-                fontSize: '0.9rem',
-                fontStyle: 'italic'
+                fontSize: '0.95rem',
+                fontStyle: 'italic',
+                lineHeight: 1.6
               }}>
-                Här kommer tidplanen, praktisk information och mer detaljer att läggas upp
+                Tidplan, praktisk information, boende, aktiviteter och mycket mer kommer att läggas upp här framöver. Vi ser fram emot att dela denna speciella dag med er! ✨
               </Typography>
             </Box>
           </motion.div>
