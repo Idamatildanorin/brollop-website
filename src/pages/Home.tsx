@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Typography, Container, Button } from '@mui/material';
+import { useState, useEffect } from 'react';
+import { Box, Typography, Container } from '@mui/material';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 
 const Home = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -163,37 +162,32 @@ const Home = () => {
                 borderTop: '1px solid rgba(231, 76, 60, 0.1)'
               }}
             >
-              <Typography variant="h6" sx={{ 
-                color: '#e74c3c', 
-                fontFamily: '"Cormorant Garamond", serif',
-                fontWeight: 400,
-                fontSize: '1.2rem',
-                mb: 3,
-                letterSpacing: '0.05em'
-              }}>
-                Välkommen till vår bröllopssida! 💕
+              <Typography 
+                variant="h6" 
+                sx={{ 
+                  color: '#e74c3c', 
+                  fontFamily: '"Cormorant Garamond", serif',
+                  fontWeight: 400,
+                  fontSize: '1.15rem',
+                  letterSpacing: '0.02em',
+                  mx: 'auto',
+                  mb: 0.5
+                }}
+              >
+                Vi längtar efter er!
               </Typography>
-              <Typography variant="body1" sx={{ 
-                color: '#34495e', 
-                fontFamily: '"Cormorant Garamond", serif',
-                fontWeight: 300,
-                fontSize: '1rem',
-                lineHeight: 1.7,
-                maxWidth: '600px',
-                mx: 'auto',
-                mb: 3
-              }}>
-                Här hittar ni all information ni behöver. Vi uppdaterar sidan regelbundet med ny information, så kom gärna tillbaka och kolla vad som är nytt.
-              </Typography>
-              <Typography variant="body2" sx={{ 
-                color: '#7f8c8d', 
-                fontFamily: '"Cormorant Garamond", serif',
-                fontWeight: 300,
-                fontSize: '0.95rem',
-                fontStyle: 'italic',
-                lineHeight: 1.6
-              }}>
-                Tidplan, praktisk information, boende, aktiviteter och mer kommer att läggas upp här framöver. Vi ser fram emot att dela denna dag med er! ✨
+              <Typography 
+                variant="body2" 
+                sx={{ 
+                  color: '#7f8c8d', 
+                  fontFamily: '"Cormorant Garamond", serif',
+                  fontWeight: 300,
+                  fontSize: '0.9rem',
+                  lineHeight: 1.6,
+                  mx: 'auto'
+                }}
+              >
+                Mer information kommer framöver – håll utkik med jämna mellanrum.
               </Typography>
             </Box>
           </motion.div>
