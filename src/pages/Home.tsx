@@ -24,7 +24,7 @@ const Home = () => {
   }, []);
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="lg">
       <Box sx={{ 
         py: 1,
         background: '#ffffff',
@@ -39,29 +39,11 @@ const Home = () => {
             background: '#ffffff',
             borderRadius: '25px',
             p: { xs: 1.5, md: 2 },
+            py: { xs: 3, md: 4 },
+            minHeight: { xs: '75vh', md: '85vh' },
             position: 'relative',
-            boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)',
-            border: '2px solid rgba(231, 76, 60, 0.15)',
-            '&::before': {
-              content: '""',
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              height: '5px',
-              background: 'linear-gradient(90deg, #e74c3c, #c0392b, #e74c3c)',
-              borderRadius: '25px 25px 0 0'
-            },
-            '&::after': {
-              content: '""',
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: '5px',
-              background: 'linear-gradient(90deg, #e74c3c, #c0392b, #e74c3c)',
-              borderRadius: '0 0 25px 25px'
-            }
+            boxShadow: '0 10px 40px rgba(0, 0, 0, 0.08)',
+            border: '1px solid rgba(0, 0, 0, 0.06)'
           }}
         >
           {/* Huvudrubrik - mer kompakt */}
@@ -93,7 +75,7 @@ const Home = () => {
           </motion.div>
 
           {/* Nedräkning - mer kompakt */}
-          <Box sx={{ mb: 1 }}>
+          <Box sx={{ mt: -2, mb: 1 }}>
             <Box sx={{ 
               display: 'flex',
               justifyContent: 'center',
@@ -111,7 +93,7 @@ const Home = () => {
                   sx={{
                     p: 3,
                     textAlign: 'center',
-                    borderBottom: '2px solid #e74c3c',
+                    borderBottom: '1px solid rgba(0, 0, 0, 0.08)',
                     minWidth: '120px'
                   }}
                 >
