@@ -20,6 +20,7 @@ const navItems = [
   { text: 'OSA', path: '/rsvp' },
   { text: 'Bra att veta', path: '/info' },
   { text: 'Boende och transport', path: '/accommodation' },
+  { text: 'Galleri', path: '/gallery' },
   { text: 'Kontakt', path: '/contact' }
 ];
 

@@ -7,25 +7,21 @@ import { motion, AnimatePresence } from 'framer-motion';
 // Bilderna ska placeras i public/images-mappen
 // och refereras till med /images/filnamn.jpg
 const photos = [
-  {
-    src: '/images/photo1.jpg', // Exempel: /images/forlovning.jpg
-    width: 4,
-    height: 3,
-    title: 'Första dejten'
-  },
-  {
-    src: '/images/photo2.jpg', // Exempel: /images/semester.jpg
-    width: 1,
-    height: 1,
-    title: 'Förlovningen'
-  },
-  // Kopiera och klistra in fler bildobjekt här
-  // {
-  //   src: '/images/din-bild.jpg',
-  //   width: 4, // Bildens bredd-förhållande
-  //   height: 3, // Bildens höjd-förhållande
-  //   title: 'Bildtext'
-  // },
+  { src: '/images/engagement1.jpg', width: 4, height: 3, title: 'Förlovningen' },
+  { src: '/images/rut1.jpg', width: 4, height: 3, title: 'Rut' },
+  { src: '/images/rut2.jpg', width: 4, height: 3, title: 'Rut' },
+  { src: '/images/vanlife_beach.jpg', width: 4, height: 3, title: 'Vanlife' },
+  { src: '/images/vanlife_mountain.jpg', width: 4, height: 3, title: 'Fjäll' },
+  // Nya uppladdade bilder
+  { src: '/images/468822617_10162772963163413_6430739565414732441_n.jpg', width: 4, height: 3, title: '' },
+  { src: '/images/468042298_10162632577363413_8770442690666789542_n.jpg', width: 4, height: 3, title: '' },
+  { src: '/images/472211300_10163057887953413_1861285274298366542_n.jpg', width: 4, height: 3, title: '' },
+  { src: '/images/472032881_10163081597678413_7006011210373281061_n.jpg', width: 4, height: 3, title: '' },
+  { src: '/images/471873848_10163022352893413_6471546301548460484_n.jpg', width: 4, height: 3, title: '' },
+  { src: '/images/468972081_10162878167963413_2351330846835839363_n.jpg', width: 4, height: 3, title: '' },
+  { src: '/images/468936457_10162848086513413_2774617505489923067_n.jpg', width: 4, height: 3, title: '' },
+  { src: '/images/468841563_10162847315998413_2146630582485362512_n.jpg', width: 4, height: 3, title: '' },
+  { src: '/images/468801874_10162833937098413_983283881458179574_n.jpg', width: 4, height: 3, title: '' },
 ];
 
 const Gallery = () => {
@@ -54,9 +50,9 @@ const Gallery = () => {
           <Box
             sx={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-              gap: 3,
-              padding: 2
+              gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
+              gap: 0.5,
+              padding: 0
             }}
           >
             {photos.map((photo, index) => (
@@ -64,41 +60,38 @@ const Gallery = () => {
                 key={index}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
+                transition={{ delay: index * 0.05 }}
+                whileHover={{ scale: 1.08, zIndex: 2 }}
                 onClick={() => handleOpen(index)}
                 style={{ cursor: 'pointer' }}
               >
                 <Box
                   sx={{
                     position: 'relative',
-                    paddingTop: '75%',
+                    paddingTop: '72%',
                     overflow: 'hidden',
-                    borderRadius: 2,
-                    boxShadow: 3
+                    borderRadius: 0,
+                    boxShadow: 0
                   }}
                 >
                   <Box
                     component="img"
                     src={photo.src}
                     alt={photo.title}
+                    loading="lazy"
                     sx={{
                       position: 'absolute',
                       top: 0,
                       left: 0,
                       width: '100%',
                       height: '100%',
-                      objectFit: 'cover'
+                      objectFit: 'cover',
+                      transition: 'transform 220ms ease',
+                      '&:hover': { transform: 'scale(1.06)' }
                     }}
                   />
                 </Box>
-                <Typography
-                  variant="subtitle1"
-                  align="center"
-                  sx={{ mt: 1, color: 'text.secondary' }}
-                >
-                  {photo.title}
-                </Typography>
+                
               </motion.div>
             ))}
           </Box>

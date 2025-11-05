@@ -24,6 +24,8 @@ const Home = () => {
     return () => clearInterval(timer);
   }, []);
 
+
+
   // Konfetti vid sidladdning
   useEffect(() => {
     const confetti = (window as any).confetti;
@@ -176,6 +178,7 @@ const Home = () => {
               </motion.div>
             </Box>
           </Box>
+
 
 
           {/* Information kommer löpande */}
