@@ -187,7 +187,7 @@ const Home = () => {
                   mx: 'auto'
                 }}
               >
-                Mer information kommer framöver – håll utkik med jämna mellanrum.
+                Mer information kommer framöver – håll utkik.
               </Typography>
             </Box>
           </motion.div>
