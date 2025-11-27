@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import { Box, Typography, Container } from '@mui/material';
+import { Box, Typography, Container, Button } from '@mui/material';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -10,6 +11,12 @@ const Home = () => {
 
   // Ange bröllopsdatumet här (format: YYYY, MM-1, DD, HH, MM)
   const weddingDate = new Date(2026, 8, 5, 14, 0); // 5 september 2026 kl 14:00
+
+  // TODO-meddelande för gästerna (ändra här när ni vill uppdatera)
+  const todoMessage = {
+    title: 'Varför boka hotell innan nyår?',
+    description: 'Efter nyår kommer priserna justeras och allmänheten släpps på att boka, så för att vara garanterad rum boka gärna i god tid!'
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -179,22 +186,20 @@ const Home = () => {
             </Box>
           </Box>
 
-
-
-          {/* Information kommer löpande */}
+          {/* TODO: Hotellbokning */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.3 }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.0 }}
           >
             <Box 
               sx={{ 
                 textAlign: 'center',
-                maxWidth: '600px',
+                maxWidth: '500px',
                 mx: 'auto',
-                mt: 1,
-                pt: 1,
-                borderTop: '1px solid rgba(231, 76, 60, 0.1)'
+                mt: 3,
+                mb: 2,
+                p: 2.5
               }}
             >
               <Typography 
@@ -202,14 +207,13 @@ const Home = () => {
                 sx={{ 
                   color: '#e74c3c', 
                   fontFamily: '"Cormorant Garamond", serif',
-                  fontWeight: 400,
-                  fontSize: '1.15rem',
+                  fontWeight: 500,
+                  fontSize: '1.2rem',
                   letterSpacing: '0.02em',
-                  mx: 'auto',
-                  mb: 0.5
+                  mb: 1.5
                 }}
               >
-                Vi längtar efter er!
+                {todoMessage.title}
               </Typography>
               <Typography 
                 variant="body2" 
@@ -217,13 +221,35 @@ const Home = () => {
                   color: '#7f8c8d', 
                   fontFamily: '"Cormorant Garamond", serif',
                   fontWeight: 300,
-                  fontSize: '0.9rem',
+                  fontSize: '0.95rem',
                   lineHeight: 1.6,
-                  mx: 'auto'
+                  mb: 2
                 }}
               >
-                Mer information kommer framöver – håll utkik.
+                {todoMessage.description}
               </Typography>
+              <Button
+                component={Link}
+                to="/accommodation"
+                variant="outlined"
+                sx={{
+                  color: '#e74c3c',
+                  borderColor: '#e74c3c',
+                  fontFamily: '"Cormorant Garamond", serif',
+                  fontWeight: 400,
+                  fontSize: '0.95rem',
+                  textTransform: 'none',
+                  borderRadius: '8px',
+                  px: 3,
+                  py: 1,
+                  '&:hover': {
+                    borderColor: '#c0392b',
+                    backgroundColor: 'rgba(231, 76, 60, 0.08)'
+                  }
+                }}
+              >
+                Se boende →
+              </Button>
             </Box>
           </motion.div>
         </Box>
