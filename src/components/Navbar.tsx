@@ -20,7 +20,6 @@ const navItems = [
   { text: 'OSA', path: '/rsvp' },
   { text: 'Bra att veta', path: '/info' },
   { text: 'Boende och transport', path: '/accommodation' },
-  { text: 'Galleri', path: '/gallery' },
   { text: 'Kontakt', path: '/contact' }
 ];
 
@@ -42,9 +41,9 @@ const Navbar = () => {
           to={item.path}
           onClick={handleDrawerToggle}
           sx={{ 
-            color: '#594545',
+            color: '#6b7280',
             '&:hover': {
-              backgroundColor: 'rgba(158, 118, 118, 0.1)'
+              backgroundColor: 'rgba(107, 114, 128, 0.1)'
             }
           }}
         >
@@ -53,7 +52,8 @@ const Navbar = () => {
             primaryTypographyProps={{
               sx: { 
                 fontSize: '1.1rem',
-                fontFamily: '"Playfair Display", serif'
+                fontFamily: '"Inter", sans-serif',
+                fontWeight: 300
               }
             }}
           />
@@ -72,7 +72,7 @@ const Navbar = () => {
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ color: '#9E7676' }}
+              sx={{ color: '#6b7280' }}
             >
               <MenuIcon />
             </IconButton>
@@ -84,8 +84,9 @@ const Navbar = () => {
                 sx={{ 
                   fontSize: '1.2rem', 
                   textTransform: 'none',
-                  color: '#9E7676',
-                  fontFamily: '"Playfair Display", serif'
+                  color: '#6b7280',
+                  fontFamily: '"Inter", sans-serif',
+                  fontWeight: 300
                 }}
               >
                 Pelle & Matilda
@@ -99,12 +100,13 @@ const Navbar = () => {
             justifyContent: 'center', 
             gap: 3,
             '& .MuiButton-root': {
-              color: '#594545',
+              color: '#6b7280',
               fontSize: '1.1rem',
               textTransform: 'none',
-              fontFamily: '"Playfair Display", serif',
+              fontFamily: '"Inter", sans-serif',
+              fontWeight: 300,
               '&:hover': {
-                backgroundColor: 'rgba(158, 118, 118, 0.1)'
+                backgroundColor: 'rgba(107, 114, 128, 0.1)'
               }
             }
           }}>

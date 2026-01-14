@@ -6,7 +6,6 @@ import Rsvp from './pages/Rsvp';
 import Info from './pages/Info';
 import Accommodation from './pages/Accommodation';
 import Contact from './pages/Contact';
-import Gallery from './pages/Gallery';
 import Navbar from './components/Navbar';
 
 const theme = createTheme({
@@ -19,7 +18,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Cormorant Garamond", "Playfair Display", "Roboto", "Arial", sans-serif',
+    fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
   },
 });
 
@@ -37,7 +36,6 @@ function App() {
               <Route path="/info" element={<Info />} />
               <Route path="/accommodation" element={<Accommodation />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/gallery" element={<Gallery />} />
             </Routes>
           </main>
         </div>

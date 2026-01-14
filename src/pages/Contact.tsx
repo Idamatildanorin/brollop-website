@@ -6,9 +6,8 @@ const Contact = () => {
   return (
     <Container maxWidth="md" sx={{ px: { xs: 2, sm: 3 } }}>
       <Box sx={{
-        py: 6,
-        background: 'linear-gradient(135deg, #fefefe 0%, #f8f6f0 100%)',
-        minHeight: '100vh'
+        py: 1,
+        background: 'linear-gradient(135deg, #fefefe 0%, #f8f6f0 100%)'
       }}>
         {/* Diskret ram runt allt innehåll */}
         <Box
@@ -69,7 +68,7 @@ const Contact = () => {
               </Typography>
               <Typography variant="body1" sx={{ 
                 mb: 4, 
-                color: '#34495e', 
+                color: '#6b7280', 
                 maxWidth: '600px', 
                 mx: 'auto',
                 fontFamily: '"Cormorant Garamond", serif',
@@ -110,7 +109,7 @@ const Contact = () => {
                     mb: 2,
                     fontFamily: '"Cormorant Garamond", serif',
                     fontWeight: 300,
-                    color: '#34495e'
+                    color: '#6b7280'
                   }}>
                     erik.axel.carlsson@gmail.com
                   </Typography>
@@ -118,12 +117,12 @@ const Contact = () => {
                     mb: 3,
                     fontFamily: '"Cormorant Garamond", serif',
                     fontWeight: 300,
-                    color: '#34495e'
+                    color: '#6b7280'
                   }}>
                     070-587 58 85
                   </Typography>
                   <Typography variant="body2" sx={{ 
-                    color: '#95a5a6', 
+                    color: '#34495e', 
                     fontStyle: 'italic',
                     fontFamily: '"Cormorant Garamond", serif',
                     fontWeight: 300
@@ -152,8 +151,8 @@ const Contact = () => {
                 >
                   <Typography variant="h5" gutterBottom sx={{ 
                     mb: 3, 
-                    color: '#e74c3c',
                     fontFamily: '"Cormorant Garamond", serif',
+                    color: '#34495e',
                     fontWeight: 400
                   }}>
                     Maja Häggström
@@ -162,7 +161,7 @@ const Contact = () => {
                     mb: 2,
                     fontFamily: '"Cormorant Garamond", serif',
                     fontWeight: 300,
-                    color: '#34495e'
+                    color: '#6b7280'
                   }}>
                     majahagg@gmail.com
                   </Typography>
@@ -170,12 +169,12 @@ const Contact = () => {
                     mb: 3,
                     fontFamily: '"Cormorant Garamond", serif',
                     fontWeight: 300,
-                    color: '#34495e'
+                    color: '#6b7280'
                   }}>
                     072-531 04 84
                   </Typography>
                   <Typography variant="body2" sx={{ 
-                    color: '#95a5a6', 
+                    color: '#34495e', 
                     fontStyle: 'italic',
                     fontFamily: '"Cormorant Garamond", serif',
                     fontWeight: 300
@@ -200,7 +199,7 @@ const Contact = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
             >
               <Typography variant="body2" sx={{ 
-                color: '#95a5a6',
+                color: '#6b7280',
                 fontFamily: '"Cormorant Garamond", serif',
                 fontWeight: 300,
                 fontSize: '0.9rem',
@@ -218,8 +217,8 @@ const Contact = () => {
               }}>
                 <Box sx={{ textAlign: 'center' }}>
                   <Typography variant="body2" sx={{ 
-                    color: '#e74c3c',
                     fontFamily: '"Cormorant Garamond", serif',
+                    color: '#34495e',
                     fontWeight: 400,
                     fontSize: '0.95rem',
                     mb: 0.5
@@ -227,7 +226,7 @@ const Contact = () => {
                     Matilda
                   </Typography>
                   <Typography variant="body2" sx={{ 
-                    color: '#7f8c8d',
+                    color: '#34495e',
                     fontFamily: '"Cormorant Garamond", serif',
                     fontWeight: 300,
                     fontSize: '0.8rem'
@@ -245,8 +244,8 @@ const Contact = () => {
                 
                 <Box sx={{ textAlign: 'center' }}>
                   <Typography variant="body2" sx={{ 
-                    color: '#e74c3c',
                     fontFamily: '"Cormorant Garamond", serif',
+                    color: '#34495e',
                     fontWeight: 400,
                     fontSize: '0.95rem',
                     mb: 0.5
@@ -254,7 +253,7 @@ const Contact = () => {
                     Pelle
                   </Typography>
                   <Typography variant="body2" sx={{ 
-                    color: '#7f8c8d',
+                    color: '#34495e',
                     fontFamily: '"Cormorant Garamond", serif',
                     fontWeight: 300,
                     fontSize: '0.8rem'

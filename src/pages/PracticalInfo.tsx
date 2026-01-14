@@ -28,7 +28,7 @@ const PracticalInfo = () => {
                       <strong>Plats:</strong> Hemlig plats i naturen
                     </Typography>
                     <Typography variant="body1" paragraph>
-                      <strong>Tid:</strong> 14:00
+                      <strong>Tid:</strong> 15:00
                     </Typography>
                     <Typography variant="body1" paragraph>
                       Vi har valt en vacker plats i naturen för vår borgerliga vigsel. Exakt plats kommer att avslöjas närmare bröllopet. Vi kommer att ordna med transport från samlingsplatsen till vigselplatsen.

@@ -36,21 +36,59 @@ const Info = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <Typography 
-              variant="h2" 
-              component="h1" 
-              align="center"
-              sx={{ 
-                fontFamily: '"Cormorant Garamond", serif',
-                fontWeight: 400,
-                mb: 4,
-                color: '#2c3e50',
-                fontSize: { xs: '2.2rem', md: '2.8rem' },
-                letterSpacing: '0.05em'
-              }}
-            >
+              <Typography 
+                variant="h2" 
+                component="h1" 
+                align="center"
+                sx={{ 
+                  fontFamily: "'Playfair Display', serif",
+                  fontWeight: 400,
+                  mb: 4,
+                  color: '#2c3e50',
+                  fontSize: { xs: '2.2rem', md: '2.8rem' },
+                  letterSpacing: '0.05em'
+                }}
+              >
               Bra att veta
             </Typography>
+          </motion.div>
+
+          {/* När */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <Box sx={{ mb: 4 }}>
+              <Typography 
+                variant="h5" 
+                component="h2" 
+                sx={{ 
+                  fontFamily: "'Playfair Display', serif",
+                  fontWeight: 400,
+                  mb: 2,
+                  color: '#e74c3c',
+                  fontSize: '1.4rem',
+                  letterSpacing: '0.05em'
+                }}
+              >
+                När
+              </Typography>
+              <Typography 
+                variant="body1" 
+                sx={{ 
+                  fontFamily: "'Playfair Display', serif",
+                  color: '#34495e',
+                  fontWeight: 300,
+                  color: '#6b7280',
+                  fontSize: '0.95rem',
+                  lineHeight: 1.6,
+                  mb: 2
+                }}
+              >
+                5 september kl 15:00
+              </Typography>
+            </Box>
           </motion.div>
 
           {/* Klädkod */}
@@ -64,7 +102,7 @@ const Info = () => {
                 variant="h5" 
                 component="h2" 
                 sx={{ 
-                  fontFamily: '"Cormorant Garamond", serif',
+                  fontFamily: "'Playfair Display', serif",
                   fontWeight: 400,
                   mb: 2,
                   color: '#e74c3c',
@@ -77,10 +115,11 @@ const Info = () => {
               <Typography 
                 variant="body1" 
                 sx={{ 
-                  fontFamily: '"Cormorant Garamond", serif',
-                  fontWeight: 300,
+                  fontFamily: "'Playfair Display', serif",
                   color: '#34495e',
-                  fontSize: '1.1rem',
+                  fontWeight: 300,
+                  color: '#6b7280',
+                  fontSize: '0.95rem',
                   lineHeight: 1.6,
                   mb: 2
                 }}
@@ -103,7 +142,7 @@ const Info = () => {
                 variant="h5" 
                 component="h2" 
                 sx={{ 
-                  fontFamily: '"Cormorant Garamond", serif',
+                  fontFamily: "'Playfair Display', serif",
                   fontWeight: 400,
                   mb: 2,
                   color: '#e74c3c',
@@ -116,10 +155,11 @@ const Info = () => {
               <Typography 
                 variant="body1" 
                 sx={{ 
-                  fontFamily: '"Cormorant Garamond", serif',
-                  fontWeight: 300,
+                  fontFamily: "'Playfair Display', serif",
                   color: '#34495e',
-                  fontSize: '1.1rem',
+                  fontWeight: 300,
+                  color: '#6b7280',
+                  fontSize: '0.95rem',
                   lineHeight: 1.6,
                   mb: 2
                 }}

@@ -9,7 +9,7 @@ const scheduleItems = [
     description: 'Vi samlas för gemensam transport till vigselplatsen (exakt plats meddelas senare)'
   },
   {
-    time: '14:00',
+    time: '15:00',
     title: 'Borgerlig vigsel i naturen',
     description: 'En vacker ceremoni under bar himmel'
   },
