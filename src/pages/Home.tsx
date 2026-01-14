@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Box, Typography, Container, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const Home = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -14,7 +15,7 @@ const Home = () => {
 
   // TODO-meddelande för gästerna (ändra här när ni vill uppdatera)
   const todoMessage = {
-    title: 'Dags att boka boende',
+    title: 'Boka boende här',
     description: 'Vi har blockerat rum på Gibsons Hotell i Jonsered för 4-6 september. Vid nyår släpps allmänheten på att boka, så för att vara garanterad ett rum rekommenderar vi att boka innan dess.'
   };
 
@@ -256,20 +257,20 @@ const Home = () => {
               >
                 {todoMessage.title}
               </Typography>
-              <Typography 
-                variant="body2" 
-                sx={{ 
-                  color: '#6b7280', 
-                  fontFamily: "'Playfair Display', serif",
-                  color: '#7f8c8d',
-                  fontWeight: 300,
-                  fontSize: '0.95rem',
-                  lineHeight: 1.6,
-                  mb: 2
-                }}
-              >
-                {todoMessage.description}
-              </Typography>
+              <Box sx={{ 
+                display: 'flex', 
+                justifyContent: 'center', 
+                mb: 1.5,
+                animation: 'bounce 2s infinite'
+              }}>
+                <KeyboardArrowDownIcon 
+                  sx={{ 
+                    color: '#e74c3c',
+                    fontSize: '2rem',
+                    opacity: 0.7
+                  }} 
+                />
+              </Box>
               <Button
                 component={Link}
                 to="/accommodation"
