@@ -154,7 +154,7 @@ const Home = () => {
                   mb: 0.5
                 }}
               >
-                5 september kl 15:00
+                5 september 2026 kl 15:00
               </Typography>
               <Typography
                 variant="body2"
