@@ -9,12 +9,10 @@ import {
   Radio,
   RadioGroup,
   Typography,
-  Paper,
   Alert,
   CircularProgress
 } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
 import Confetti from 'react-confetti';
 
@@ -130,16 +128,16 @@ const Rsvp = () => {
 
       <Box sx={{ 
         py: 1,
-        background: 'linear-gradient(135deg, #fefefe 0%, #f8f6f0 100%)'
+        background: 'transparent'
       }}>
         {/* Diskret ram runt allt innehåll */}
         <Box
           sx={{
-            background: '#fff',
+            background: 'var(--content-surface-rose)',
             borderRadius: '20px',
             p: { xs: 4, md: 6 },
             boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)',
-            border: '1px solid rgba(231, 76, 60, 0.1)',
+            border: '1px solid rgba(179, 18, 75, 0.18)',
             position: 'relative',
             '&::before': {
               content: '""',
@@ -148,7 +146,7 @@ const Rsvp = () => {
               left: 0,
               right: 0,
               height: '3px',
-              background: 'linear-gradient(90deg, #e74c3c, #c0392b)',
+              background: 'linear-gradient(90deg, #b3124b, #d88faa)',
               borderRadius: '20px 20px 0 0'
             }
           }}
@@ -182,7 +180,7 @@ const Rsvp = () => {
                   gutterBottom 
                   align="center" 
                   sx={{ 
-                    color: '#e74c3c',
+                    color: '#b3124b',
                     fontFamily: '"Cormorant Garamond", serif',
                     fontWeight: 400,
                     mb: 2,
@@ -194,7 +192,7 @@ const Rsvp = () => {
                 
                 <Typography variant="h6" align="center" gutterBottom sx={{ 
                   mb: 2, 
-                  color: '#34495e',
+                  color: '#9b7a86',
                   fontFamily: '"Cormorant Garamond", serif',
                   fontWeight: 300,
                   fontStyle: 'italic'
@@ -204,7 +202,7 @@ const Rsvp = () => {
 
                 <Typography variant="body2" align="center" sx={{ 
                   mb: 4, 
-                  color: '#2c3e50',
+                  color: '#9b7a86',
                   fontFamily: '"Cormorant Garamond", serif',
                   fontWeight: 400,
                   fontStyle: 'italic',
@@ -245,7 +243,7 @@ const Rsvp = () => {
 
                     <FormControl required>
                       <Typography variant="subtitle1" gutterBottom sx={{ 
-                        color: '#34495e',
+                        color: '#9b7a86',
                         fontFamily: '"Cormorant Garamond", serif',
                         fontWeight: 400
                       }}>
@@ -347,9 +345,9 @@ const Rsvp = () => {
                             <Box sx={{ 
                               mt: 4, 
                               p: 3, 
-                              backgroundColor: 'rgba(231, 76, 60, 0.05)', 
+                              backgroundColor: 'rgba(179, 18, 75, 0.06)', 
                               borderRadius: 2,
-                              border: '1px solid rgba(231, 76, 60, 0.1)'
+                              border: '1px solid rgba(179, 18, 75, 0.18)'
                             }}>
                               <Typography
                                 variant="h6"
@@ -357,7 +355,7 @@ const Rsvp = () => {
                                   fontFamily: '"Cormorant Garamond", serif',
                                   fontWeight: 400,
                                   mb: 2,
-                                  color: '#e74c3c',
+                                  color: '#b3124b',
                                   fontSize: { xs: '1rem', md: '1.1rem' }
                                 }}
                               >
@@ -370,7 +368,7 @@ const Rsvp = () => {
                                   fontFamily: '"Cormorant Garamond", serif',
                                   fontWeight: 300,
                                   mb: 2,
-                                  color: '#34495e',
+                                  color: '#9b7a86',
                                   lineHeight: 1.6,
                                   fontSize: { xs: '0.9rem', md: '1rem' }
                                 }}
@@ -384,7 +382,7 @@ const Rsvp = () => {
                                   sx={{
                                     fontFamily: '"Cormorant Garamond", serif',
                                     fontWeight: 400,
-                                    color: '#e74c3c',
+                                    color: '#b3124b',
                                     fontSize: { xs: '0.9rem', md: '1rem' }
                                   }}
                                 >
@@ -395,7 +393,7 @@ const Rsvp = () => {
                                   sx={{
                                     fontFamily: '"Cormorant Garamond", serif',
                                     fontWeight: 300,
-                                    color: '#34495e',
+                                    color: '#9b7a86',
                                     fontSize: { xs: '0.85rem', md: '0.9rem' }
                                   }}
                                 >
@@ -406,7 +404,7 @@ const Rsvp = () => {
                                   sx={{
                                     fontFamily: '"Cormorant Garamond", serif',
                                     fontWeight: 300,
-                                    color: '#34495e',
+                                    color: '#9b7a86',
                                     fontSize: { xs: '0.85rem', md: '0.9rem' },
                                     mb: 1
                                   }}
@@ -419,7 +417,7 @@ const Rsvp = () => {
                                   sx={{
                                     fontFamily: '"Cormorant Garamond", serif',
                                     fontWeight: 400,
-                                    color: '#e74c3c',
+                                    color: '#b3124b',
                                     fontSize: { xs: '0.9rem', md: '1rem' }
                                   }}
                                 >
@@ -430,7 +428,7 @@ const Rsvp = () => {
                                   sx={{
                                     fontFamily: '"Cormorant Garamond", serif',
                                     fontWeight: 300,
-                                    color: '#34495e',
+                                    color: '#9b7a86',
                                     fontSize: { xs: '0.85rem', md: '0.9rem' }
                                   }}
                                 >
@@ -441,7 +439,7 @@ const Rsvp = () => {
                                   sx={{
                                     fontFamily: '"Cormorant Garamond", serif',
                                     fontWeight: 300,
-                                    color: '#34495e',
+                                    color: '#9b7a86',
                                     fontSize: { xs: '0.85rem', md: '0.9rem' }
                                   }}
                                 >
@@ -465,14 +463,14 @@ const Rsvp = () => {
                         mt: 2,
                         position: 'relative',
                         minHeight: 48,
-                        backgroundColor: '#e74c3c',
+                        backgroundColor: '#b3124b',
                         borderRadius: 0,
                         fontFamily: '"Cormorant Garamond", serif',
                         fontWeight: 400,
                         textTransform: 'none',
                         letterSpacing: '0.05em',
                         '&:hover': {
-                          backgroundColor: '#c0392b'
+                          backgroundColor: '#8f0f3b'
                         }
                       }}
                     >

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Typography, Container } from '@mui/material';
 import { motion } from 'framer-motion';
 
@@ -7,16 +6,16 @@ const Info = () => {
     <Container maxWidth="md">
       <Box sx={{ 
         py: 1,
-        background: 'linear-gradient(135deg, #fefefe 0%, #f8f6f0 100%)'
+        background: 'transparent'
       }}>
         {/* Diskret ram runt allt innehåll */}
         <Box
           sx={{
-            background: '#fff',
+            background: 'var(--content-surface-rose)',
             borderRadius: '20px',
             p: { xs: 4, md: 6 },
             boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)',
-            border: '1px solid rgba(231, 76, 60, 0.1)',
+            border: '1px solid rgba(179, 18, 75, 0.18)',
             position: 'relative',
             '&::before': {
               content: '""',
@@ -25,7 +24,7 @@ const Info = () => {
               left: 0,
               right: 0,
               height: '3px',
-              background: 'linear-gradient(90deg, #e74c3c, #c0392b)',
+              background: 'linear-gradient(90deg, #b3124b, #d88faa)',
               borderRadius: '20px 20px 0 0'
             }
           }}
@@ -44,7 +43,7 @@ const Info = () => {
                   fontFamily: "'Playfair Display', serif",
                   fontWeight: 400,
                   mb: 4,
-                  color: '#2c3e50',
+                  color: '#b3124b',
                   fontSize: { xs: '2.2rem', md: '2.8rem' },
                   letterSpacing: '0.05em'
                 }}
@@ -67,7 +66,7 @@ const Info = () => {
                   fontFamily: "'Playfair Display', serif",
                   fontWeight: 400,
                   mb: 2,
-                  color: '#e74c3c',
+                  color: '#b3124b',
                   fontSize: '1.4rem',
                   letterSpacing: '0.05em'
                 }}
@@ -78,9 +77,8 @@ const Info = () => {
                 variant="body1" 
                 sx={{ 
                   fontFamily: "'Playfair Display', serif",
-                  color: '#34495e',
+                  color: '#9b7a86',
                   fontWeight: 300,
-                  color: '#6b7280',
                   fontSize: '0.95rem',
                   lineHeight: 1.6,
                   mb: 2
@@ -105,7 +103,7 @@ const Info = () => {
                   fontFamily: "'Playfair Display', serif",
                   fontWeight: 400,
                   mb: 2,
-                  color: '#e74c3c',
+                  color: '#b3124b',
                   fontSize: '1.4rem',
                   letterSpacing: '0.05em'
                 }}
@@ -116,9 +114,8 @@ const Info = () => {
                 variant="body1" 
                 sx={{ 
                   fontFamily: "'Playfair Display', serif",
-                  color: '#34495e',
+                  color: '#9b7a86',
                   fontWeight: 300,
-                  color: '#6b7280',
                   fontSize: '0.95rem',
                   lineHeight: 1.6,
                   mb: 2
@@ -145,7 +142,7 @@ const Info = () => {
                   fontFamily: "'Playfair Display', serif",
                   fontWeight: 400,
                   mb: 2,
-                  color: '#e74c3c',
+                  color: '#b3124b',
                   fontSize: '1.4rem',
                   letterSpacing: '0.05em'
                 }}
@@ -156,9 +153,8 @@ const Info = () => {
                 variant="body1" 
                 sx={{ 
                   fontFamily: "'Playfair Display', serif",
-                  color: '#34495e',
+                  color: '#9b7a86',
                   fontWeight: 300,
-                  color: '#6b7280',
                   fontSize: '0.95rem',
                   lineHeight: 1.6,
                   mb: 2

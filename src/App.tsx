@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material';
 import Home from './pages/Home';
@@ -11,10 +10,18 @@ import Navbar from './components/Navbar';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#e74c3c', // Röd färg som matchar hemsidan
+      main: '#b3124b',
     },
     secondary: {
-      main: '#c0392b', // Mörkare röd komplementfärg
+      main: '#d88faa',
+    },
+    text: {
+      primary: '#b3124b',
+      secondary: '#b3124b',
+    },
+    background: {
+      default: '#f6dce6',
+      paper: '#fff7fa',
     },
   },
   typography: {

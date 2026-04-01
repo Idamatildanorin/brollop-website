@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { Box, Typography, Container, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const Home = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -12,12 +11,6 @@ const Home = () => {
 
   // Ange bröllopsdatumet här (format: YYYY, MM-1, DD, HH, MM)
   const weddingDate = new Date(2026, 8, 5, 15, 0); // 5 september 2026 kl 15:00
-
-  // TODO-meddelande för gästerna (ändra här när ni vill uppdatera)
-  const todoMessage = {
-    title: 'Boka boende här',
-    description: 'Vi har blockerat rum på Gibsons Hotell i Jonsered för 4-6 september. Vid nyår släpps allmänheten på att boka, så för att vara garanterad ett rum rekommenderar vi att boka innan dess.'
-  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -83,7 +76,7 @@ const Home = () => {
     <Container maxWidth="md">
       <Box sx={{ 
         py: { xs: 3, md: 5 },
-        background: '#ffffff',
+        background: 'transparent',
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
@@ -92,13 +85,40 @@ const Home = () => {
         {/* Innehåll med elegant ram */}
         <Box
           sx={{
-            background: '#ffffff',
+            background: 'transparent',
             borderRadius: '20px',
             p: { xs: 3, md: 4 },
             py: { xs: 3, md: 4 },
             position: 'relative',
+            isolation: 'isolate',
             boxShadow: '0 10px 40px rgba(0, 0, 0, 0.08)',
-            border: '1px solid rgba(0, 0, 0, 0.06)'
+            border: '1px solid rgba(0, 0, 0, 0.06)',
+            '&::after': {
+              content: '""',
+              position: 'absolute',
+              inset: '-14px',
+              backgroundImage:
+                "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M12,6 C18,2 24,10 30,6 C36,2 42,10 48,6 C54,2 60,10 66,6 C72,2 78,10 84,6 C90,4 92,10 92,14 C96,20 88,26 92,32 C96,38 88,44 92,50 C96,56 88,62 92,68 C96,74 88,80 92,86 C92,90 88,96 84,94 C78,90 72,98 66,94 C60,90 54,98 48,94 C42,90 36,98 30,94 C24,90 18,98 12,94 C8,92 4,88 6,84 C10,78 2,72 6,66 C10,60 2,54 6,48 C10,42 2,36 6,30 C10,24 2,18 6,12 C8,8 10,6 12,6 Z' fill='%23ffffff' stroke='none'/></svg>\")",
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: '100% 100%',
+              zIndex: 1,
+              pointerEvents: 'none'
+            },
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              inset: '-14px',
+              backgroundImage:
+                "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M12,6 C18,2 24,10 30,6 C36,2 42,10 48,6 C54,2 60,10 66,6 C72,2 78,10 84,6 C90,4 92,10 92,14 C96,20 88,26 92,32 C96,38 88,44 92,50 C96,56 88,62 92,68 C96,74 88,80 92,86 C92,90 88,96 84,94 C78,90 72,98 66,94 C60,90 54,98 48,94 C42,90 36,98 30,94 C24,90 18,98 12,94 C8,92 4,88 6,84 C10,78 2,72 6,66 C10,60 2,54 6,48 C10,42 2,36 6,30 C10,24 2,18 6,12 C8,8 10,6 12,6 Z' fill='none' stroke='%23b3124b' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/></svg>\")",
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: '100% 100%',
+              zIndex: 10,
+              pointerEvents: 'none'
+            },
+            '& > *': {
+              position: 'relative',
+              zIndex: 2
+            },
           }}
         >
           {/* Huvudrubrik - mer kompakt */}
@@ -111,6 +131,7 @@ const Home = () => {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
+              mt: 1.6,
               mb: 0
             }}>
               <img
@@ -122,8 +143,10 @@ const Home = () => {
                   height: 'auto',
                   maxWidth: '320px',
                   display: 'block',
-                  filter: 'brightness(1.2) contrast(1.1)',
-                  backgroundColor: '#ffffff'
+                  filter: 'brightness(1.4) contrast(1.2) saturate(1.25) hue-rotate(95deg)',
+                  backgroundColor: '#ffffff',
+                  mixBlendMode: 'normal',
+                  opacity: 1
                 }}
               />
             </Box>
@@ -147,7 +170,7 @@ const Home = () => {
                 variant="body1"
                 sx={{
                   fontFamily: "'Playfair Display', serif",
-                  color: '#e74c3c',
+                  color: '#b58a9a',
                   fontWeight: 300,
                   fontSize: { xs: '1rem', md: '1.1rem' },
                   letterSpacing: '0.08em',
@@ -160,7 +183,7 @@ const Home = () => {
                 variant="body2"
                 sx={{
                   fontFamily: "'Playfair Display', serif",
-                  color: '#95a5a6',
+                  color: '#b58a9a',
                   fontWeight: 200,
                   fontSize: { xs: '0.8rem', md: '0.9rem' },
                   letterSpacing: '0.05em',
@@ -202,7 +225,7 @@ const Home = () => {
                     variant="h3" 
                     sx={{ 
                       fontFamily: "'Playfair Display', serif",
-                      color: '#e74c3c',
+                      color: '#b58a9a',
                       fontWeight: 300,
                       mb: 1,
                       fontSize: { xs: '2.5rem', md: '3rem' }
@@ -214,7 +237,7 @@ const Home = () => {
                     variant="caption" 
                     sx={{ 
                       fontFamily: "'Playfair Display', serif",
-                      color: '#7f8c8d',
+                      color: '#9b7a86',
                       fontWeight: 400,
                       textTransform: 'uppercase',
                       letterSpacing: '0.1em',
@@ -228,71 +251,137 @@ const Home = () => {
             </Box>
           </Box>
 
-          {/* TODO: Hotellbokning */}
+          {/* Sektion med boende + OSA tillsammans */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.0 }}
           >
-            <Box 
-              sx={{ 
+            <Box
+              sx={{
                 textAlign: 'center',
-                maxWidth: '500px',
+                maxWidth: '520px',
                 mx: 'auto',
                 mt: 2.5,
                 mb: 1.5,
                 p: 2.5
               }}
             >
-              <Typography 
-                variant="h6" 
-                sx={{ 
-                  fontFamily: "'Playfair Display', serif",
-                  color: '#e74c3c',
-                  fontWeight: 400,
-                  fontSize: '1.2rem',
-                  letterSpacing: '0.02em',
-                  mb: 1.5
-                }}
-              >
-                {todoMessage.title}
-              </Typography>
-              <Box sx={{ 
-                display: 'flex', 
-                justifyContent: 'center', 
-                mb: 1.5,
-                animation: 'bounce 2s infinite'
-              }}>
-                <KeyboardArrowDownIcon 
-                  sx={{ 
-                    color: '#e74c3c',
-                    fontSize: '2rem',
-                    opacity: 0.7
-                  }} 
-                />
-              </Box>
-              <Button
-                component={Link}
-                to="/accommodation"
-                variant="outlined"
+              <Box
                 sx={{
-                  fontFamily: "'Playfair Display', serif",
-                  color: '#e74c3c',
-                  borderColor: '#6b7280',
-                  fontWeight: 300,
-                  fontSize: '0.95rem',
-                  textTransform: 'none',
-                  borderRadius: '8px',
-                  px: 3,
-                  py: 1,
-                  '&:hover': {
-                    borderColor: '#c0392b',
-                    backgroundColor: 'rgba(231, 76, 60, 0.08)'
-                  }
+                  display: 'flex',
+                  flexDirection: { xs: 'column', sm: 'row' },
+                  justifyContent: 'center',
+                  alignItems: 'flex-start',
+                  gap: { xs: 1.2, sm: 2.5 }
                 }}
               >
-                Se boende →
-              </Button>
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 116 }}>
+                  <Typography
+                    sx={{
+                      width: '100%',
+                      textAlign: 'center',
+                      transform: 'translateX(-10px)',
+                      color: '#9b7a86',
+                      fontFamily: "'Playfair Display', serif",
+                      fontSize: '0.78rem',
+                      letterSpacing: '0.02em',
+                      wordSpacing: '0.35em',
+                      mb: 0.25
+                    }}
+                  >
+                    Boka hotell
+                  </Typography>
+                  <svg viewBox="0 0 70 44" width="76" height="34" aria-hidden="true" style={{ marginBottom: 4 }}>
+                    <path
+                      d="M4 6 C 23 7, 27 19, 34 34"
+                      fill="none"
+                      stroke="#b58a9a"
+                      strokeWidth="1.4"
+                      strokeLinecap="round"
+                    />
+                    <path d="M30 30 L34 36 L38 30" fill="none" stroke="#b58a9a" strokeWidth="1.4" strokeLinecap="round" />
+                  </svg>
+                  <Button
+                    component={Link}
+                    to="/accommodation"
+                    variant="outlined"
+                    sx={{
+                      fontFamily: "'Playfair Display', serif",
+                      color: '#b3124b',
+                      borderColor: 'rgba(179, 18, 75, 0.35)',
+                      fontWeight: 400,
+                      fontSize: '0.88rem',
+                      letterSpacing: '0.03em',
+                      textTransform: 'none',
+                      borderRadius: '8px',
+                      px: 2.3,
+                      py: 0.55,
+                      minWidth: '100px',
+                      lineHeight: 1.2,
+                      '&:hover': {
+                        borderColor: '#b3124b',
+                        backgroundColor: 'rgba(179, 18, 75, 0.08)'
+                      }
+                    }}
+                  >
+                    Boende
+                  </Button>
+                </Box>
+
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 116 }}>
+                  <Typography
+                    sx={{
+                      width: '100%',
+                      textAlign: 'center',
+                      transform: 'translateX(10px)',
+                      color: '#9b7a86',
+                      fontFamily: "'Playfair Display', serif",
+                      fontSize: '0.78rem',
+                      letterSpacing: '0.02em',
+                      wordSpacing: '0.35em',
+                      mb: 0.25
+                    }}
+                  >
+                    Svara här
+                  </Typography>
+                  <svg viewBox="0 0 70 44" width="76" height="34" aria-hidden="true" style={{ marginBottom: 4 }}>
+                    <path
+                      d="M66 6 C 47 7, 43 19, 36 34"
+                      fill="none"
+                      stroke="#b58a9a"
+                      strokeWidth="1.4"
+                      strokeLinecap="round"
+                    />
+                    <path d="M32 30 L36 36 L40 30" fill="none" stroke="#b58a9a" strokeWidth="1.4" strokeLinecap="round" />
+                  </svg>
+                  <Button
+                    component={Link}
+                    to="/rsvp"
+                    variant="outlined"
+                    sx={{
+                      fontFamily: "'Playfair Display', serif",
+                      color: '#b3124b',
+                      borderColor: 'rgba(179, 18, 75, 0.35)',
+                      fontWeight: 400,
+                      fontSize: '0.88rem',
+                      letterSpacing: '0.03em',
+                      textTransform: 'none',
+                      borderRadius: '8px',
+                      px: 2.3,
+                      py: 0.55,
+                      minWidth: '100px',
+                      lineHeight: 1.2,
+                      '&:hover': {
+                        borderColor: '#b3124b',
+                        backgroundColor: 'rgba(179, 18, 75, 0.08)'
+                      }
+                    }}
+                  >
+                    OSA
+                  </Button>
+                </Box>
+              </Box>
             </Box>
           </motion.div>
         </Box>

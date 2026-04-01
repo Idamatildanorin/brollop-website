@@ -135,7 +135,7 @@ const Schedule = () => {
                       width: 20,
                       height: 20,
                       borderRadius: '50%',
-                      bgcolor: '#fff',
+                      bgcolor: 'var(--content-surface-rose)',
                       border: '3px solid #1976d2',
                       transform: 'translateY(-50%)',
                       boxShadow: '0 0 0 4px rgba(25, 118, 210, 0.15), 0 2px 4px rgba(0,0,0,0.1)',
@@ -150,7 +150,7 @@ const Schedule = () => {
                       flex: 1,
                       ml: 4,
                       p: 2,
-                      background: 'linear-gradient(145deg, #ffffff 0%, #f8f8f8 100%)',
+                      background: 'linear-gradient(145deg, var(--content-surface-rose) 0%, #fce8ef 100%)',
                       borderRadius: 2,
                       position: 'relative'
                     }}

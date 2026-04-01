@@ -301,7 +301,7 @@ const OurStory = () => {
                       transform: 'translate(-50%, -50%)',
                       zIndex: 2,
                       textAlign: 'center',
-                      bgcolor: '#fff', 
+                      bgcolor: 'var(--content-surface-rose)', 
                       borderRadius: '50%',
                       width: 60,
                       height: 60,
@@ -332,7 +332,7 @@ const OurStory = () => {
                         sx={{
                           p: 3,
                           height: '100%',
-                          background: 'linear-gradient(145deg, #ffffff 0%, #f8f8f8 100%)',
+                          background: 'linear-gradient(145deg, var(--content-surface-rose) 0%, #fce8ef 100%)',
                           borderRadius: 2,
                           mr: index % 2 === 0 ? { md: 4 } : 0,
                           ml: index % 2 !== 0 ? { md: 4 } : 0,
@@ -430,7 +430,7 @@ const OurStory = () => {
                       width: 20,
                       height: 20,
                       borderRadius: '50%',
-                      bgcolor: '#fff',
+                      bgcolor: 'var(--content-surface-rose)',
                       border: '3px solid #1976d2',
                       transform: 'translateY(-50%)',
                       boxShadow: '0 0 0 4px rgba(25, 118, 210, 0.15), 0 2px 4px rgba(0,0,0,0.1)',
@@ -458,7 +458,7 @@ const OurStory = () => {
                       elevation={2}
                       sx={{
                         p: 2,
-                        background: 'linear-gradient(145deg, #ffffff 0%, #f8f8f8 100%)',
+                        background: 'linear-gradient(145deg, var(--content-surface-rose) 0%, #fce8ef 100%)',
                         borderRadius: 2
                       }}
                     >

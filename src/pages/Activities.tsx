@@ -146,7 +146,7 @@ const Activities = () => {
                           elevation={3}
                           sx={{
                             height: '100%',
-                            background: 'linear-gradient(145deg, #ffffff 0%, #f5f5f5 100%)',
+                            background: 'linear-gradient(145deg, var(--content-surface-rose) 0%, #fce8ef 100%)',
                             borderRadius: 2,
                             overflow: 'hidden',
                             '&:hover': {

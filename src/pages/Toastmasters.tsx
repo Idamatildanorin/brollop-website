@@ -88,7 +88,7 @@ const Toastmasters = () => {
               Tack för din anmälan! Maja eller Erik kommer att kontakta dig inom kort.
             </Alert>
           ) : (
-            <Paper elevation={2} sx={{ p: 4, background: 'linear-gradient(145deg, #ffffff 0%, #f8f8f8 100%)' }}>
+            <Paper elevation={2} sx={{ p: 4, background: 'linear-gradient(145deg, var(--content-surface-rose) 0%, #fce8ef 100%)' }}>
               <form onSubmit={handleSubmit}>
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
                   <TextField

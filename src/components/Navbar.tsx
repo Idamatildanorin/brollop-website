@@ -13,7 +13,7 @@ import {
   useTheme
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const navItems = [
   { text: 'Hem', path: '/' },
@@ -27,6 +27,7 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const location = useLocation();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -63,8 +64,26 @@ const Navbar = () => {
   );
 
   return (
-    <AppBar position="sticky" color="inherit" elevation={0} sx={{ bgcolor: '#fff', boxShadow: 'none' }}>
-      <Toolbar sx={{ py: 0, pt: 0, pb: 0, minHeight: '48px !important', paddingTop: '0 !important' }}>
+    <AppBar
+      position="sticky"
+      color="inherit"
+      elevation={0}
+      sx={{
+        bgcolor: 'rgba(246, 220, 230, 0.92)',
+        boxShadow: '0 1px 0 rgba(179, 18, 75, 0.25)',
+        borderBottom: '1px solid rgba(179, 18, 75, 0.25)',
+      }}
+    >
+      <Toolbar
+        sx={{
+          py: 0,
+          minHeight: '52px !important',
+          px: { xs: 1.5, md: 3 },
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
         {isMobile ? (
           <>
             <IconButton
@@ -72,7 +91,7 @@ const Navbar = () => {
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ color: '#6b7280' }}
+              sx={{ color: '#b3124b', mr: 1 }}
             >
               <MenuIcon />
             </IconButton>
@@ -82,14 +101,15 @@ const Navbar = () => {
                 to="/"
                 color="inherit"
                 sx={{ 
-                  fontSize: '1.2rem', 
+                  fontSize: '1.15rem', 
                   textTransform: 'none',
-                  color: '#6b7280',
-                  fontFamily: '"Inter", sans-serif',
-                  fontWeight: 300
+                  color: '#b3124b',
+                  fontFamily: '"Playfair Display", serif',
+                  fontWeight: 400,
+                  letterSpacing: '0.04em'
                 }}
               >
-                Pelle & Matilda
+                Pelle &amp; Matilda
               </Button>
             </Box>
           </>
@@ -97,28 +117,70 @@ const Navbar = () => {
           <Box sx={{ 
             flexGrow: 1, 
             display: 'flex', 
+            alignItems: 'center',
             justifyContent: 'center', 
-            gap: 3,
-            '& .MuiButton-root': {
-              color: '#6b7280',
-              fontSize: '1.1rem',
-              textTransform: 'none',
-              fontFamily: '"Inter", sans-serif',
-              fontWeight: 300,
-              '&:hover': {
-                backgroundColor: 'rgba(107, 114, 128, 0.1)'
-              }
-            }
+            gap: 3
           }}>
-            {navItems.map((item) => (
-              <Button
-                key={item.path}
-                component={Link}
-                to={item.path}
-              >
-                {item.text}
-              </Button>
-            ))}
+            <Button
+              component={Link}
+              to="/"
+              sx={{
+                mr: 3,
+                fontSize: '1.2rem',
+                textTransform: 'none',
+                color: '#b3124b',
+                fontFamily: '"Playfair Display", serif',
+                fontWeight: 400,
+                letterSpacing: '0.06em',
+                '&:hover': { backgroundColor: 'transparent' }
+              }}
+            >
+              Pelle &amp; Matilda
+            </Button>
+            {navItems.map((item) => {
+              const isActive =
+                item.path === '/'
+                  ? location.pathname === '/'
+                  : location.pathname.startsWith(item.path);
+
+              return (
+                <Button
+                  key={item.path}
+                  component={Link}
+                  to={item.path}
+                  sx={{
+                    position: 'relative',
+                    color: '#b3124b',
+                    fontSize: '0.95rem',
+                    textTransform: 'none',
+                    fontFamily: '"Inter", sans-serif',
+                    fontWeight: isActive ? 500 : 300,
+                    letterSpacing: '0.04em',
+                    px: 1,
+                    pb: 0.5,
+                    '&:hover': {
+                      backgroundColor: 'transparent',
+                      color: '#b3124b',
+                    },
+                    '&::after': {
+                      content: '""',
+                      position: 'absolute',
+                      left: '12%',
+                      right: '12%',
+                      bottom: 0,
+                      height: 2,
+                      borderRadius: 999,
+                      backgroundColor: '#b3124b',
+                      opacity: isActive ? 1 : 0.35,
+                      transform: isActive ? 'scaleX(1)' : 'scaleX(0.8)',
+                      transition: 'opacity 0.25s ease, transform 0.25s ease',
+                    },
+                  }}
+                >
+                  {item.text}
+                </Button>
+              );
+            })}
           </Box>
         )}
 

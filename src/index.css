@@ -2,12 +2,16 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  /* Samma ljusrosa yta som runt loggan – all text ligger på den */
+  --content-surface-rose: #fff7fa;
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #f6dce6;
+  color: #b3124b;
 }
 
 #root {
@@ -16,7 +20,7 @@ body {
 
 .app {
   min-height: 100vh;
-  background-color: #faf6f6;
+  background-color: #f6dce6;
 }
 
 @keyframes bounce {

@@ -1,23 +1,21 @@
-import React from 'react';
-import { Box, Typography, Container, Button } from '@mui/material';
+import { Box, Typography, Container } from '@mui/material';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 
 const Accommodation = () => {
   return (
     <Container maxWidth="md" sx={{ px: { xs: 2, sm: 3 } }}>
       <Box sx={{
         py: 1,
-        background: 'linear-gradient(135deg, #fefefe 0%, #f8f6f0 100%)'
+        background: 'transparent'
       }}>
         {/* Diskret ram runt allt innehåll */}
         <Box
           sx={{
-            background: '#fff',
+            background: 'var(--content-surface-rose)',
             borderRadius: '20px',
             p: { xs: 3, sm: 4, md: 6 },
             boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)',
-            border: '1px solid rgba(231, 76, 60, 0.1)',
+            border: '1px solid rgba(179, 18, 75, 0.18)',
             position: 'relative',
             '&::before': {
               content: '""',
@@ -26,7 +24,7 @@ const Accommodation = () => {
               left: 0,
               right: 0,
               height: '3px',
-              background: 'linear-gradient(90deg, #e74c3c, #c0392b)',
+              background: 'linear-gradient(90deg, #b3124b, #d88faa)',
               borderRadius: '20px 20px 0 0'
             }
           }}
@@ -46,7 +44,7 @@ const Accommodation = () => {
                 fontFamily: '"Cormorant Garamond", serif',
                 fontWeight: 400,
                 mb: 4,
-                color: '#2c3e50',
+                color: '#b3124b',
                 fontSize: { xs: '1.8rem', sm: '2.2rem', md: '2.8rem' },
                 letterSpacing: '0.05em'
               }}
@@ -69,7 +67,7 @@ const Accommodation = () => {
                   fontFamily: '"Cormorant Garamond", serif',
                   fontWeight: 400,
                   mb: 3,
-                  color: '#e74c3c',
+                  color: '#b3124b',
                   fontSize: '1.3rem'
                 }}
               >
@@ -82,7 +80,7 @@ const Accommodation = () => {
                   fontFamily: '"Cormorant Garamond", serif',
                   fontWeight: 300,
                   mb: 3,
-                  color: '#34495e',
+                  color: '#9b7a86',
                   lineHeight: 1.6,
                   fontSize: '1rem'
                 }}
@@ -95,11 +93,11 @@ const Accommodation = () => {
               </Typography>
 
               <Box sx={{ 
-                backgroundColor: 'rgba(231, 76, 60, 0.05)', 
+                backgroundColor: 'rgba(179, 18, 75, 0.06)', 
                 p: { xs: 2, md: 3 }, 
                 borderRadius: 2, 
                 mb: 3,
-                border: '1px solid rgba(231, 76, 60, 0.1)',
+                border: '1px solid rgba(179, 18, 75, 0.18)',
                 overflow: 'hidden'
               }}>
                 <Typography
@@ -108,7 +106,7 @@ const Accommodation = () => {
                     fontFamily: '"Cormorant Garamond", serif',
                     fontWeight: 400,
                     mb: 2,
-                    color: '#e74c3c',
+                    color: '#b3124b',
                     fontSize: { xs: '1rem', md: '1.1rem' }
                   }}
                 >
@@ -120,7 +118,7 @@ const Accommodation = () => {
                     fontFamily: '"Cormorant Garamond", serif',
                     fontWeight: 300,
                     mb: 2,
-                    color: '#34495e',
+                    color: '#9b7a86',
                     lineHeight: 1.6,
                     fontSize: { xs: '0.9rem', md: '1rem' },
                     wordBreak: 'break-all'
@@ -134,13 +132,13 @@ const Accommodation = () => {
                     fontFamily: '"Cormorant Garamond", serif',
                     fontWeight: 300,
                     mb: 1,
-                    color: '#34495e',
+                    color: '#9b7a86',
                     lineHeight: 1.6,
                     fontSize: { xs: '0.9rem', md: '1rem' },
                     wordBreak: 'break-word'
                   }}
                 >
-                  1. Gå till <a href="https://www.gibsonshotell.se/boka" target="_blank" rel="noopener noreferrer" style={{ color: '#e74c3c', textDecoration: 'none' }}>www.gibsonshotell.se/boka</a>
+                  1. Gå till <a href="https://www.gibsonshotell.se/boka" target="_blank" rel="noopener noreferrer" style={{ color: '#b3124b', textDecoration: 'none' }}>www.gibsonshotell.se/boka</a>
                 </Typography>
                 <Typography
                   variant="body1"
@@ -148,7 +146,7 @@ const Accommodation = () => {
                     fontFamily: '"Cormorant Garamond", serif',
                     fontWeight: 300,
                     mb: 1,
-                    color: '#34495e',
+                    color: '#9b7a86',
                     lineHeight: 1.6,
                     fontSize: { xs: '0.9rem', md: '1rem' }
                   }}
@@ -161,7 +159,7 @@ const Accommodation = () => {
                     fontFamily: '"Cormorant Garamond", serif',
                     fontWeight: 300,
                     mb: 1,
-                    color: '#34495e',
+                    color: '#9b7a86',
                     lineHeight: 1.6,
                     fontSize: { xs: '0.9rem', md: '1rem' }
                   }}
@@ -173,7 +171,7 @@ const Accommodation = () => {
                   sx={{
                     fontFamily: '"Cormorant Garamond", serif',
                     fontWeight: 300,
-                    color: '#34495e',
+                    color: '#9b7a86',
                     lineHeight: 1.6,
                     fontSize: { xs: '0.9rem', md: '1rem' }
                   }}
@@ -189,7 +187,7 @@ const Accommodation = () => {
                   fontFamily: '"Cormorant Garamond", serif',
                   fontWeight: 300,
                   mb: 3,
-                  color: '#34495e',
+                  color: '#9b7a86',
                   lineHeight: 1.6,
                   fontSize: '1rem'
                 }}
@@ -207,7 +205,7 @@ const Accommodation = () => {
                   fontFamily: '"Cormorant Garamond", serif',
                   fontWeight: 400,
                   mb: 3,
-                  color: '#e74c3c',
+                  color: '#b3124b',
                   fontSize: '1.3rem'
                 }}
               >
@@ -220,7 +218,7 @@ const Accommodation = () => {
                   fontFamily: '"Cormorant Garamond", serif',
                   fontWeight: 300,
                   mb: 3,
-                  color: '#34495e',
+                  color: '#9b7a86',
                   lineHeight: 1.6,
                   fontSize: '1rem'
                 }}
@@ -236,7 +234,7 @@ const Accommodation = () => {
                   fontFamily: '"Cormorant Garamond", serif',
                   fontWeight: 300,
                   mb: 3,
-                  color: '#34495e',
+                  color: '#9b7a86',
                   lineHeight: 1.6,
                   fontSize: '1rem'
                 }}
@@ -255,7 +253,7 @@ const Accommodation = () => {
                   fontFamily: '"Cormorant Garamond", serif',
                   fontWeight: 400,
                   mb: 3,
-                  color: '#e74c3c',
+                  color: '#b3124b',
                   fontSize: '1.3rem'
                 }}
               >
@@ -267,12 +265,12 @@ const Accommodation = () => {
                 height: '400px', 
                 borderRadius: 2,
                 overflow: 'hidden',
-                border: '1px solid rgba(231, 76, 60, 0.1)',
+                border: '1px solid rgba(179, 18, 75, 0.18)',
                 boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                backgroundColor: 'rgba(231, 76, 60, 0.05)'
+                backgroundColor: 'rgba(179, 18, 75, 0.06)'
               }}>
                 <Box sx={{ textAlign: 'center' }}>
                   <Typography
@@ -281,7 +279,7 @@ const Accommodation = () => {
                       fontFamily: '"Cormorant Garamond", serif',
                       fontWeight: 400,
                       mb: 3,
-                      color: '#e74c3c',
+                      color: '#b3124b',
                       fontSize: '1.1rem'
                     }}
                   >
@@ -294,14 +292,14 @@ const Accommodation = () => {
                       <Box sx={{ 
                         width: 12, 
                         height: 12, 
-                        backgroundColor: '#e74c3c', 
+                        backgroundColor: '#b3124b', 
                         borderRadius: '50%', 
                         mr: 1 
                       }} />
                       <Typography variant="body2" sx={{ 
                         fontFamily: '"Cormorant Garamond", serif',
                         fontWeight: 400,
-                        color: '#34495e'
+                        color: '#9b7a86'
                       }}>
                         Gibson Hotell
                       </Typography>
@@ -311,14 +309,14 @@ const Accommodation = () => {
                       <Box sx={{ 
                         width: 12, 
                         height: 12, 
-                        backgroundColor: '#c0392b', 
+                        backgroundColor: '#8f0f3b', 
                         borderRadius: '50%', 
                         mr: 1 
                       }} />
                       <Typography variant="body2" sx={{ 
                         fontFamily: '"Cormorant Garamond", serif',
                         fontWeight: 400,
-                        color: '#34495e'
+                        color: '#9b7a86'
                       }}>
                         Festlokalen (Fabriksstråket 36)
                       </Typography>
@@ -334,7 +332,7 @@ const Accommodation = () => {
                       style={{
                         display: 'inline-block',
                         padding: '12px 24px',
-                        backgroundColor: '#e74c3c',
+                        backgroundColor: '#b3124b',
                         color: 'white',
                         textDecoration: 'none',
                         borderRadius: '4px',
@@ -343,8 +341,8 @@ const Accommodation = () => {
                         fontWeight: 400,
                         transition: 'background-color 0.3s ease'
                       }}
-                      onMouseOver={(e) => e.target.style.backgroundColor = '#c0392b'}
-                      onMouseOut={(e) => e.target.style.backgroundColor = '#e74c3c'}
+                      onMouseOver={(e) => ((e.currentTarget as HTMLAnchorElement).style.backgroundColor = '#8f0f3b')}
+                      onMouseOut={(e) => ((e.currentTarget as HTMLAnchorElement).style.backgroundColor = '#b3124b')}
                     >
                       Se avstånd mellan platser
                     </a>
