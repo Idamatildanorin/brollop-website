@@ -72,8 +72,6 @@ const Navbar = () => {
         bgcolor: 'rgba(246, 220, 230, 0.92)',
         boxShadow: '0 1px 0 rgba(179, 18, 75, 0.25)',
         borderBottom: '1px solid rgba(179, 18, 75, 0.25)',
-        /* iPhone (notch) + vissa Android: meny under statusfält */
-        paddingTop: 'env(safe-area-inset-top, 0px)',
       }}
     >
       <Toolbar

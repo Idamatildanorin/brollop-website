@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Typography, Container, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -7,8 +7,6 @@ const Home = () => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0
   });
-  const logoRef = useRef<HTMLImageElement | null>(null);
-
   // Ange bröllopsdatumet här (format: YYYY, MM-1, DD, HH, MM)
   const weddingDate = new Date(2026, 8, 5, 15, 0); // 5 september 2026 kl 15:00
 
@@ -38,46 +36,12 @@ const Home = () => {
     }, 250);
   }, []);
 
-  // Kontinuerligt "regn" av konfetti över loggan
-  useEffect(() => {
-    const confetti = (window as any).confetti;
-    if (!confetti) return;
-    const intervalId = setInterval(() => {
-      const img = logoRef.current;
-      const viewportW = window.innerWidth || 1;
-      const viewportH = window.innerHeight || 1;
-      let left = 0.4, right = 0.6, top = 0.15; // fallback mitt på
-      if (img) {
-        const rect = img.getBoundingClientRect();
-        left = rect.left / viewportW;
-        right = (rect.right) / viewportW;
-        top = Math.max(0, (rect.top / viewportH) - 0.06); // lite ovanför loggan
-      }
-      // Släpp 3 små "droppar" per puls över loggans bredd
-      for (let i = 0; i < 3; i++) {
-        const x = left + Math.random() * Math.max(0.02, (right - left));
-        confetti({
-          particleCount: 4,
-          angle: 90, // nedåt
-          spread: 18,
-          startVelocity: 4,
-          gravity: 1.15,
-          scalar: 0.8,
-          ticks: 220,
-          drift: (Math.random() - 0.5) * 0.6,
-          origin: { x, y: top }
-        });
-      }
-    }, 900);
-    return () => clearInterval(intervalId);
-  }, []);
-
   return (
     <Container maxWidth="md">
       <Box sx={{ 
-        py: { xs: 3, md: 5 },
+        py: { xs: 5, md: 9 },
         background: 'transparent',
-        minHeight: 'var(--app-min-height)',
+        minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center'
@@ -87,46 +51,21 @@ const Home = () => {
           sx={{
             backgroundColor: '#ffffff',
             borderRadius: '20px',
-            p: { xs: 3, md: 4 },
-            py: { xs: 3, md: 4 },
+            p: { xs: 4, md: 6 },
+            py: { xs: 5, md: 7 },
             position: 'relative',
-            isolation: 'isolate',
             boxShadow: '0 10px 40px rgba(0, 0, 0, 0.08)',
             border: '1px solid rgba(0, 0, 0, 0.06)',
           }}
         >
-          {/* Ram under innehåll: vit #fff ovanpå SVG dolde strecket — ytterbox är redan vit, inner transparent så streck syns. */}
-          <Box
-            component="svg"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-            xmlns="http://www.w3.org/2000/svg"
-            sx={{
-              position: 'absolute',
-              inset: '-14px',
-              width: 'calc(100% + 28px)',
-              height: 'calc(100% + 28px)',
-              pointerEvents: 'none',
-              zIndex: 0,
-            }}
-          >
-            <path
-              d="M12,6 C18,2 24,10 30,6 C36,2 42,10 48,6 C54,2 60,10 66,6 C72,2 78,10 84,6 C90,4 92,10 92,14 C96,20 88,26 92,32 C96,38 88,44 92,50 C96,56 88,62 92,68 C96,74 88,80 92,86 C92,90 88,96 84,94 C78,90 72,98 66,94 C60,90 54,98 48,94 C42,90 36,98 30,94 C24,90 18,98 12,94 C8,92 4,88 6,84 C10,78 2,72 6,66 C10,60 2,54 6,48 C10,42 2,36 6,30 C10,24 2,18 6,12 C8,8 10,6 12,6 Z"
-              fill="none"
-              stroke="#b3124b"
-              strokeWidth="1.35"
-              vectorEffect="non-scaling-stroke"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </Box>
-
+          {/* Vit yta + innehåll – undvik pseudo-SVG ovanpå text (Safari kan gråtona hela lagret) */}
           <Box
             sx={{
               position: 'relative',
-              zIndex: 1,
-              bgcolor: 'transparent',
+              zIndex: 2,
+              bgcolor: '#ffffff',
               borderRadius: '18px',
+              pb: { xs: 2, md: 3 },
             }}
           >
           {/* Huvudrubrik - mer kompakt */}
@@ -135,30 +74,33 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <Box sx={{ 
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              mt: 1.6,
-              mb: 0
-            }}>
-              <img
-                src="/images/ChatGPT Image 14 okt. 2025 19_49_39.png"
-                alt="Pelle och Matilda"
-                ref={logoRef}
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  maxWidth: '320px',
-                  display: 'block',
-                  filter: 'brightness(1.4) contrast(1.2) saturate(1.25) hue-rotate(95deg)',
-                  backgroundColor: '#ffffff',
-                  mixBlendMode: 'normal',
-                  opacity: 1
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                minHeight: { xs: 100, md: 120 },
+                mt: { xs: 1, md: 1.5 },
+                mb: { xs: 2, md: 2.5 },
+              }}
+            >
+              <Typography
+                component="h1"
+                variant="h4"
+                sx={{
+                  textAlign: 'center',
+                  px: 1,
+                  fontFamily: "'Playfair Display', serif",
+                  color: '#b3124b',
+                  fontWeight: 500,
+                  letterSpacing: '0.08em',
+                  fontSize: { xs: '1.85rem', md: '2.25rem' },
+                  lineHeight: 1.35,
                 }}
-              />
+              >
+                Pelle &amp; Matilda
+              </Typography>
             </Box>
-            
           </motion.div>
 
           {/* Datum och tid – framsidetext */}
@@ -170,8 +112,8 @@ const Home = () => {
             <Box
               sx={{
                 textAlign: 'center',
-                mb: 2,
-                mt: 1.5
+                mb: { xs: 3.5, md: 4.5 },
+                mt: { xs: 1, md: 1.5 }
               }}
             >
               <Typography
@@ -182,7 +124,7 @@ const Home = () => {
                   fontWeight: 300,
                   fontSize: { xs: '1rem', md: '1.1rem' },
                   letterSpacing: '0.08em',
-                  mb: 0.5
+                  mb: 1
                 }}
               >
                 5 september 2026 kl 15:00
@@ -203,8 +145,8 @@ const Home = () => {
             </Box>
           </motion.div>
 
-          {/* Nedräkning - mer kompakt */}
-          <Box sx={{ mt: -1.5, mb: 1 }} onClick={() => {
+          {/* Nedräkning */}
+          <Box sx={{ mt: { xs: 2.5, md: 3.5 }, mb: { xs: 3, md: 4 } }} onClick={() => {
             const confetti = (window as any).confetti;
             if (confetti) confetti({ particleCount: 80, spread: 70, origin: { y: 0.3 } });
           }}>
@@ -223,7 +165,8 @@ const Home = () => {
               >
                 <Box
                   sx={{
-                    p: 3,
+                    py: { xs: 4.5, md: 5.5 },
+                    px: 4,
                     textAlign: 'center',
                     borderBottom: '1px solid rgba(0, 0, 0, 0.08)',
                     minWidth: '120px'
@@ -270,9 +213,10 @@ const Home = () => {
                 textAlign: 'center',
                 maxWidth: '520px',
                 mx: 'auto',
-                mt: 2.5,
-                mb: 1.5,
-                p: 2.5
+                mt: { xs: 4, md: 5.5 },
+                mb: { xs: 2.5, md: 3.5 },
+                p: { xs: 3, md: 4 },
+                pt: { xs: 4, md: 5 }
               }}
             >
               <Box
@@ -281,7 +225,7 @@ const Home = () => {
                   flexDirection: { xs: 'column', sm: 'row' },
                   justifyContent: 'center',
                   alignItems: 'flex-start',
-                  gap: { xs: 1.2, sm: 2.5 }
+                  gap: { xs: 3, sm: 4 }
                 }}
               >
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 116 }}>
@@ -392,6 +336,31 @@ const Home = () => {
               </Box>
             </Box>
           </motion.div>
+          </Box>
+
+          {/* Vågig ram som riktigt SVG-lager (stroke), inte background-image ovanför innehållet */}
+          <Box
+            component="svg"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            xmlns="http://www.w3.org/2000/svg"
+            sx={{
+              position: 'absolute',
+              inset: '-14px',
+              width: 'calc(100% + 28px)',
+              height: 'calc(100% + 28px)',
+              pointerEvents: 'none',
+              zIndex: 3,
+            }}
+          >
+            <path
+              d="M12,6 C18,2 24,10 30,6 C36,2 42,10 48,6 C54,2 60,10 66,6 C72,2 78,10 84,6 C90,4 92,10 92,14 C96,20 88,26 92,32 C96,38 88,44 92,50 C96,56 88,62 92,68 C96,74 88,80 92,86 C92,90 88,96 84,94 C78,90 72,98 66,94 C60,90 54,98 48,94 C42,90 36,98 30,94 C24,90 18,98 12,94 C8,92 4,88 6,84 C10,78 2,72 6,66 C10,60 2,54 6,48 C10,42 2,36 6,30 C10,24 2,18 6,12 C8,8 10,6 12,6 Z"
+              fill="none"
+              stroke="#b3124b"
+              strokeWidth="1.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </Box>
         </Box>
       </Box>

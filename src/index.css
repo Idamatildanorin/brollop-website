@@ -4,19 +4,9 @@
   font-weight: 400;
   /* Samma ljusrosa yta som runt loggan – all text ligger på den */
   --content-surface-rose: #fff7fa;
-  /* Full höjd utan adressfält-glapp (iOS Safari + Chrome Android) */
-  --app-min-height: 100vh;
-}
-
-@supports (height: 100dvh) {
-  :root {
-    --app-min-height: 100dvh;
-  }
 }
 
 html {
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
   /* Samma rosa som body så inga “remsor” syns i Safari */
   background-color: #f6dce6;
 }
@@ -24,27 +14,17 @@ html {
 body {
   margin: 0;
   min-width: 320px;
-  min-height: var(--app-min-height);
+  min-height: 100vh;
   background-color: #f6dce6;
   color: #b3124b;
-  /* iPhone/Android: undvik att innehåll hamnar under notch eller styrfält */
-  padding-left: env(safe-area-inset-left, 0px);
-  padding-right: env(safe-area-inset-right, 0px);
-  padding-bottom: env(safe-area-inset-bottom, 0px);
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
 }
 
 #root {
-  min-height: var(--app-min-height);
+  min-height: 100vh;
 }
 
 .app {
-  min-height: var(--app-min-height);
+  min-height: 100vh;
   background-color: #f6dce6;
 }
 
