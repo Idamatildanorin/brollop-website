@@ -85,43 +85,24 @@ const Home = () => {
         {/* Innehåll med elegant ram */}
         <Box
           sx={{
-            /* Solid yta: mobil-Safari kan annars visa gråton genom transparent + pseudo-SVG */
             backgroundColor: '#ffffff',
             borderRadius: '20px',
             p: { xs: 3, md: 4 },
             py: { xs: 3, md: 4 },
             position: 'relative',
-            isolation: 'isolate',
             boxShadow: '0 10px 40px rgba(0, 0, 0, 0.08)',
             border: '1px solid rgba(0, 0, 0, 0.06)',
-            '&::after': {
-              content: '""',
-              position: 'absolute',
-              inset: '-14px',
-              backgroundImage:
-                "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M12,6 C18,2 24,10 30,6 C36,2 42,10 48,6 C54,2 60,10 66,6 C72,2 78,10 84,6 C90,4 92,10 92,14 C96,20 88,26 92,32 C96,38 88,44 92,50 C96,56 88,62 92,68 C96,74 88,80 92,86 C92,90 88,96 84,94 C78,90 72,98 66,94 C60,90 54,98 48,94 C42,90 36,98 30,94 C24,90 18,98 12,94 C8,92 4,88 6,84 C10,78 2,72 6,66 C10,60 2,54 6,48 C10,42 2,36 6,30 C10,24 2,18 6,12 C8,8 10,6 12,6 Z' fill='%23ffffff' stroke='none'/></svg>\")",
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: '100% 100%',
-              zIndex: 1,
-              pointerEvents: 'none'
-            },
-            '&::before': {
-              content: '""',
-              position: 'absolute',
-              inset: '-14px',
-              backgroundImage:
-                "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M12,6 C18,2 24,10 30,6 C36,2 42,10 48,6 C54,2 60,10 66,6 C72,2 78,10 84,6 C90,4 92,10 92,14 C96,20 88,26 92,32 C96,38 88,44 92,50 C96,56 88,62 92,68 C96,74 88,80 92,86 C92,90 88,96 84,94 C78,90 72,98 66,94 C60,90 54,98 48,94 C42,90 36,98 30,94 C24,90 18,98 12,94 C8,92 4,88 6,84 C10,78 2,72 6,66 C10,60 2,54 6,48 C10,42 2,36 6,30 C10,24 2,18 6,12 C8,8 10,6 12,6 Z' fill='none' stroke='%23b3124b' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/></svg>\")",
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: '100% 100%',
-              zIndex: 10,
-              pointerEvents: 'none'
-            },
-            '& > *': {
-              position: 'relative',
-              zIndex: 2
-            },
           }}
         >
+          {/* Vit yta + innehåll – undvik pseudo-SVG ovanpå text (Safari kan gråtona hela lagret) */}
+          <Box
+            sx={{
+              position: 'relative',
+              zIndex: 2,
+              bgcolor: '#ffffff',
+              borderRadius: '18px',
+            }}
+          >
           {/* Huvudrubrik - mer kompakt */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -385,6 +366,32 @@ const Home = () => {
               </Box>
             </Box>
           </motion.div>
+          </Box>
+
+          {/* Vågig ram som riktigt SVG-lager (stroke), inte background-image ovanför innehållet */}
+          <Box
+            component="svg"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            xmlns="http://www.w3.org/2000/svg"
+            sx={{
+              position: 'absolute',
+              inset: '-14px',
+              width: 'calc(100% + 28px)',
+              height: 'calc(100% + 28px)',
+              pointerEvents: 'none',
+              zIndex: 3,
+            }}
+          >
+            <path
+              d="M12,6 C18,2 24,10 30,6 C36,2 42,10 48,6 C54,2 60,10 66,6 C72,2 78,10 84,6 C90,4 92,10 92,14 C96,20 88,26 92,32 C96,38 88,44 92,50 C96,56 88,62 92,68 C96,74 88,80 92,86 C92,90 88,96 84,94 C78,90 72,98 66,94 C60,90 54,98 48,94 C42,90 36,98 30,94 C24,90 18,98 12,94 C8,92 4,88 6,84 C10,78 2,72 6,66 C10,60 2,54 6,48 C10,42 2,36 6,30 C10,24 2,18 6,12 C8,8 10,6 12,6 Z"
+              fill="none"
+              stroke="#b3124b"
+              strokeWidth="1.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </Box>
         </Box>
       </Box>
     </Container>
