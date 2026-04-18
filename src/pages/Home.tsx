@@ -73,11 +73,17 @@ const Home = () => {
   }, []);
 
   return (
-    <Container maxWidth="md">
+    <Container
+      maxWidth="md"
+      sx={{
+        bgcolor: 'var(--page-bg)',
+        px: { xs: 2, sm: 3 }
+      }}
+    >
       <Box sx={{ 
         py: { xs: 3, md: 5 },
-        background: 'transparent',
-        minHeight: '100vh',
+        bgcolor: 'var(--page-bg)',
+        minHeight: { xs: '100dvh', md: '100vh' },
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center'
@@ -85,7 +91,8 @@ const Home = () => {
         {/* Innehåll med elegant ram */}
         <Box
           sx={{
-            background: 'transparent',
+            /* Solid yta: mobil-Safari kan annars visa gråton genom transparent + pseudo-SVG */
+            backgroundColor: '#ffffff',
             borderRadius: '20px',
             p: { xs: 3, md: 4 },
             py: { xs: 3, md: 4 },
