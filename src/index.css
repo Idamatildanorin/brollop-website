@@ -4,42 +4,28 @@
   font-weight: 400;
   /* Samma ljusrosa yta som runt loggan – all text ligger på den */
   --content-surface-rose: #fff7fa;
-  /* Sidbakgrund – samma värde överallt så mobil/web matchar */
-  --page-bg: #f6dce6;
 }
 
 html {
-  background-color: var(--page-bg);
-  /* Undvik att Safari/system tonar ytor annorlunda än desktop */
-  color-scheme: only light;
+  /* Samma rosa som body så inga “remsor” syns i Safari */
+  background-color: #f6dce6;
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  min-height: 100dvh;
-  background-color: var(--page-bg);
+  background-color: #f6dce6;
   color: #b3124b;
 }
 
 #root {
   min-height: 100vh;
-  min-height: 100dvh;
-  background-color: var(--page-bg);
 }
 
 .app {
   min-height: 100vh;
-  min-height: 100dvh;
-  background-color: var(--page-bg);
-  display: flex;
-  flex-direction: column;
-}
-
-.app main {
-  flex: 1;
-  background-color: var(--page-bg);
+  background-color: #f6dce6;
 }
 
 @keyframes bounce {

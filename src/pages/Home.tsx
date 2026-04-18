@@ -73,17 +73,11 @@ const Home = () => {
   }, []);
 
   return (
-    <Container
-      maxWidth="md"
-      sx={{
-        bgcolor: 'var(--page-bg)',
-        px: { xs: 2, sm: 3 }
-      }}
-    >
+    <Container maxWidth="md">
       <Box sx={{ 
         py: { xs: 3, md: 5 },
-        bgcolor: 'var(--page-bg)',
-        minHeight: { xs: '100dvh', md: '100vh' },
+        background: 'transparent',
+        minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center'
