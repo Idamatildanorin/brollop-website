@@ -100,16 +100,23 @@ const Navbar = () => {
                 component={Link}
                 to="/"
                 color="inherit"
+                aria-label="Pelle och Matilda"
                 sx={{ 
-                  fontSize: '1.15rem', 
+                  fontSize: '1.35rem', 
                   textTransform: 'none',
-                  color: '#b3124b',
+                  color: '#1f5c3a',
                   fontFamily: '"Playfair Display", serif',
                   fontWeight: 400,
-                  letterSpacing: '0.04em'
+                  letterSpacing: '0.04em',
+                  pl: 0.75,
+                  '&:hover': { color: '#174a30' },
                 }}
               >
-                Pelle &amp; Matilda
+                Pelle{' '}
+                <Box component="span" sx={{ color: '#4a9d6f', px: 0.25 }} aria-hidden>
+                  ♥
+                </Box>{' '}
+                Matilda
               </Button>
             </Box>
           </>
@@ -124,18 +131,24 @@ const Navbar = () => {
             <Button
               component={Link}
               to="/"
+              aria-label="Pelle och Matilda"
               sx={{
                 mr: 3,
-                fontSize: '1.2rem',
+                fontSize: '1.45rem',
                 textTransform: 'none',
-                color: '#b3124b',
+                color: '#1f5c3a',
                 fontFamily: '"Playfair Display", serif',
                 fontWeight: 400,
                 letterSpacing: '0.06em',
-                '&:hover': { backgroundColor: 'transparent' }
+                pl: 0.5,
+                '&:hover': { backgroundColor: 'transparent', color: '#174a30' }
               }}
             >
-              Pelle &amp; Matilda
+              Pelle{' '}
+              <Box component="span" sx={{ color: '#4a9d6f', px: 0.25 }} aria-hidden>
+                ♥
+              </Box>{' '}
+              Matilda
             </Button>
             {navItems.map((item) => {
               const isActive =
