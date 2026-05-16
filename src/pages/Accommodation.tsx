@@ -1,5 +1,6 @@
 import { Box, Typography, Container } from '@mui/material';
 import { motion } from 'framer-motion';
+import { contentCard, pageTitle } from '../styles';
 
 const Accommodation = () => {
   return (
@@ -9,26 +10,7 @@ const Accommodation = () => {
         background: 'transparent'
       }}>
         {/* Diskret ram runt allt innehåll */}
-        <Box
-          sx={{
-            background: 'var(--content-surface-rose)',
-            borderRadius: '20px',
-            p: { xs: 3, sm: 4, md: 6 },
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)',
-            border: '1px solid rgba(179, 18, 75, 0.18)',
-            position: 'relative',
-            '&::before': {
-              content: '""',
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              height: '3px',
-              background: 'linear-gradient(90deg, #b3124b, #d88faa)',
-              borderRadius: '20px 20px 0 0'
-            }
-          }}
-        >
+        <Box sx={{ ...contentCard, p: { xs: 3, sm: 4, md: 6 } }}>
 
           {/* Huvudrubrik */}
           <motion.div
@@ -41,12 +23,9 @@ const Accommodation = () => {
               component="h1"
               align="center"
               sx={{
-                fontFamily: '"Cormorant Garamond", serif',
-                fontWeight: 400,
+                ...pageTitle,
                 mb: 4,
-                color: '#b3124b',
-                fontSize: { xs: '1.8rem', sm: '2.2rem', md: '2.8rem' },
-                letterSpacing: '0.05em'
+                fontSize: { xs: '1.8rem', sm: '2.2rem', md: '2.5rem' },
               }}
             >
               Boende
@@ -64,7 +43,7 @@ const Accommodation = () => {
                 variant="h5"
                 component="h2"
                 sx={{
-                  fontFamily: '"Cormorant Garamond", serif',
+                  fontFamily: '"Playfair Display", serif',
                   fontWeight: 400,
                   mb: 3,
                   color: '#b3124b',
@@ -77,7 +56,7 @@ const Accommodation = () => {
               <Typography
                 variant="body1"
                 sx={{
-                  fontFamily: '"Cormorant Garamond", serif',
+                  fontFamily: '"Playfair Display", serif',
                   fontWeight: 300,
                   mb: 3,
                   color: '#9b7a86',
@@ -103,7 +82,7 @@ const Accommodation = () => {
                 <Typography
                   variant="h6"
                   sx={{
-                    fontFamily: '"Cormorant Garamond", serif',
+                    fontFamily: '"Playfair Display", serif',
                     fontWeight: 400,
                     mb: 2,
                     color: '#b3124b',
@@ -115,7 +94,7 @@ const Accommodation = () => {
                 <Typography
                   variant="body1"
                   sx={{
-                    fontFamily: '"Cormorant Garamond", serif',
+                    fontFamily: '"Playfair Display", serif',
                     fontWeight: 300,
                     mb: 2,
                     color: '#9b7a86',
@@ -129,7 +108,7 @@ const Accommodation = () => {
                 <Typography
                   variant="body1"
                   sx={{
-                    fontFamily: '"Cormorant Garamond", serif',
+                    fontFamily: '"Playfair Display", serif',
                     fontWeight: 300,
                     mb: 1,
                     color: '#9b7a86',
@@ -143,7 +122,7 @@ const Accommodation = () => {
                 <Typography
                   variant="body1"
                   sx={{
-                    fontFamily: '"Cormorant Garamond", serif',
+                    fontFamily: '"Playfair Display", serif',
                     fontWeight: 300,
                     mb: 1,
                     color: '#9b7a86',
@@ -156,7 +135,7 @@ const Accommodation = () => {
                 <Typography
                   variant="body1"
                   sx={{
-                    fontFamily: '"Cormorant Garamond", serif',
+                    fontFamily: '"Playfair Display", serif',
                     fontWeight: 300,
                     mb: 1,
                     color: '#9b7a86',
@@ -169,7 +148,7 @@ const Accommodation = () => {
                 <Typography
                   variant="body1"
                   sx={{
-                    fontFamily: '"Cormorant Garamond", serif',
+                    fontFamily: '"Playfair Display", serif',
                     fontWeight: 300,
                     color: '#9b7a86',
                     lineHeight: 1.6,
@@ -184,7 +163,7 @@ const Accommodation = () => {
               <Typography
                 variant="body1"
                 sx={{
-                  fontFamily: '"Cormorant Garamond", serif',
+                  fontFamily: '"Playfair Display", serif',
                   fontWeight: 300,
                   mb: 3,
                   color: '#9b7a86',
@@ -202,7 +181,7 @@ const Accommodation = () => {
                 variant="h5"
                 component="h2"
                 sx={{
-                  fontFamily: '"Cormorant Garamond", serif',
+                  fontFamily: '"Playfair Display", serif',
                   fontWeight: 400,
                   mb: 3,
                   color: '#b3124b',
@@ -215,7 +194,7 @@ const Accommodation = () => {
               <Typography
                 variant="body1"
                 sx={{
-                  fontFamily: '"Cormorant Garamond", serif',
+                  fontFamily: '"Playfair Display", serif',
                   fontWeight: 300,
                   mb: 3,
                   color: '#9b7a86',
@@ -231,7 +210,7 @@ const Accommodation = () => {
               <Typography
                 variant="body1"
                 sx={{
-                  fontFamily: '"Cormorant Garamond", serif',
+                  fontFamily: '"Playfair Display", serif',
                   fontWeight: 300,
                   mb: 3,
                   color: '#9b7a86',
@@ -250,7 +229,7 @@ const Accommodation = () => {
                 variant="h5"
                 component="h2"
                 sx={{
-                  fontFamily: '"Cormorant Garamond", serif',
+                  fontFamily: '"Playfair Display", serif',
                   fontWeight: 400,
                   mb: 3,
                   color: '#b3124b',
@@ -276,7 +255,7 @@ const Accommodation = () => {
                   <Typography
                     variant="h6"
                     sx={{
-                      fontFamily: '"Cormorant Garamond", serif',
+                      fontFamily: '"Playfair Display", serif',
                       fontWeight: 400,
                       mb: 3,
                       color: '#b3124b',
@@ -297,7 +276,7 @@ const Accommodation = () => {
                         mr: 1 
                       }} />
                       <Typography variant="body2" sx={{ 
-                        fontFamily: '"Cormorant Garamond", serif',
+                        fontFamily: '"Playfair Display", serif',
                         fontWeight: 400,
                         color: '#9b7a86'
                       }}>
@@ -314,7 +293,7 @@ const Accommodation = () => {
                         mr: 1 
                       }} />
                       <Typography variant="body2" sx={{ 
-                        fontFamily: '"Cormorant Garamond", serif',
+                        fontFamily: '"Playfair Display", serif',
                         fontWeight: 400,
                         color: '#9b7a86'
                       }}>
@@ -336,7 +315,7 @@ const Accommodation = () => {
                         color: 'white',
                         textDecoration: 'none',
                         borderRadius: '4px',
-                        fontFamily: '"Cormorant Garamond", serif',
+                        fontFamily: '"Playfair Display", serif',
                         fontSize: '1rem',
                         fontWeight: 400,
                         transition: 'background-color 0.3s ease'

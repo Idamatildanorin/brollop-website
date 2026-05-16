@@ -10,14 +10,25 @@ import {
   RadioGroup,
   Typography,
   Alert,
-  CircularProgress
+  CircularProgress,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import Confetti from 'react-confetti';
-
-// Initialize EmailJS
-emailjs.init("TrPdgkkOUYIHHEi6A");
+import { contentCard, pageTitle, bodyText, rsvpTextFieldSx } from '../styles';
+import { emailjsConfig, isEmailJsConfigured } from '../config/emailjs';
+import {
+  RSVP_LIMITS,
+  sanitizeRsvpField,
+  validateRsvpInput,
+  canSubmitRsvp,
+  isValidGuestName,
+} from '../lib/rsvpForm';
+import ToastmastersSection from '../components/ToastmastersSection';
 
 
 interface CombinedForm {
@@ -40,6 +51,16 @@ const Rsvp = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<{ name?: string; attending?: string }>({});
+  const [honeypot, setHoneypot] = useState('');
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [pendingRsvp, setPendingRsvp] = useState<{
+    trimmedName: string;
+    attendingLabel: string;
+    isAttending: boolean;
+    dietaryLabel: string;
+  } | null>(null);
+  const [nameTouched, setNameTouched] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [windowDimensions, setWindowDimensions] = useState({
     width: window.innerWidth,
@@ -65,33 +86,111 @@ const Rsvp = () => {
     }
   }, [showConfetti]);
 
+  const runValidation = () => {
+    const { errors, trimmedName, isValid } = validateRsvpInput(formData.name, formData.attending);
+    setFieldErrors(errors);
+    return { errors, trimmedName, isValid };
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
+    if (name === 'name') {
+      if (nameTouched || fieldErrors.name) {
+        const { errors } = validateRsvpInput(value, formData.attending);
+        setFieldErrors((prev) => ({ ...prev, name: errors.name }));
+      }
+    }
+    if (name === 'attending' && fieldErrors.attending) {
+      setFieldErrors((prev) => ({ ...prev, attending: undefined }));
+    }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleNameBlur = () => {
+    setNameTouched(true);
+    const { errors } = validateRsvpInput(formData.name, formData.attending);
+    setFieldErrors((prev) => ({ ...prev, name: errors.name }));
+  };
+
+  const canSubmit = canSubmitRsvp(formData.name, formData.attending);
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (loading) return;
+
+    setError(null);
+    setNameTouched(true);
+
+    if (honeypot.trim()) {
+      setSubmitted(true);
+      return;
+    }
+
+    const { trimmedName, isValid } = runValidation();
+    if (!isValid || !isValidGuestName(trimmedName)) {
+      return;
+    }
+
+    if (!isEmailJsConfigured()) {
+      setError('OSA är inte konfigurerat ännu. Kontakta brudparet direkt.');
+      return;
+    }
+
+    const isAttending = formData.attending === 'yes';
+    const attendingLabel = isAttending ? 'Ja, kommer' : 'Nej, kan inte komma';
+    const dietarySanitized = sanitizeRsvpField(
+      formData.dietaryRestrictions,
+      RSVP_LIMITS.dietaryRestrictions,
+    );
+
+    setPendingRsvp({
+      trimmedName,
+      attendingLabel,
+      isAttending,
+      dietaryLabel: dietarySanitized || 'Inga',
+    });
+    setConfirmOpen(true);
+  };
+
+  const handleConfirmSend = async () => {
+    if (!pendingRsvp || loading) return;
+
+    const { trimmedName, attendingLabel } = pendingRsvp;
+
+    if (!isValidGuestName(trimmedName)) {
+      setConfirmOpen(false);
+      setFieldErrors({ name: 'Skriv ett riktigt namn (minst två bokstäver)' });
+      return;
+    }
+
+    setConfirmOpen(false);
     setLoading(true);
     setError(null);
 
+    const payload = {
+      to_name: 'Pelle & Matilda',
+      guest_name: trimmedName,
+      from_name: trimmedName,
+      name: trimmedName,
+      attending: attendingLabel,
+      dietary_restrictions:
+        sanitizeRsvpField(formData.dietaryRestrictions, RSVP_LIMITS.dietaryRestrictions) ||
+        'Inga',
+      dance_song:
+        sanitizeRsvpField(formData.danceSong, RSVP_LIMITS.danceSong) || 'Ingen låt vald',
+      message: sanitizeRsvpField(formData.message, RSVP_LIMITS.message) || 'Inget meddelande',
+    };
+
     try {
+      emailjs.init(emailjsConfig.publicKey);
       const result = await emailjs.send(
-        'service_fzp1zvi',
-        'template_jvsuzlv',
-        {
-          to_name: 'Pelle & Matilda',
-          from_name: formData.name,
-          guest_name: formData.name,
-          attending: formData.attending === 'yes' ? 'Ja, kommer' : 'Nej, kan inte komma',
-          dietary_restrictions: formData.dietaryRestrictions || 'Inga',
-          dance_song: formData.danceSong || 'Ingen låt vald',
-          message: formData.message || 'Inget meddelande'
-        },
-        'TrPdgkkOUYIHHEi6A'
+        emailjsConfig.serviceId,
+        emailjsConfig.templateId,
+        payload,
+        emailjsConfig.publicKey,
       );
 
       if (result.text === 'OK') {
@@ -99,12 +198,13 @@ const Rsvp = () => {
           setShowConfetti(true);
         }
         setSubmitted(true);
+        setPendingRsvp(null);
       } else {
         setError('Något gick fel. Vänligen försök igen.');
       }
-    } catch (error) {
+    } catch (err) {
       setError('Något gick fel. Vänligen försök igen.');
-      console.error('EmailJS error:', error);
+      console.error('EmailJS error:', err);
     } finally {
       setLoading(false);
     }
@@ -131,26 +231,7 @@ const Rsvp = () => {
         background: 'transparent'
       }}>
         {/* Diskret ram runt allt innehåll */}
-        <Box
-          sx={{
-            background: 'var(--content-surface-rose)',
-            borderRadius: '20px',
-            p: { xs: 4, md: 6 },
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)',
-            border: '1px solid rgba(179, 18, 75, 0.18)',
-            position: 'relative',
-            '&::before': {
-              content: '""',
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              height: '3px',
-              background: 'linear-gradient(90deg, #b3124b, #d88faa)',
-              borderRadius: '20px 20px 0 0'
-            }
-          }}
-        >
+        <Box sx={{ ...contentCard, p: { xs: 4, md: 6 } }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -174,43 +255,46 @@ const Rsvp = () => {
               </Alert>
             ) : (
               <>
-                <Typography 
-                  variant="h3" 
-                  component="h1" 
-                  gutterBottom 
-                  align="center" 
-                  sx={{ 
-                    color: '#b3124b',
-                    fontFamily: '"Cormorant Garamond", serif',
-                    fontWeight: 400,
+                <Typography
+                  component="h1"
+                  align="center"
+                  sx={{
+                    ...pageTitle,
                     mb: 2,
-                    letterSpacing: '0.05em'
+                    fontSize: { xs: '2rem', md: '2.5rem' },
                   }}
                 >
                   OSA
                 </Typography>
-                
-                <Typography variant="h6" align="center" gutterBottom sx={{ 
-                  mb: 2, 
-                  color: '#9b7a86',
-                  fontFamily: '"Cormorant Garamond", serif',
-                  fontWeight: 300,
-                  fontStyle: 'italic'
-                }}>
+
+                <Typography
+                  align="center"
+                  sx={{
+                    fontFamily: "'Playfair Display', serif",
+                    color: '#9b7a86',
+                    fontWeight: 300,
+                    letterSpacing: '0.02em',
+                    mb: 2,
+                    fontSize: { xs: '1rem', md: '1.08rem' },
+                  }}
+                >
                   Vänligen svara senast den 5 juni 2026
                 </Typography>
 
-                <Typography variant="body2" align="center" sx={{ 
-                  mb: 4, 
-                  color: '#9b7a86',
-                  fontFamily: '"Cormorant Garamond", serif',
-                  fontWeight: 400,
-                  fontStyle: 'italic',
-                  fontSize: '0.95rem',
-                  maxWidth: '400px',
-                  mx: 'auto',
-                  lineHeight: 1.4
-                }}>
+                <Typography
+                  align="center"
+                  sx={{
+                    fontFamily: "'Playfair Display', serif",
+                    color: '#8a6d78',
+                    fontWeight: 300,
+                    letterSpacing: '0.01em',
+                    lineHeight: 1.5,
+                    mb: 4,
+                    fontSize: '0.95rem',
+                    maxWidth: 400,
+                    mx: 'auto',
+                  }}
+                >
                   Vi älskar barn, men denna kväll vill vi fira tillsammans med våra vuxna vänner och familj. Ammande får självklart följa med.
                 </Typography>
               <Box sx={{ 
@@ -223,58 +307,89 @@ const Rsvp = () => {
                   </Alert>
                 )}
                 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} noValidate>
                   <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                    <Box
+                      component="label"
+                      aria-hidden
+                      sx={{
+                        position: 'absolute',
+                        width: 1,
+                        height: 1,
+                        padding: 0,
+                        margin: -1,
+                        overflow: 'hidden',
+                        clip: 'rect(0, 0, 0, 0)',
+                        whiteSpace: 'nowrap',
+                        border: 0,
+                      }}
+                    >
+                      Lämna tomt
+                      <input
+                        type="text"
+                        name="website"
+                        value={honeypot}
+                        onChange={(e) => setHoneypot(e.target.value)}
+                        tabIndex={-1}
+                        autoComplete="off"
+                      />
+                    </Box>
+
                     <TextField
                       required
                       label="Namn"
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
+                      onBlur={handleNameBlur}
                       fullWidth
                       disabled={loading}
-                      sx={{
-                        '& .MuiOutlinedInput-root': {
-                          borderRadius: 0,
-                          fontFamily: '"Cormorant Garamond", serif'
-                        }
+                      error={Boolean(fieldErrors.name)}
+                      helperText={fieldErrors.name}
+                      inputProps={{
+                        'aria-required': true,
+                        maxLength: RSVP_LIMITS.name,
+                        autoComplete: 'name',
                       }}
+                      sx={rsvpTextFieldSx}
                     />
 
-                    <FormControl required>
-                      <Typography variant="subtitle1" gutterBottom sx={{ 
-                        color: '#9b7a86',
-                        fontFamily: '"Cormorant Garamond", serif',
-                        fontWeight: 400
-                      }}>
+                    <FormControl required error={Boolean(fieldErrors.attending)}>
+                      <Typography sx={{ ...bodyText, mb: 1, fontSize: '0.95rem' }}>
                         Kommer du på bröllopet?
                       </Typography>
                       <RadioGroup
                         name="attending"
                         value={formData.attending}
                         onChange={handleChange}
+                        aria-required
                       >
                         <FormControlLabel
                           value="yes"
                           control={<Radio />}
                           label="JA, såklart jag vill komma!"
                           disabled={loading}
-                          sx={{
-                            fontFamily: '"Cormorant Garamond", serif',
-                            fontWeight: 400
-                          }}
                         />
                         <FormControlLabel
                           value="no"
                           control={<Radio />}
                           label="Nej, jag kan tyvärr inte komma"
                           disabled={loading}
-                          sx={{
-                            fontFamily: '"Cormorant Garamond", serif',
-                            fontWeight: 400
-                          }}
                         />
                       </RadioGroup>
+                      {fieldErrors.attending && (
+                        <Typography
+                          sx={{
+                            ...bodyText,
+                            color: '#b3124b',
+                            fontSize: '0.75rem',
+                            mt: 0.5,
+                            display: 'block',
+                          }}
+                        >
+                          {fieldErrors.attending}
+                        </Typography>
+                      )}
                     </FormControl>
 
 
@@ -297,12 +412,8 @@ const Rsvp = () => {
                               placeholder="Låt och artist som får dig att dansa"
                               helperText="Hjälp oss skapa den bästa spellistan!"
                               disabled={loading}
-                              sx={{
-                                '& .MuiOutlinedInput-root': {
-                                  borderRadius: 0,
-                                  fontFamily: '"Cormorant Garamond", serif'
-                                }
-                              }}
+                              inputProps={{ maxLength: RSVP_LIMITS.danceSong }}
+                              sx={rsvpTextFieldSx}
                             />
 
                             <TextField
@@ -314,12 +425,8 @@ const Rsvp = () => {
                               multiline
                               rows={2}
                               disabled={loading}
-                              sx={{
-                                '& .MuiOutlinedInput-root': {
-                                  borderRadius: 0,
-                                  fontFamily: '"Cormorant Garamond", serif'
-                                }
-                              }}
+                              inputProps={{ maxLength: RSVP_LIMITS.dietaryRestrictions }}
+                              sx={rsvpTextFieldSx}
                             />
 
                             <TextField
@@ -333,120 +440,11 @@ const Rsvp = () => {
                               placeholder="Skriv en personlig hälsning till Pelle & Matilda..."
                               helperText="Vi ser fram emot att läsa era fina meddelanden!"
                               disabled={loading}
-                              sx={{
-                                '& .MuiOutlinedInput-root': {
-                                  borderRadius: 0,
-                                  fontFamily: '"Cormorant Garamond", serif'
-                                }
-                              }}
+                              inputProps={{ maxLength: RSVP_LIMITS.message }}
+                              sx={rsvpTextFieldSx}
                             />
 
-                            {/* Toastmasters sektion */}
-                            <Box sx={{ 
-                              mt: 4, 
-                              p: 3, 
-                              backgroundColor: 'rgba(179, 18, 75, 0.06)', 
-                              borderRadius: 2,
-                              border: '1px solid rgba(179, 18, 75, 0.18)'
-                            }}>
-                              <Typography
-                                variant="h6"
-                                sx={{
-                                  fontFamily: '"Cormorant Garamond", serif',
-                                  fontWeight: 400,
-                                  mb: 2,
-                                  color: '#b3124b',
-                                  fontSize: { xs: '1rem', md: '1.1rem' }
-                                }}
-                              >
-                                Vill du hålla tal eller bidra med underhållning?
-                              </Typography>
-                              
-                              <Typography
-                                variant="body1"
-                                sx={{
-                                  fontFamily: '"Cormorant Garamond", serif',
-                                  fontWeight: 300,
-                                  mb: 2,
-                                  color: '#9b7a86',
-                                  lineHeight: 1.6,
-                                  fontSize: { xs: '0.9rem', md: '1rem' }
-                                }}
-                              >
-                                Kontakta våra toastmasters Maja & Erik direkt:
-                              </Typography>
-                              
-                              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                                <Typography
-                                  variant="body1"
-                                  sx={{
-                                    fontFamily: '"Cormorant Garamond", serif',
-                                    fontWeight: 400,
-                                    color: '#b3124b',
-                                    fontSize: { xs: '0.9rem', md: '1rem' }
-                                  }}
-                                >
-                                  Erik Karlsson
-                                </Typography>
-                                <Typography
-                                  variant="body1"
-                                  sx={{
-                                    fontFamily: '"Cormorant Garamond", serif',
-                                    fontWeight: 300,
-                                    color: '#9b7a86',
-                                    fontSize: { xs: '0.85rem', md: '0.9rem' }
-                                  }}
-                                >
-                                  erik.axel.carlsson@gmail.com
-                                </Typography>
-                                <Typography
-                                  variant="body1"
-                                  sx={{
-                                    fontFamily: '"Cormorant Garamond", serif',
-                                    fontWeight: 300,
-                                    color: '#9b7a86',
-                                    fontSize: { xs: '0.85rem', md: '0.9rem' },
-                                    mb: 1
-                                  }}
-                                >
-                                  070-587 58 85
-                                </Typography>
-                                
-                                <Typography
-                                  variant="body1"
-                                  sx={{
-                                    fontFamily: '"Cormorant Garamond", serif',
-                                    fontWeight: 400,
-                                    color: '#b3124b',
-                                    fontSize: { xs: '0.9rem', md: '1rem' }
-                                  }}
-                                >
-                                  Maja Häggström
-                                </Typography>
-                                <Typography
-                                  variant="body1"
-                                  sx={{
-                                    fontFamily: '"Cormorant Garamond", serif',
-                                    fontWeight: 300,
-                                    color: '#9b7a86',
-                                    fontSize: { xs: '0.85rem', md: '0.9rem' }
-                                  }}
-                                >
-                                  majahagg@gmail.com
-                                </Typography>
-                                <Typography
-                                  variant="body1"
-                                  sx={{
-                                    fontFamily: '"Cormorant Garamond", serif',
-                                    fontWeight: 300,
-                                    color: '#9b7a86',
-                                    fontSize: { xs: '0.85rem', md: '0.9rem' }
-                                  }}
-                                >
-                                  072-531 04 84
-                                </Typography>
-                              </Box>
-                            </Box>
+                            <ToastmastersSection variant="inline" />
                           </Box>
                         </motion.div>
                       )}
@@ -458,20 +456,17 @@ const Rsvp = () => {
                       variant="contained"
                       color="primary"
                       size="large"
-                      disabled={loading}
-                      sx={{ 
+                      disabled={loading || !canSubmit}
+                      sx={{
                         mt: 2,
                         position: 'relative',
                         minHeight: 48,
                         backgroundColor: '#b3124b',
                         borderRadius: 0,
-                        fontFamily: '"Cormorant Garamond", serif',
-                        fontWeight: 400,
-                        textTransform: 'none',
                         letterSpacing: '0.05em',
                         '&:hover': {
-                          backgroundColor: '#8f0f3b'
-                        }
+                          backgroundColor: '#8f0f3b',
+                        },
                       }}
                     >
                       {loading ? (
@@ -489,11 +484,95 @@ const Rsvp = () => {
                           Skickar...
                         </>
                       ) : (
-                        'Skicka svar'
+                        'Granska och skicka'
                       )}
                     </Button>
                   </Box>
                 </form>
+
+                <Dialog
+                  open={confirmOpen}
+                  onClose={() => !loading && setConfirmOpen(false)}
+                  aria-labelledby="rsvp-confirm-title"
+                  PaperProps={{
+                    sx: {
+                      borderRadius: '12px',
+                      p: 0.5,
+                      maxWidth: 400,
+                    },
+                  }}
+                >
+                  <DialogTitle
+                    id="rsvp-confirm-title"
+                    sx={{
+                      ...pageTitle,
+                      fontSize: '1.1rem',
+                      textAlign: 'center',
+                      pb: 1,
+                    }}
+                  >
+                    Innan du skickar, kolla så att din info stämmer
+                  </DialogTitle>
+                  <DialogContent sx={{ px: 3, pb: 1 }}>
+                    <Box
+                      sx={{
+                        textAlign: 'center',
+                        ...bodyText,
+                        fontSize: '0.95rem',
+                        lineHeight: 1.85,
+                      }}
+                    >
+                      <Typography component="p" sx={{ mb: 1.5 }}>
+                        Du osar för{' '}
+                        <Box component="span" sx={{ color: '#1f5c3a', fontWeight: 500 }}>
+                          {pendingRsvp?.trimmedName}
+                        </Box>
+                      </Typography>
+                      <Typography component="p" sx={{ mb: pendingRsvp?.isAttending ? 1.5 : 0 }}>
+                        Svar:{' '}
+                        <Box component="span" sx={{ color: '#1f5c3a', fontWeight: 500 }}>
+                          {pendingRsvp?.attendingLabel}
+                        </Box>
+                      </Typography>
+                      {pendingRsvp?.isAttending && (
+                        <Typography component="p">
+                          Allergier/specialkost:{' '}
+                          <Box component="span" sx={{ color: '#1f5c3a', fontWeight: 500 }}>
+                            {pendingRsvp.dietaryLabel}
+                          </Box>
+                        </Typography>
+                      )}
+                    </Box>
+                  </DialogContent>
+                  <DialogActions
+                    sx={{
+                      justifyContent: 'center',
+                      gap: 1,
+                      pb: 2.5,
+                      px: 2,
+                    }}
+                  >
+                    <Button
+                      onClick={() => setConfirmOpen(false)}
+                      disabled={loading}
+                      sx={{ color: '#8a6d78' }}
+                    >
+                      Ändra
+                    </Button>
+                    <Button
+                      onClick={handleConfirmSend}
+                      variant="contained"
+                      disabled={loading || !pendingRsvp?.trimmedName}
+                      sx={{
+                        backgroundColor: '#b3124b',
+                        px: 3,
+                        '&:hover': { backgroundColor: '#8f0f3b' },
+                      }}
+                    >
+                      {loading ? 'Skickar…' : 'Ja, skicka'}
+                    </Button>
+                  </DialogActions>
+                </Dialog>
               </Box>
               </>
             )}

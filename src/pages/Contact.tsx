@@ -1,34 +1,13 @@
-import { Container, Typography, Box, Paper, Grid } from '@mui/material';
+import { Container, Typography, Box } from '@mui/material';
 import { motion } from 'framer-motion';
+import { contentCard, pageTitle, bodyText } from '../styles';
+import ToastmastersSection from '../components/ToastmastersSection';
 
 const Contact = () => {
   return (
     <Container maxWidth="md" sx={{ px: { xs: 2, sm: 3 } }}>
-      <Box sx={{
-        py: 1,
-        background: 'transparent'
-      }}>
-        {/* Diskret ram runt allt innehåll */}
-        <Box
-          sx={{
-            background: 'var(--content-surface-rose)',
-            borderRadius: '20px',
-            p: { xs: 3, sm: 4, md: 6 },
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)',
-            border: '1px solid rgba(179, 18, 75, 0.18)',
-            position: 'relative',
-            '&::before': {
-              content: '""',
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              height: '3px',
-              background: 'linear-gradient(90deg, #b3124b, #d88faa)',
-              borderRadius: '20px 20px 0 0'
-            }
-          }}
-        >
+      <Box sx={{ py: 1, background: 'transparent' }}>
+        <Box sx={{ ...contentCard, p: { xs: 3, sm: 4, md: 6 } }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -39,230 +18,114 @@ const Contact = () => {
               component="h1"
               align="center"
               sx={{
-                fontFamily: '"Cormorant Garamond", serif',
-                fontWeight: 400,
+                ...pageTitle,
                 mb: 4,
-                color: '#b3124b',
-                fontSize: { xs: '1.8rem', sm: '2.2rem', md: '2.8rem' },
-                letterSpacing: '0.05em'
+                fontSize: { xs: '1.8rem', sm: '2.2rem', md: '2.5rem' },
               }}
             >
-              Kontakt
+              Våra fantastiska toastmasters
             </Typography>
 
-            {/* Innehåll */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <Box sx={{ mb: 6, textAlign: 'center' }}>
-              <Typography variant="h5" gutterBottom sx={{ 
-                color: '#b3124b', 
-                mb: 2,
-                fontFamily: '"Cormorant Garamond", serif',
-                fontWeight: 400
-              }}>
-                Våra Toastmasters
-              </Typography>
-              <Typography variant="body1" sx={{ 
-                mb: 4, 
-                color: '#9b7a86', 
-                maxWidth: '600px', 
-                mx: 'auto',
-                fontFamily: '"Cormorant Garamond", serif',
-                fontWeight: 300,
-                lineHeight: 1.6
-              }}>
-                Om du vill hålla tal, sjunga en sång, dansa eller bidra med någon annan form av underhållning under middagen, 
-                kontakta våra toastmasters Erik och Maja direkt.
-              </Typography>
-            </Box>
+              <ToastmastersSection variant="cards" hideTitle />
 
-          <Grid container spacing={4} justifyContent="center">
-            <Grid item xs={12} md={5}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
+              <Box
+                sx={{
+                  mt: 6,
+                  pt: 4,
+                  borderTop: '1px solid rgba(179, 18, 75, 0.1)',
+                  textAlign: 'center',
+                }}
               >
-                <Paper
-                  elevation={3}
-                  sx={{
-                    p: 4,
-                    height: '100%',
-                    backgroundColor: 'rgba(179, 18, 75, 0.06)',
-                    textAlign: 'center',
-                    border: '1px solid rgba(179, 18, 75, 0.18)'
-                  }}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
                 >
-                  <Typography variant="h5" gutterBottom sx={{ 
-                    mb: 3, 
-                    color: '#b3124b',
-                    fontFamily: '"Cormorant Garamond", serif',
-                    fontWeight: 400
-                  }}>
-                    Erik Karlsson
+                  <Typography
+                    sx={{
+                      ...bodyText,
+                      fontSize: '0.9rem',
+                      mb: 3,
+                    }}
+                  >
+                    För andra frågor om bröllopet, kontakta brudparet direkt
                   </Typography>
-                  <Typography variant="body1" sx={{ 
-                    mb: 2,
-                    fontFamily: '"Cormorant Garamond", serif',
-                    fontWeight: 300,
-                    color: '#9b7a86'
-                  }}>
-                    erik.axel.carlsson@gmail.com
-                  </Typography>
-                  <Typography variant="body1" sx={{ 
-                    mb: 3,
-                    fontFamily: '"Cormorant Garamond", serif',
-                    fontWeight: 300,
-                    color: '#9b7a86'
-                  }}>
-                    070-587 58 85
-                  </Typography>
-                  <Typography variant="body2" sx={{ 
-                    color: '#9b7a86', 
-                    fontStyle: 'italic',
-                    fontFamily: '"Cormorant Garamond", serif',
-                    fontWeight: 300
-                  }}>
-                    Kontakta Erik för frågor om tal och framträdanden
-                  </Typography>
-                </Paper>
-              </motion.div>
-            </Grid>
 
-            <Grid item xs={12} md={5}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                <Paper
-                  elevation={3}
-                  sx={{
-                    p: 4,
-                    height: '100%',
-                    backgroundColor: 'rgba(179, 18, 75, 0.06)',
-                    textAlign: 'center',
-                    border: '1px solid rgba(179, 18, 75, 0.18)'
-                  }}
-                >
-                  <Typography variant="h5" gutterBottom sx={{ 
-                    mb: 3, 
-                    fontFamily: '"Cormorant Garamond", serif',
-                    color: '#b3124b',
-                    fontWeight: 400
-                  }}>
-                    Maja Häggström
-                  </Typography>
-                  <Typography variant="body1" sx={{ 
-                    mb: 2,
-                    fontFamily: '"Cormorant Garamond", serif',
-                    fontWeight: 300,
-                    color: '#9b7a86'
-                  }}>
-                    majahagg@gmail.com
-                  </Typography>
-                  <Typography variant="body1" sx={{ 
-                    mb: 3,
-                    fontFamily: '"Cormorant Garamond", serif',
-                    fontWeight: 300,
-                    color: '#9b7a86'
-                  }}>
-                    072-531 04 84
-                  </Typography>
-                  <Typography variant="body2" sx={{ 
-                    color: '#9b7a86', 
-                    fontStyle: 'italic',
-                    fontFamily: '"Cormorant Garamond", serif',
-                    fontWeight: 300
-                  }}>
-                    Kontakta Maja för frågor om tal och framträdanden
-                  </Typography>
-                </Paper>
-              </motion.div>
-            </Grid>
-          </Grid>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      gap: 4,
+                      flexWrap: 'wrap',
+                    }}
+                  >
+                    <Box sx={{ textAlign: 'center' }}>
+                      <Typography
+                        sx={{
+                          ...pageTitle,
+                          fontSize: '0.95rem',
+                          mb: 0.5,
+                        }}
+                      >
+                        Matilda
+                      </Typography>
+                      <Typography
+                        component="a"
+                        href="tel:+46702786980"
+                        sx={{
+                          ...bodyText,
+                          fontSize: '0.88rem',
+                          textDecoration: 'none',
+                          color: '#8a6d78',
+                          '&:hover': { color: '#1f5c3a' },
+                        }}
+                      >
+                        070-278 69 80
+                      </Typography>
+                    </Box>
 
+                    <Box
+                      sx={{
+                        width: '1px',
+                        height: 30,
+                        bgcolor: 'rgba(179, 18, 75, 0.15)',
+                        display: { xs: 'none', sm: 'block' },
+                      }}
+                    />
 
-          <Box sx={{ 
-            mt: 8, 
-            pt: 4, 
-            borderTop: '1px solid rgba(179, 18, 75, 0.24)',
-            textAlign: 'center'
-          }}>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              <Typography variant="body2" sx={{ 
-                color: '#9b7a86',
-                fontFamily: '"Cormorant Garamond", serif',
-                fontWeight: 300,
-                fontSize: '0.9rem',
-                mb: 3
-              }}>
-                För andra frågor om bröllopet, kontakta brudparet direkt
-              </Typography>
-              
-              <Box sx={{ 
-                display: 'flex', 
-                justifyContent: 'center', 
-                alignItems: 'center',
-                gap: 4,
-                flexWrap: 'wrap'
-              }}>
-                <Box sx={{ textAlign: 'center' }}>
-                  <Typography variant="body2" sx={{ 
-                    fontFamily: '"Cormorant Garamond", serif',
-                    color: '#b3124b',
-                    fontWeight: 400,
-                    fontSize: '0.95rem',
-                    mb: 0.5
-                  }}>
-                    Matilda
-                  </Typography>
-                  <Typography variant="body2" sx={{ 
-                    color: '#9b7a86',
-                    fontFamily: '"Cormorant Garamond", serif',
-                    fontWeight: 300,
-                    fontSize: '0.8rem'
-                  }}>
-                    070-278 69 80
-                  </Typography>
-                </Box>
-                
-                <Box sx={{ 
-                  width: '1px', 
-                  height: '30px', 
-                  backgroundColor: 'rgba(179, 18, 75, 0.3)',
-                  display: { xs: 'none', sm: 'block' }
-                }} />
-                
-                <Box sx={{ textAlign: 'center' }}>
-                  <Typography variant="body2" sx={{ 
-                    fontFamily: '"Cormorant Garamond", serif',
-                    color: '#b3124b',
-                    fontWeight: 400,
-                    fontSize: '0.95rem',
-                    mb: 0.5
-                  }}>
-                    Pelle
-                  </Typography>
-                  <Typography variant="body2" sx={{ 
-                    color: '#9b7a86',
-                    fontFamily: '"Cormorant Garamond", serif',
-                    fontWeight: 300,
-                    fontSize: '0.8rem'
-                  }}>
-                    073-840 09 14
-                  </Typography>
-                </Box>
+                    <Box sx={{ textAlign: 'center' }}>
+                      <Typography
+                        sx={{
+                          ...pageTitle,
+                          fontSize: '0.95rem',
+                          mb: 0.5,
+                        }}
+                      >
+                        Pelle
+                      </Typography>
+                      <Typography
+                        component="a"
+                        href="tel:+46738400914"
+                        sx={{
+                          ...bodyText,
+                          fontSize: '0.88rem',
+                          textDecoration: 'none',
+                          color: '#8a6d78',
+                          '&:hover': { color: '#1f5c3a' },
+                        }}
+                      >
+                        073-840 09 14
+                      </Typography>
+                    </Box>
+                  </Box>
+                </motion.div>
               </Box>
-            </motion.div>
-          </Box>
             </motion.div>
           </motion.div>
         </Box>

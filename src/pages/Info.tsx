@@ -1,5 +1,6 @@
 import { Box, Typography, Container } from '@mui/material';
 import { motion } from 'framer-motion';
+import { contentCard, pageTitle, bodyText, dressCodeFrame } from '../styles';
 
 const Info = () => {
   return (
@@ -9,43 +10,21 @@ const Info = () => {
         background: 'transparent'
       }}>
         {/* Diskret ram runt allt innehåll */}
-        <Box
-          sx={{
-            background: 'var(--content-surface-rose)',
-            borderRadius: '20px',
-            p: { xs: 4, md: 6 },
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)',
-            border: '1px solid rgba(179, 18, 75, 0.18)',
-            position: 'relative',
-            '&::before': {
-              content: '""',
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              height: '3px',
-              background: 'linear-gradient(90deg, #b3124b, #d88faa)',
-              borderRadius: '20px 20px 0 0'
-            }
-          }}
-        >
+        <Box sx={{ ...contentCard, p: { xs: 4, md: 6 } }}>
           {/* Rubrik */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-              <Typography 
-                variant="h2" 
-                component="h1" 
+              <Typography
+                variant="h2"
+                component="h1"
                 align="center"
-                sx={{ 
-                  fontFamily: "'Playfair Display', serif",
-                  fontWeight: 400,
+                sx={{
+                  ...pageTitle,
                   mb: 4,
-                  color: '#b3124b',
-                  fontSize: { xs: '2.2rem', md: '2.8rem' },
-                  letterSpacing: '0.05em'
+                  fontSize: { xs: '2rem', md: '2.5rem' },
                 }}
               >
               Bra att veta
@@ -59,29 +38,23 @@ const Info = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             <Box sx={{ mb: 4 }}>
-              <Typography 
-                variant="h5" 
-                component="h2" 
-                sx={{ 
-                  fontFamily: "'Playfair Display', serif",
-                  fontWeight: 400,
-                  mb: 2,
-                  color: '#b3124b',
-                  fontSize: '1.4rem',
-                  letterSpacing: '0.05em'
+              <Typography
+                variant="h5"
+                component="h2"
+                sx={{
+                  ...pageTitle,
+                  mb: 1.5,
+                  fontSize: '1.2rem',
                 }}
               >
                 När
               </Typography>
-              <Typography 
-                variant="body1" 
-                sx={{ 
-                  fontFamily: "'Playfair Display', serif",
-                  color: '#9b7a86',
-                  fontWeight: 300,
+              <Typography
+                variant="body1"
+                sx={{
+                  ...bodyText,
                   fontSize: '0.95rem',
-                  lineHeight: 1.6,
-                  mb: 2
+                  mb: 2,
                 }}
               >
                 5 september kl 15:00
@@ -95,34 +68,32 @@ const Info = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <Box sx={{ mb: 4 }}>
-              <Typography 
-                variant="h5" 
-                component="h2" 
-                sx={{ 
-                  fontFamily: "'Playfair Display', serif",
-                  fontWeight: 400,
-                  mb: 2,
-                  color: '#b3124b',
-                  fontSize: '1.4rem',
-                  letterSpacing: '0.05em'
-                }}
-              >
-                Klädkod
-              </Typography>
-              <Typography 
-                variant="body1" 
-                sx={{ 
-                  fontFamily: "'Playfair Display', serif",
-                  color: '#9b7a86',
-                  fontWeight: 300,
-                  fontSize: '0.95rem',
-                  lineHeight: 1.6,
-                  mb: 2
-                }}
-              >
-                Kavaj
-              </Typography>
+            <Box sx={{ mb: 4, textAlign: 'center' }}>
+              <Box sx={{ ...dressCodeFrame, mt: 0 }}>
+                <Typography
+                  component="p"
+                  sx={{
+                    ...pageTitle,
+                    fontSize: '0.78rem',
+                    letterSpacing: '0.04em',
+                    mb: 0.75,
+                  }}
+                >
+                  Klädkod
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontFamily: "'Playfair Display', serif",
+                    color: '#1f5c3a',
+                    fontWeight: 400,
+                    fontSize: '0.95rem',
+                    mb: 0,
+                  }}
+                >
+                  Kavaj / festfin
+                </Typography>
+              </Box>
             </Box>
           </motion.div>
 
@@ -135,32 +106,30 @@ const Info = () => {
             transition={{ duration: 0.8, delay: 0.8 }}
           >
             <Box sx={{ mb: 4 }}>
-              <Typography 
-                variant="h5" 
-                component="h2" 
-                sx={{ 
-                  fontFamily: "'Playfair Display', serif",
-                  fontWeight: 400,
-                  mb: 2,
-                  color: '#b3124b',
-                  fontSize: '1.4rem',
-                  letterSpacing: '0.05em'
-                }}
+              <Typography
+                variant="h5"
+                component="h2"
+                sx={{ ...pageTitle, mb: 1.5, fontSize: '1.2rem' }}
               >
                 Presenter
               </Typography>
-              <Typography 
-                variant="body1" 
-                sx={{ 
+              <Typography variant="body1" sx={{ ...bodyText, fontSize: '0.95rem', mb: 1.5 }}>
+                Vi önskar oss inga presenter. Det viktigaste för oss är att få umgås, fira och skapa
+                minnen tillsammans med alla våra favoritmänniskor.
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{
                   fontFamily: "'Playfair Display', serif",
-                  color: '#9b7a86',
-                  fontWeight: 300,
+                  color: '#4a9d6f',
+                  fontWeight: 400,
+                  fontStyle: 'italic',
                   fontSize: '0.95rem',
-                  lineHeight: 1.6,
-                  mb: 2
+                  lineHeight: 1.65,
+                  mb: 2,
                 }}
               >
-                Er närvaro är den största gåvan vi kan få! Om ni ändå vill ge oss något, så uppskattar vi bidrag till vår bröllopsresa.
+                Så kom redo att bjuda till och ha en rolig helg med oss!
               </Typography>
             </Box>
           </motion.div>

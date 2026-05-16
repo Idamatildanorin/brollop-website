@@ -1,27 +1,34 @@
 import { useState } from 'react';
-import { 
-  AppBar, 
-  Toolbar, 
-  Button, 
-  Box, 
-  IconButton, 
-  Drawer, 
-  List, 
-  ListItem, 
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  Box,
+  IconButton,
+  Drawer,
+  List,
+  ListItemButton,
   ListItemText,
+  Typography,
+  Divider,
+  Container,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import { Link, useLocation } from 'react-router-dom';
 
 const navItems = [
   { text: 'Hem', path: '/' },
   { text: 'OSA', path: '/rsvp' },
-  { text: 'Bra att veta', path: '/info' },
+  { text: 'Tidsplan', path: '/tidsplan' },
   { text: 'Boende och transport', path: '/accommodation' },
-  { text: 'Kontakt', path: '/contact' }
+  { text: 'Våra fantastiska toastmasters', path: '/contact' },
 ];
+
+const isActivePath = (pathname: string, path: string) =>
+  path === '/' ? pathname === '/' : pathname.startsWith(path);
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -33,34 +40,113 @@ const Navbar = () => {
     setMobileOpen(!mobileOpen);
   };
 
+  const linkSx = (isActive: boolean) => ({
+    fontSize: '0.92rem',
+    textTransform: 'none' as const,
+    fontFamily: '"Playfair Display", serif',
+    fontWeight: isActive ? 500 : 400,
+    letterSpacing: '0.03em',
+    px: { md: 1.75 },
+    py: 1,
+    minWidth: 'auto',
+    borderRadius: 0,
+    position: 'relative' as const,
+    color: isActive ? '#1f5c3a' : '#8a6d78',
+    backgroundColor: 'transparent',
+    transition: 'color 0.2s ease',
+    '&::after': {
+      content: '""',
+      position: 'absolute',
+      left: '20%',
+      right: '20%',
+      bottom: 4,
+      height: '1px',
+      backgroundColor: '#1f5c3a',
+      transform: isActive ? 'scaleX(1)' : 'scaleX(0)',
+      transition: 'transform 0.22s ease',
+    },
+    '&:hover': {
+      backgroundColor: 'transparent',
+      color: '#1f5c3a',
+    },
+  });
+
   const drawer = (
-    <List>
-      {navItems.map((item) => (
-        <ListItem 
-          key={item.path} 
-          component={Link} 
-          to={item.path}
-          onClick={handleDrawerToggle}
-          sx={{ 
-            color: '#6b7280',
-            '&:hover': {
-              backgroundColor: 'rgba(107, 114, 128, 0.1)'
-            }
+    <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          px: 2.5,
+          pt: 2.5,
+          pb: 1.5,
+        }}
+      >
+        <Typography
+          sx={{
+            fontFamily: '"Playfair Display", serif',
+            fontSize: '1.05rem',
+            fontWeight: 500,
+            letterSpacing: '0.04em',
+            color: '#1f5c3a',
           }}
         >
-          <ListItemText 
-            primary={item.text}
-            primaryTypographyProps={{
-              sx: { 
-                fontSize: '1.1rem',
-                fontFamily: '"Inter", sans-serif',
-                fontWeight: 300
-              }
-            }}
-          />
-        </ListItem>
-      ))}
-    </List>
+          Meny
+        </Typography>
+        <IconButton
+          aria-label="Stäng meny"
+          onClick={handleDrawerToggle}
+          size="small"
+          sx={{ color: '#8a6d78' }}
+        >
+          <CloseIcon fontSize="small" />
+        </IconButton>
+      </Box>
+      <Divider sx={{ borderColor: 'rgba(179, 18, 75, 0.1)' }} />
+      <List sx={{ px: 1.5, py: 2, flex: 1 }}>
+        {navItems.map((item) => {
+          const isActive = isActivePath(location.pathname, item.path);
+          return (
+            <ListItemButton
+              key={item.path}
+              component={Link}
+              to={item.path}
+              onClick={handleDrawerToggle}
+              selected={isActive}
+              sx={{
+                py: 1.35,
+                px: 2,
+                mb: 0.5,
+                borderRadius: '8px',
+                color: isActive ? '#1f5c3a' : '#8a6d78',
+                '&.Mui-selected': {
+                  backgroundColor: 'rgba(74, 157, 111, 0.1)',
+                  '&:hover': {
+                    backgroundColor: 'rgba(74, 157, 111, 0.12)',
+                  },
+                },
+                '&:hover': {
+                  backgroundColor: 'rgba(74, 157, 111, 0.08)',
+                },
+              }}
+            >
+              <ListItemText
+                primary={item.text}
+                primaryTypographyProps={{
+                  sx: {
+                    fontSize: '1.02rem',
+                    fontFamily: '"Playfair Display", serif',
+                    fontWeight: isActive ? 500 : 400,
+                    letterSpacing: '0.02em',
+                  },
+                }}
+              />
+            </ListItemButton>
+          );
+        })}
+      </List>
+    </Box>
   );
 
   return (
@@ -69,155 +155,88 @@ const Navbar = () => {
       color="inherit"
       elevation={0}
       sx={{
-        bgcolor: 'rgba(246, 220, 230, 0.92)',
-        boxShadow: '0 1px 0 rgba(179, 18, 75, 0.25)',
-        borderBottom: '1px solid rgba(179, 18, 75, 0.25)',
+        bgcolor: 'rgba(249, 232, 239, 0.75)',
+        boxShadow: 'none',
+        backdropFilter: 'blur(12px)',
+        borderBottom: '1px solid rgba(179, 18, 75, 0.1)',
       }}
     >
-      <Toolbar
-        sx={{
-          py: 0,
-          minHeight: '52px !important',
-          px: { xs: 1.5, md: 3 },
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        {isMobile ? (
-          <>
+      <Container maxWidth="md" disableGutters={isMobile}>
+        <Toolbar
+          disableGutters
+          sx={{
+            py: { xs: 0.75, md: 1 },
+            minHeight: { xs: '56px !important', md: '60px !important' },
+            px: { xs: 1.5, md: 2 },
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: { xs: 'flex-start', md: 'center' },
+          }}
+        >
+          {isMobile ? (
             <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
+              aria-label="Öppna meny"
               onClick={handleDrawerToggle}
-              sx={{ color: '#b3124b', mr: 1 }}
+              sx={{
+                color: '#8a6d78',
+                p: 1.1,
+                borderRadius: '8px',
+                border: '1px solid rgba(179, 18, 75, 0.12)',
+              }}
             >
               <MenuIcon />
             </IconButton>
-            <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
-              <Button
-                component={Link}
-                to="/"
-                color="inherit"
-                aria-label="Pelle och Matilda"
-                sx={{ 
-                  fontSize: '1.35rem', 
-                  textTransform: 'none',
-                  color: '#1f5c3a',
-                  fontFamily: '"Playfair Display", serif',
-                  fontWeight: 400,
-                  letterSpacing: '0.04em',
-                  pl: 0.75,
-                  '&:hover': { color: '#174a30' },
-                }}
-              >
-                Pelle{' '}
-                <Box component="span" sx={{ color: '#4a9d6f', px: 0.25 }} aria-hidden>
-                  ♥
-                </Box>{' '}
-                Matilda
-              </Button>
-            </Box>
-          </>
-        ) : (
-          <Box sx={{ 
-            flexGrow: 1, 
-            display: 'flex', 
-            alignItems: 'center',
-            justifyContent: 'center', 
-            gap: 3
-          }}>
-            <Button
-              component={Link}
-              to="/"
-              aria-label="Pelle och Matilda"
+          ) : (
+            <Box
+              component="nav"
+              aria-label="Huvudmeny"
               sx={{
-                mr: 3,
-                fontSize: '1.45rem',
-                textTransform: 'none',
-                color: '#1f5c3a',
-                fontFamily: '"Playfair Display", serif',
-                fontWeight: 400,
-                letterSpacing: '0.06em',
-                pl: 0.5,
-                '&:hover': { backgroundColor: 'transparent', color: '#174a30' }
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexWrap: 'wrap',
+                gap: { md: 0.5, lg: 1 },
+                width: '100%',
               }}
             >
-              Pelle{' '}
-              <Box component="span" sx={{ color: '#4a9d6f', px: 0.25 }} aria-hidden>
-                ♥
-              </Box>{' '}
-              Matilda
-            </Button>
-            {navItems.map((item) => {
-              const isActive =
-                item.path === '/'
-                  ? location.pathname === '/'
-                  : location.pathname.startsWith(item.path);
+              {navItems.map((item) => {
+                const isActive = isActivePath(location.pathname, item.path);
+                return (
+                  <Button
+                    key={item.path}
+                    component={Link}
+                    to={item.path}
+                    sx={linkSx(isActive)}
+                  >
+                    {item.text}
+                  </Button>
+                );
+              })}
+            </Box>
+          )}
 
-              return (
-                <Button
-                  key={item.path}
-                  component={Link}
-                  to={item.path}
-                  sx={{
-                    position: 'relative',
-                    color: '#b3124b',
-                    fontSize: '0.95rem',
-                    textTransform: 'none',
-                    fontFamily: '"Inter", sans-serif',
-                    fontWeight: isActive ? 500 : 300,
-                    letterSpacing: '0.04em',
-                    px: 1,
-                    pb: 0.5,
-                    '&:hover': {
-                      backgroundColor: 'transparent',
-                      color: '#b3124b',
-                    },
-                    '&::after': {
-                      content: '""',
-                      position: 'absolute',
-                      left: '12%',
-                      right: '12%',
-                      bottom: 0,
-                      height: 2,
-                      borderRadius: 999,
-                      backgroundColor: '#b3124b',
-                      opacity: isActive ? 1 : 0.35,
-                      transform: isActive ? 'scaleX(1)' : 'scaleX(0.8)',
-                      transition: 'opacity 0.25s ease, transform 0.25s ease',
-                    },
-                  }}
-                >
-                  {item.text}
-                </Button>
-              );
-            })}
-          </Box>
-        )}
-
-        <Drawer
-          variant="temporary"
-          anchor="left"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true // Better open performance on mobile.
-          }}
-          sx={{
-            '& .MuiDrawer-paper': { 
-              boxSizing: 'border-box', 
-              width: 240,
-              bgcolor: '#fff'
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
-      </Toolbar>
+          <Drawer
+            variant="temporary"
+            anchor="left"
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{ keepMounted: true }}
+            sx={{
+              '& .MuiDrawer-paper': {
+                boxSizing: 'border-box',
+                width: 280,
+                bgcolor: '#fff9fc',
+                borderRadius: '0 12px 12px 0',
+                boxShadow: '4px 0 24px rgba(0, 0, 0, 0.06)',
+              },
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </Toolbar>
+      </Container>
     </AppBar>
   );
 };
 
-export default Navbar; 
+export default Navbar;

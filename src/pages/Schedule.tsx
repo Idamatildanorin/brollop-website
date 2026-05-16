@@ -1,189 +1,178 @@
-import React from 'react';
-import { Container, Typography, Box, Paper } from '@mui/material';
+import { Container, Typography, Box } from '@mui/material';
 import { motion } from 'framer-motion';
+import { contentCard, pageTitle } from '../styles';
 
 const scheduleItems = [
   {
-    time: '13:30',
-    title: 'Samling för transport',
-    description: 'Vi samlas för gemensam transport till vigselplatsen (exakt plats meddelas senare)'
+    time: '14:30',
+    title: 'Samling vid hotellet',
+    description:
+      'Vi samlas utanför hotellet för en gemensam mysig promenad ner till vigselplatsen.',
   },
   {
     time: '15:00',
-    title: 'Borgerlig vigsel i naturen',
-    description: 'En vacker ceremoni under bar himmel'
+    title: 'Vigsel',
+    description:
+      'Platsen ligger nere vid sjön aspen — en kort promenad ned från festlokalen (räkna med cirka 15 minuter till fots). Bekväma skor kan vara bra, och det finns tid att byta skor efter promenaden.',
   },
   {
-    time: '15:00',
-    title: 'Transport till festlokalen',
-    description: 'Gemensam transport till Jonsereds Fabrikstråk'
+    time: '16:00',
+    title: 'Mingel',
+    description: 'På uteplatsen vid festlokalen',
   },
   {
-    time: '15:30',
-    title: 'Incheckning & uppfräschning',
-    description: 'Möjlighet att checka in på Gibson Hotell och fräscha upp sig'
+    time: '17.30',
+    title: 'Middag',
   },
   {
-    time: '16:30',
-    title: 'Välkomstdrink',
-    description: 'Mingel och fotografering'
-  },
-  {
-    time: '17:30',
-    title: 'Middag serveras',
-    description: 'Trerätters festmiddag med tal och underhållning'
-  },
-  {
-    time: '20:00',
-    title: 'Bröllopstårta',
-    description: 'Tårtskärning och kaffe'
-  },
-  {
-    time: '21:00',
-    title: 'Första dansen',
-    description: 'Brudparets första dans som gifta'
-  },
-  {
-    time: '21:30',
-    title: 'Dansen börjar',
-    description: 'Dans och fest till sent'
+    time: 'ca 22.00 - sent',
+    title: 'Dansgolvet öppnar',
+    description: 'och baren öppnar för drinkar',
   },
   {
     time: '01:00',
-    title: 'Festen avslutas',
-    description: 'Tack för en underbar kväll!'
-  }
+    title: 'Vickning',
+  },
 ];
 
 const Schedule = () => {
   return (
     <Container maxWidth="md">
-      <Box sx={{ py: 8 }}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+      <Box sx={{ py: { xs: 2.5, md: 4 }, background: 'transparent' }}>
+        <Box
+          sx={{
+            ...contentCard,
+            p: { xs: 2.5, sm: 3.25, md: 4 },
+            pb: { xs: 3.25, md: 4.25 },
+            overflow: 'hidden',
+          }}
         >
-          <Typography 
-            variant="h3" 
-            component="h1" 
-            gutterBottom 
-            align="center" 
-            sx={{ 
-              mb: 6,
-              color: '#1976d2'
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55 }}
+          >
+            <Typography
+              variant="h2"
+              component="h1"
+              align="center"
+              sx={{
+                ...pageTitle,
+                mb: 0.4,
+                fontSize: { xs: '1.55rem', md: '1.95rem' },
+              }}
+            >
+              Tidsplan
+            </Typography>
+            <Typography
+              align="center"
+              sx={{
+                fontFamily: "'Playfair Display', serif",
+                color: '#9b7a86',
+                fontWeight: 300,
+                fontSize: { xs: '0.82rem', md: '0.9rem' },
+                letterSpacing: '0.01em',
+                mb: { xs: 1.9, md: 2.25 },
+              }}
+            >
+              5 september 2026
+            </Typography>
+          </motion.div>
+
+          <Box
+            sx={{
+              maxWidth: 640,
+              mx: 'auto',
+              borderRadius: '10px',
+              px: { xs: 1.7, sm: 2.2 },
+              py: { xs: 1.4, sm: 1.8 },
+              background: 'rgba(255, 255, 255, 0.45)',
             }}
           >
-            Schema för bröllopsdagen
-          </Typography>
-
-          <Box sx={{ position: 'relative', maxWidth: '800px', mx: 'auto' }}>
-            {/* Vertikal tidslinje */}
-            <Box
-              sx={{
-                position: 'absolute',
-                left: { xs: 80, sm: 100 },
-                top: 0,
-                bottom: 0,
-                width: 3,
-                background: 'linear-gradient(180deg, #1976d2 0%, #1976d2 30%, rgba(25, 118, 210, 0.7) 70%, rgba(25, 118, 210, 0.4) 100%)',
-                boxShadow: '0 0 8px rgba(25, 118, 210, 0.2)'
-              }}
-            />
-
-            {/* Schema-items */}
             {scheduleItems.map((item, index) => (
               <motion.div
-                key={item.time}
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                key={`${index}-${item.title}`}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: 0.04 * index }}
               >
                 <Box
                   sx={{
-                    display: 'flex',
-                    mb: 4,
-                    position: 'relative'
+                    display: 'grid',
+                    gridTemplateColumns: { xs: '1fr', sm: '118px 1fr' },
+                    gap: { xs: 0.5, sm: 0.8 },
+                    py: { xs: 1.35, sm: 1.55 },
+                    borderBottom:
+                      index === scheduleItems.length - 1
+                        ? 'none'
+                        : '1px solid rgba(31, 92, 58, 0.16)',
                   }}
                 >
-                  {/* Tidpunkt */}
                   <Box
                     sx={{
-                      width: { xs: 80, sm: 100 },
-                      pr: 3,
-                      textAlign: 'right',
-                      pt: 1
+                      textAlign: { xs: 'left', sm: 'right' },
+                      pr: { sm: 1.2 },
                     }}
                   >
                     <Typography
-                      variant="h6"
-                      sx={{ 
-                        color: '#0d47a1',
-                        fontSize: '1.1rem'
+                      component="span"
+                      sx={{
+                        fontFamily: "'Playfair Display', serif",
+                        color: '#b3124b',
+                        fontWeight: 500,
+                        fontSize: { xs: '0.88rem', sm: '0.92rem' },
+                        letterSpacing: '0.03em',
+                        display: 'block',
                       }}
                     >
                       {item.time}
                     </Typography>
                   </Box>
 
-                  {/* Punkt på tidslinjen */}
                   <Box
                     sx={{
-                      position: 'absolute',
-                      left: { xs: 71, sm: 91 },
-                      top: '50%',
-                      width: 20,
-                      height: 20,
-                      borderRadius: '50%',
-                      bgcolor: 'var(--content-surface-rose)',
-                      border: '3px solid #1976d2',
-                      transform: 'translateY(-50%)',
-                      boxShadow: '0 0 0 4px rgba(25, 118, 210, 0.15), 0 2px 4px rgba(0,0,0,0.1)',
-                      zIndex: 1
-                    }}
-                  />
-
-                  {/* Innehåll */}
-                  <Paper
-                    elevation={2}
-                    sx={{
-                      flex: 1,
-                      ml: 4,
-                      p: 2,
-                      background: 'linear-gradient(145deg, var(--content-surface-rose) 0%, #fce8ef 100%)',
-                      borderRadius: 2,
-                      position: 'relative'
+                      p: 0,
                     }}
                   >
-                    <Typography 
-                      variant="h6" 
-                      gutterBottom
-                      sx={{ 
-                        color: '#0d47a1',
-                        fontSize: '1.1rem',
-                        fontWeight: 500
-                      }}
-                    >
-                      {item.title}
-                    </Typography>
-                    <Typography 
-                      variant="body1"
-                      sx={{ 
-                        color: '#0d47a1',
-                        opacity: 0.8
-                      }}
-                    >
-                      {item.description}
-                    </Typography>
-                  </Paper>
+                    {item.title && (
+                      <Typography
+                        component="h2"
+                        sx={{
+                          fontFamily: "'Playfair Display', serif",
+                          color: '#1f5c3a',
+                          fontSize: { xs: '0.97rem', sm: '1.03rem' },
+                          fontWeight: 500,
+                          letterSpacing: '0.03em',
+                          mb: item.description ? 0.3 : 0,
+                          lineHeight: 1.34,
+                        }}
+                      >
+                        {item.title}
+                      </Typography>
+                    )}
+                    {item.description && (
+                      <Typography
+                        sx={{
+                          fontFamily: "'Playfair Display', serif",
+                          color: '#7d606c',
+                          fontWeight: 300,
+                          fontSize: { xs: '0.82rem', sm: '0.87rem' },
+                          lineHeight: 1.48,
+                          letterSpacing: '0.02em',
+                        }}
+                      >
+                        {item.description}
+                      </Typography>
+                    )}
+                  </Box>
                 </Box>
               </motion.div>
             ))}
           </Box>
-        </motion.div>
+        </Box>
       </Box>
     </Container>
   );
 };
 
-export default Schedule; 
+export default Schedule;
