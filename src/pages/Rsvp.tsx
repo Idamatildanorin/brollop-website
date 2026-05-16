@@ -30,6 +30,36 @@ import {
 } from '../lib/rsvpForm';
 import ToastmastersSection from '../components/ToastmastersSection';
 
+const RSVP_SEND_ERROR =
+  'Det gick inte att skicka just nu. Försök gärna igen om en liten stund, eller OSA genom att höra av dig till oss direkt:';
+
+const couplePhoneLinkSx = {
+  ...bodyText,
+  fontSize: '0.82rem',
+  textDecoration: 'none',
+  color: '#8a6d78',
+  '&:hover': { color: '#1f5c3a' },
+};
+
+function DirectOsaContact() {
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        gap: { xs: 1.5, sm: 3 },
+        flexWrap: 'wrap',
+      }}
+    >
+      <Typography component="a" href="tel:+46702786980" sx={couplePhoneLinkSx}>
+        Matilda · 070-278 69 80
+      </Typography>
+      <Typography component="a" href="tel:+46738400914" sx={couplePhoneLinkSx}>
+        Pelle · 073-840 09 14
+      </Typography>
+    </Box>
+  );
+}
 
 interface CombinedForm {
   name: string;
@@ -135,7 +165,7 @@ const Rsvp = () => {
     }
 
     if (!isEmailJsConfigured()) {
-      setError('OSA är inte konfigurerat ännu. Kontakta brudparet direkt.');
+      setError(RSVP_SEND_ERROR);
       return;
     }
 
@@ -200,10 +230,10 @@ const Rsvp = () => {
         setSubmitted(true);
         setPendingRsvp(null);
       } else {
-        setError('Något gick fel. Vänligen försök igen.');
+        setError(RSVP_SEND_ERROR);
       }
     } catch (err) {
-      setError('Något gick fel. Vänligen försök igen.');
+      setError(RSVP_SEND_ERROR);
       console.error('EmailJS error:', err);
     } finally {
       setLoading(false);
@@ -303,7 +333,10 @@ const Rsvp = () => {
               }}>
                 {error && (
                   <Alert severity="error" sx={{ mb: 3 }}>
-                    {error}
+                    <Typography sx={{ fontSize: '0.92rem', lineHeight: 1.5, mb: 1.5 }}>
+                      {error}
+                    </Typography>
+                    <DirectOsaContact />
                   </Alert>
                 )}
                 
