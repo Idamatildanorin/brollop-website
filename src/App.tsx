@@ -1,7 +1,6 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material';
 import Home from './pages/Home';
-import Rsvp from './pages/Rsvp';
 import Info from './pages/Info';
 import Accommodation from './pages/Accommodation';
 import Contact from './pages/Contact';
@@ -151,7 +150,7 @@ function App() {
           <main>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/rsvp" element={<Rsvp />} />
+              <Route path="/rsvp" element={<Navigate to="/" replace />} />
               <Route path="/info" element={<Info />} />
               <Route path="/tidsplan" element={<Schedule />} />
               <Route path="/accommodation" element={<Accommodation />} />

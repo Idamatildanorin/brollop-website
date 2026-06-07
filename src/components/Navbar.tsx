@@ -21,7 +21,6 @@ import { Link, useLocation } from 'react-router-dom';
 
 const navItems = [
   { text: 'Hem', path: '/' },
-  { text: 'OSA', path: '/rsvp' },
   { text: 'Tidsplan', path: '/tidsplan' },
   { text: 'Boende och transport', path: '/accommodation' },
   { text: 'Våra fantastiska toastmasters', path: '/contact' },

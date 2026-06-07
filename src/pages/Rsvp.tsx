@@ -301,20 +301,6 @@ const Rsvp = () => {
                   align="center"
                   sx={{
                     fontFamily: "'Playfair Display', serif",
-                    color: '#9b7a86',
-                    fontWeight: 300,
-                    letterSpacing: '0.02em',
-                    mb: 2,
-                    fontSize: { xs: '1rem', md: '1.08rem' },
-                  }}
-                >
-                  Vänligen svara senast den 5 juni 2026
-                </Typography>
-
-                <Typography
-                  align="center"
-                  sx={{
-                    fontFamily: "'Playfair Display', serif",
                     color: '#8a6d78',
                     fontWeight: 300,
                     letterSpacing: '0.01em',
