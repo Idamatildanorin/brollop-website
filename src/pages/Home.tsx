@@ -163,6 +163,23 @@ const Home = () => {
               >
                 Se tidsplanen
               </Button>
+              <Button
+                component={Link}
+                to="/tips"
+                variant="contained"
+                disableElevation
+                sx={{
+                  ...softButton,
+                  bgcolor: 'rgba(74, 157, 111, 0.12)',
+                  color: '#1f5c3a',
+                  '&:hover': {
+                    bgcolor: 'rgba(74, 157, 111, 0.2)',
+                    transform: 'translateY(-1px)',
+                  },
+                }}
+              >
+                Tips runt Jonsered
+              </Button>
             </Stack>
           </motion.div>
 

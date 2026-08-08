@@ -5,6 +5,7 @@ import Info from './pages/Info';
 import Accommodation from './pages/Accommodation';
 import Contact from './pages/Contact';
 import Schedule from './pages/Schedule';
+import Tips from './pages/Tips';
 import Navbar from './components/Navbar';
 
 const playfair = '"Playfair Display", serif';
@@ -154,6 +155,7 @@ function App() {
               <Route path="/info" element={<Info />} />
               <Route path="/tidsplan" element={<Schedule />} />
               <Route path="/accommodation" element={<Accommodation />} />
+              <Route path="/tips" element={<Tips />} />
               <Route path="/contact" element={<Contact />} />
             </Routes>
           </main>

@@ -23,6 +23,7 @@ const navItems = [
   { text: 'Hem', path: '/' },
   { text: 'Tidsplan', path: '/tidsplan' },
   { text: 'Boende och transport', path: '/accommodation' },
+  { text: 'Tips runt Jonsered', path: '/tips' },
   { text: 'Våra fantastiska toastmasters', path: '/contact' },
 ];
 
