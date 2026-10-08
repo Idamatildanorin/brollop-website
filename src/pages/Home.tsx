@@ -110,28 +110,58 @@ const Home = () => {
                 bgcolor: 'rgba(255, 255, 255, 0.55)',
               }}
             >
-              <Typography
-                sx={{
-                  fontFamily: "'Playfair Display', serif",
-                  color: '#1f5c3a',
-                  fontWeight: 400,
-                  fontSize: { xs: '2.4rem', md: '2.85rem' },
-                  lineHeight: 1,
-                }}
-              >
-                {Math.max(0, timeLeft.days)}
-              </Typography>
-              <Typography
-                sx={{
-                  fontFamily: "'Playfair Display', serif",
-                  color: '#9b7a86',
-                  fontWeight: 300,
-                  fontSize: '0.85rem',
-                  mt: 0.75,
-                }}
-              >
-                {timeLeft.days === 1 ? 'dag kvar' : 'dagar kvar'}
-              </Typography>
+              {timeLeft.days <= 0 ? (
+                <>
+                  <Typography
+                    sx={{
+                      fontFamily: "'Playfair Display', serif",
+                      color: '#b3124b',
+                      fontWeight: 400,
+                      fontStyle: 'italic',
+                      fontSize: { xs: '1.35rem', md: '1.55rem' },
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    Vi har gift oss!
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontFamily: "'Playfair Display', serif",
+                      color: '#9b7a86',
+                      fontWeight: 300,
+                      fontSize: '0.85rem',
+                      mt: 0.75,
+                    }}
+                  >
+                    Tack för en magisk dag ♥
+                  </Typography>
+                </>
+              ) : (
+                <>
+                  <Typography
+                    sx={{
+                      fontFamily: "'Playfair Display', serif",
+                      color: '#1f5c3a',
+                      fontWeight: 400,
+                      fontSize: { xs: '2.4rem', md: '2.85rem' },
+                      lineHeight: 1,
+                    }}
+                  >
+                    {timeLeft.days}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontFamily: "'Playfair Display', serif",
+                      color: '#9b7a86',
+                      fontWeight: 300,
+                      fontSize: '0.85rem',
+                      mt: 0.75,
+                    }}
+                  >
+                    {timeLeft.days === 1 ? 'dag kvar' : 'dagar kvar'}
+                  </Typography>
+                </>
+              )}
             </Box>
           </motion.div>
 
@@ -196,18 +226,7 @@ const Home = () => {
                   lineHeight: 1.65,
                 }}
               >
-                Vi önskar oss inga presenter — det viktigaste är att få umgås och fira tillsammans
-                med er.
-              </Typography>
-              <Typography
-                sx={{
-                  ...bodyText,
-                  color: '#1f5c3a',
-                  fontSize: { xs: '0.88rem', md: '0.92rem' },
-                  mt: 1.25,
-                }}
-              >
-                Klädkod: kavaj / festfin
+                Tack till alla som firade med oss — ni gjorde dagen oförglömlig.
               </Typography>
             </Box>
           </motion.div>
